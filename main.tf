@@ -120,7 +120,7 @@ module "container_definition_fluentbit" {
 
 module "service_task" {
   source  = "cloudposse/ecs-alb-service-task/aws"
-  version = "0.66.1"
+  version = "0.66.4"
 
   circuit_breaker_deployment_enabled = var.circuit_breaker_deployment_enabled
   circuit_breaker_rollback_enabled   = var.circuit_breaker_rollback_enabled
