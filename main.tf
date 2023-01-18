@@ -1,7 +1,7 @@
 locals {
   ecs_load_balancers = local.alb_enabled ? [{
     target_group_arn = var.target_group_arn
-    container_name   = module.application_label.id
+    container_name   = module.ecs_label.id
     elb_name         = null
     container_port   = var.port_gateway
   }] : []
@@ -54,12 +54,13 @@ locals {
   }
 }
 
-module "application_label" {
+module "ecs_label" {
   source  = "cloudposse/label/null"
   version = "0.25.0"
 
-  context     = module.this.context
-  label_order = var.application_label_order
+  label_order = var.label_orders.ecs
+
+  context = module.this.context
 }
 
 resource "aws_cloudwatch_log_group" "default" {
@@ -71,9 +72,10 @@ resource "aws_cloudwatch_log_group" "default" {
 }
 
 module "container_definition" {
-  source                       = "cloudposse/ecs-container-definition/aws"
-  version                      = "0.58.1"
-  container_name               = module.application_label.id
+  source  = "cloudposse/ecs-container-definition/aws"
+  version = "0.58.1"
+
+  container_name               = module.ecs_label.id
   container_image              = "${var.app_image_repository}:${local.image_tag}"
   container_memory             = var.container_memory
   container_memory_reservation = var.container_memory_reservation
@@ -96,8 +98,9 @@ module "container_definition" {
 }
 
 module "container_definition_fluentbit" {
-  source                       = "cloudposse/ecs-container-definition/aws"
-  version                      = "0.58.1"
+  source  = "cloudposse/ecs-container-definition/aws"
+  version = "0.58.1"
+
   container_name               = "log_router"
   container_image              = "${var.log_router_image_repository}:${var.log_router_image_tag}"
   container_cpu                = var.log_router_container_cpu
@@ -119,8 +122,8 @@ module "container_definition_fluentbit" {
 }
 
 module "service_task" {
-  source  = "cloudposse/ecs-alb-service-task/aws"
-  version = "0.66.1"
+  source  = "justtrackio/ecs-alb-service-task/aws"
+  version = "1.0.0"
 
   circuit_breaker_deployment_enabled = var.circuit_breaker_deployment_enabled
   circuit_breaker_rollback_enabled   = var.circuit_breaker_rollback_enabled
@@ -144,5 +147,6 @@ module "service_task" {
   vpc_id                             = var.vpc_id
   wait_for_steady_state              = var.wait_for_steady_state
 
-  context = module.this.context
+  label_orders = var.label_orders
+  context      = module.this.context
 }
