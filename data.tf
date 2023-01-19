@@ -2,7 +2,8 @@ module "ssm_label" {
   source  = "cloudposse/label/null"
   version = "0.25.0"
 
-  delimiter = "/"
+  delimiter   = "/"
+  label_order = var.label_orders.ssm
 
   context = module.this.context
 }

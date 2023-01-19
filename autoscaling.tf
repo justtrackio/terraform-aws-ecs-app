@@ -21,18 +21,20 @@ locals {
   )
 }
 
-module "autoscaling_label" {
+module "cloudwatch_label" {
   source  = "cloudposse/label/null"
   version = "0.25.0"
 
-  delimiter = "/"
+  delimiter   = "/"
+  label_order = var.label_orders.cloudwatch
 
   context = module.this.context
 }
 
 module "ecs_service_task_predefined_autoscaling" {
-  count  = local.predefined_autoscaling_enabled ? 1 : 0
-  source = "github.com/justtrackio/terraform-aws-ecs-autoscaling?ref=v1.0.0"
+  count   = local.predefined_autoscaling_enabled ? 1 : 0
+  source  = "justtrackio/ecs-autoscaling/aws"
+  version = "1.0.0"
 
   context = module.this.context
 
@@ -59,8 +61,9 @@ module "ecs_service_task_predefined_autoscaling" {
 }
 
 module "ecs_service_task_customized_autoscaling" {
-  count  = local.customized_autoscaling_enabled ? 1 : 0
-  source = "github.com/justtrackio/terraform-aws-ecs-autoscaling?ref=v1.0.0"
+  count   = local.customized_autoscaling_enabled ? 1 : 0
+  source  = "justtrackio/ecs-autoscaling/aws"
+  version = "1.0.0"
 
   context = module.this.context
 
@@ -77,7 +80,7 @@ module "ecs_service_task_customized_autoscaling" {
     predefined_metric_specification = []
     customized_metric_specification = [{
       metric_name = local.autoscaling_customized_metric_name
-      namespace   = module.autoscaling_label.id
+      namespace   = module.cloudwatch_label.id
       statistic   = var.autoscaling_customized_statistic
       unit        = var.autoscaling_customized_unit
     }]
@@ -89,8 +92,9 @@ module "ecs_service_task_customized_autoscaling" {
 }
 
 module "ecs_service_task_schedule" {
-  count  = var.autoscaling_enabled && length(var.autoscaling_schedule) > 0 ? 1 : 0
-  source = "github.com/justtrackio/terraform-aws-ecs-autoscaling?ref=v1.0.0"
+  count   = var.autoscaling_enabled && length(var.autoscaling_schedule) > 0 ? 1 : 0
+  source  = "justtrackio/ecs-autoscaling/aws"
+  version = "1.0.0"
 
   context = module.this.context
 
