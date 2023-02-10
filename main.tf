@@ -8,7 +8,7 @@ locals {
   container_cpu = var.container_cpu != null ? var.container_cpu : data.aws_ssm_parameter.container_cpu[0].value
   docker_labels_traefik = {
     Application                                                                      = module.ecs_label.id
-    Domain                                                                           = "sandbox.sdlc.automation"
+    Domain                                                                           = var.traefik_domain
     "traefik.enable"                                                                 = true
     "traefik.http.routers.metadata-${module.ecs_label.id}.service"                   = "metadata-${module.ecs_label.id}"
     "traefik.http.services.metadata-${module.ecs_label.id}.loadbalancer.server.port" = var.port_metadata

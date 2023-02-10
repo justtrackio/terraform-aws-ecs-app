@@ -419,3 +419,9 @@ variable "traefik_enabled" {
   description = "For enabling traefik"
   default     = true
 }
+
+variable "traefik_domain" {
+  type        = string
+  description = "Domain for traefik"
+  default     = null
+}
