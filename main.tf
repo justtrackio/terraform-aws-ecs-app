@@ -5,8 +5,19 @@ locals {
     elb_name         = null
     container_port   = var.port_gateway
   }] : []
-  container_cpu         = var.container_cpu != null ? var.container_cpu : data.aws_ssm_parameter.container_cpu[0].value
-  docker_labels         = merge({}, var.docker_labels)
+  container_cpu = var.container_cpu != null ? var.container_cpu : data.aws_ssm_parameter.container_cpu[0].value
+  docker_labels_traefik = {
+    Application                                                                      = module.ecs_label.id
+    Domain                                                                           = "sandbox.sdlc.automation"
+    "traefik.enable"                                                                 = true
+    "traefik.http.routers.metadata-${module.ecs_label.id}.service"                   = "metadata-${module.ecs_label.id}"
+    "traefik.http.services.metadata-${module.ecs_label.id}.loadbalancer.server.port" = var.port_metadata
+    "traefik.http.routers.gateway-${module.ecs_label.id}.service"                    = "gateway-${module.ecs_label.id}"
+    "traefik.http.services.gateway-${module.ecs_label.id}.loadbalancer.server.port"  = var.port_gateway
+    "traefik.http.routers.health-${module.ecs_label.id}.service"                     = "health-${module.ecs_label.id}"
+    "traefik.http.services.health-${module.ecs_label.id}.loadbalancer.server.port"   = var.port_health
+  }
+  docker_labels         = var.traefik_enabled ? merge(var.docker_labels, local.docker_labels_traefik) : var.docker_labels
   total_cpu             = local.container_cpu + var.log_router_container_cpu
   task_cpu              = var.task_cpu != null ? local.total_cpu > var.task_cpu ? local.total_cpu : var.task_cpu : null
   container_memory      = var.container_memory_reservation != null ? var.container_memory_reservation : data.aws_ssm_parameter.container_memory_reservation[0].value

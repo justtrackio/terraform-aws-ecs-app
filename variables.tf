@@ -413,3 +413,9 @@ variable "label_orders" {
   default     = {}
   description = "Overrides the `labels_order` for the different labels to modify ID elements appear in the `id`"
 }
+
+variable "traefik_enabled" {
+  type        = bool
+  description = "For enabling traefik"
+  default     = true
+}
