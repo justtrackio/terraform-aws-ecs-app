@@ -5,8 +5,21 @@ locals {
     elb_name         = null
     container_port   = var.port_gateway
   }] : []
-  container_cpu         = var.container_cpu != null ? var.container_cpu : data.aws_ssm_parameter.container_cpu[0].value
-  docker_labels         = merge({}, var.docker_labels)
+  container_cpu = var.container_cpu != null ? var.container_cpu : data.aws_ssm_parameter.container_cpu[0].value
+  docker_labels = merge(var.docker_labels, {
+    Application                                                                                        = "${module.this.stage}-${module.this.name}"
+    Domain                                                                                             = "${module.this.environment}.${var.organizational_unit}.${module.this.namespace}"
+    "traefik.enable"                                                                                   = true
+    "traefik.http.routers.metadata-${module.this.stage}-${module.this.name}.entrypoints"               = "metadata"
+    "traefik.http.routers.metadata-${module.this.name}.service"                                        = "metadata-${module.this.stage}-${module.this.name}"
+    "traefik.http.services.metadata-${module.this.stage}-${module.this.name}.loadbalancer.server.port" = 8070
+    "traefik.http.routers.gateway-${module.this.stage}-${module.this.name}.entrypoints"                = "gateway"
+    "traefik.http.routers.gateway-${module.this.stage}-${module.this.name}.service"                    = "gateway-${module.this.stage}-${module.this.name}"
+    "traefik.http.services.gateway-${module.this.stage}-${module.this.name}.loadbalancer.server.port"  = 8088
+    "traefik.http.routers.health-${module.this.stage}-${module.this.name}.entrypoints"                 = "health"
+    "traefik.http.routers.health-${module.this.stage}-${module.this.name}.service"                     = "health-${module.this.stage}-${module.this.name}"
+    "traefik.http.services.health-${module.this.stage}-${module.this.name}.loadbalancer.server.port"   = 8090
+  })
   total_cpu             = local.container_cpu + var.log_router_container_cpu
   task_cpu              = var.task_cpu != null ? local.total_cpu > var.task_cpu ? local.total_cpu : var.task_cpu : null
   container_memory      = var.container_memory_reservation != null ? var.container_memory_reservation : data.aws_ssm_parameter.container_memory_reservation[0].value
@@ -45,7 +58,7 @@ locals {
       "CMD",
       "/usr/bin/wget",
       "--spider",
-      "localhost:${var.port_health}"
+      "localhost:${var.port_health}/health"
     ],
     retries     = 3
     timeout     = 5
@@ -84,6 +97,7 @@ module "container_definition" {
   stop_timeout                 = var.container_stop_timeout
   healthcheck                  = local.healthcheck
   map_environment = merge(var.container_map_environment, {
+    AWS_SDK_RETRIES                                              = 10
     AWS_DEFAULT_REGION                                           = var.aws_region
     ENV                                                          = module.this.environment
     ENVIRONMENT                                                  = module.this.environment
