@@ -1,9 +1,3 @@
-variable "app_image_repository" {
-  type        = string
-  description = "Container registry repository url"
-  default     = ""
-}
-
 variable "app_image_tag" {
   type        = string
   description = "The default container image to use in container definition"
@@ -34,16 +28,16 @@ variable "autoscaling_enabled" {
   description = "Defines if autoscaling should be enabled"
 }
 
-variable "autoscaling_min_capacity" {
-  type        = number
-  description = "Minimum number of running instances of a Service"
-  default     = 1
-}
-
 variable "autoscaling_max_capacity" {
   type        = number
   description = "Maximum number of running instances of a Service"
   default     = 200
+}
+
+variable "autoscaling_min_capacity" {
+  type        = number
+  description = "Minimum number of running instances of a Service"
+  default     = 1
 }
 
 variable "autoscaling_predefined_metric_type" {
@@ -94,7 +88,6 @@ variable "aws_account_id" {
 variable "aws_region" {
   type        = string
   description = "The AWS region"
-  default     = null
 }
 
 variable "circuit_breaker_deployment_enabled" {
@@ -181,23 +174,12 @@ variable "docker_labels" {
   default     = null
 }
 
-variable "ecs_cluster_arn" {
-  type        = string
-  description = "The ECS Cluster ARN where ECS Service will be provisioned"
-}
-
-variable "ecs_cluster_name" {
-  type        = string
-  description = "The ECS Cluster Name used by scaling resources"
-}
-
 variable "exec_enabled" {
   type        = bool
   description = "Specifies whether to enable Amazon ECS Exec for the tasks within the service"
   default     = true
 }
 
-# https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_HealthCheck.html
 variable "healthcheck" {
   type = object({
     command     = list(string)
@@ -210,16 +192,30 @@ variable "healthcheck" {
   default     = null
 }
 
+variable "ignore_changes_desired_count" {
+  type        = bool
+  description = "Whether to ignore changes for desired count in the ECS service"
+  default     = true
+}
+
 variable "ignore_changes_task_definition" {
   type        = bool
   description = "Ignore changes (like environment variables) to the ECS task definition"
   default     = false
 }
 
-variable "ignore_changes_desired_count" {
-  type        = bool
-  description = "Whether to ignore changes for desired count in the ECS service"
-  default     = true
+variable "label_orders" {
+  type = object({
+    cloudwatch = optional(list(string)),
+    ecr        = optional(list(string)),
+    ecs        = optional(list(string), ["stage", "name"]),
+    iam        = optional(list(string)),
+    sentry     = optional(list(string), ["stage"]),
+    ssm        = optional(list(string)),
+    vpc        = optional(list(string))
+  })
+  default     = {}
+  description = "Overrides the `labels_order` for the different labels to modify ID elements appear in the `id`"
 }
 
 variable "launch_type" {
@@ -255,13 +251,12 @@ variable "log_router_container_memory_reservation" {
 variable "log_router_image_repository" {
   type        = string
   description = "Container registry repository url"
-  default     = ""
 }
 
 variable "log_router_image_tag" {
   type        = string
   description = "The default container image to use in container definition"
-  default     = null
+  default     = "stable"
 }
 
 variable "log_router_map_environment" {
@@ -341,12 +336,6 @@ variable "port_metadata" {
   default     = 8070
 }
 
-variable "target_group_arn" {
-  type        = string
-  description = "The ARN of the Target Group to which to route traffic"
-  default     = ""
-}
-
 variable "service_placement_constraints" {
   type = list(object({
     type       = string
@@ -354,6 +343,12 @@ variable "service_placement_constraints" {
   }))
   description = "The rules that are taken into consideration during task placement. Maximum number of placement_constraints is 10. See [`placement_constraints`](https://www.terraform.io/docs/providers/aws/r/ecs_service.html#placement_constraints-1) docs"
   default     = []
+}
+
+variable "target_group_arn" {
+  type        = string
+  description = "The ARN of the Target Group to which to route traffic"
+  default     = ""
 }
 
 variable "task_cpu" {
@@ -396,20 +391,12 @@ variable "working_directory" {
   default     = "/app"
 }
 
-variable "vpc_id" {
+variable "domain" {
   type        = string
-  description = "The VPC ID where resources are created"
-  default     = ""
+  description = ""
 }
 
-variable "label_orders" {
-  type = object({
-    cloudwatch = optional(list(string)),
-    ecs        = optional(list(string)),
-    iam        = optional(list(string)),
-    ssm        = optional(list(string)),
-    vpc        = optional(list(string))
-  })
-  default     = {}
-  description = "Overrides the `labels_order` for the different labels to modify ID elements appear in the `id`"
+variable "organizational_unit" {
+  type        = string
+  description = ""
 }

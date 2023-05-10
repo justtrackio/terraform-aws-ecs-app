@@ -73,22 +73,41 @@ resource "aws_cloudwatch_log_group" "default" {
 
 module "container_definition" {
   source  = "cloudposse/ecs-container-definition/aws"
-  version = "0.58.1"
+  version = "0.58.3"
 
   container_name               = module.ecs_label.id
-  container_image              = "${var.app_image_repository}:${local.image_tag}"
+  container_image              = "${module.ecr.repository_url}:${local.image_tag}"
   container_memory             = var.container_memory
   container_memory_reservation = var.container_memory_reservation
   container_cpu                = var.container_cpu
   start_timeout                = var.container_start_timeout
   stop_timeout                 = var.container_stop_timeout
   healthcheck                  = local.healthcheck
-  map_environment              = var.container_map_environment
-  map_secrets                  = var.container_map_secrets
-  port_mappings                = local.port_mappings
-  ulimits                      = var.ulimits
-  working_directory            = var.working_directory
-  docker_labels                = local.docker_labels
+  map_environment = merge(var.container_map_environment, {
+    AWS_DEFAULT_REGION                                           = var.aws_region
+    ENV                                                          = module.this.environment
+    ENVIRONMENT                                                  = module.this.environment
+    SENTRY_DSN                                                   = module.sentry.dsn
+    SENTRY_ENVIRONMENT                                           = module.this.environment
+    METRIC_WRITER                                                = "cw"
+    REDIS_DEFAULT_ADDRESS                                        = ""
+    REDIS_DEFAULT_DIALER                                         = "srv"
+    CLOUD_AWS_DEFAULTS_ENDPOINT                                  = ""
+    CLOUD_AWS_SQS_CLIENTS_AUTOMATION_NAMING_PATTERN              = "!nodecode {env}-{app}-{queueId}"
+    LOG_HANDLERS_MAIN_FORMATTER                                  = "json"
+    LOG_HANDLERS_MAIN_TIMESTAMP_FORMAT                           = "2006-01-02T15:04:05.999Z07:00"
+    METRIC_CLOUDWATCH_NAMING_PATTERN                             = "!nodecode {env}/{group}-{app}"
+    STREAM_METRICS_MESSAGES_PER_RUNNER_ECS_SERVICE               = "{app_group}-{app_name}"
+    STREAM_METRICS_MESSAGES_PER_RUNNER_CLOUDWATCH_NAMING_PATTERN = "!nodecode {env}/{group}-{app}"
+    STREAM_METRICS_MESSAGES_PER_RUNNER_DYNAMODB_NAMING_PATTERN   = "!nodecode {env}-{modelId}"
+    TRACING_ADDR_TYPE                                            = "srv"
+    FIXTURE_GROUP_NAME                                           = "$FIXTURE_GROUP_NAME"
+  })
+  map_secrets       = var.container_map_secrets
+  port_mappings     = local.port_mappings
+  ulimits           = var.ulimits
+  working_directory = var.working_directory
+  docker_labels     = local.docker_labels
 
   log_configuration = {
     logDriver     = var.log_driver
@@ -99,7 +118,7 @@ module "container_definition" {
 
 module "container_definition_fluentbit" {
   source  = "cloudposse/ecs-container-definition/aws"
-  version = "0.58.1"
+  version = "0.58.3"
 
   container_name               = "log_router"
   container_image              = "${var.log_router_image_repository}:${var.log_router_image_tag}"
@@ -118,7 +137,11 @@ module "container_definition_fluentbit" {
     }
   }
 
-  map_environment = var.log_router_map_environment
+  map_environment = {
+    FLUENTD_HOSTNAME = "fluentd.${var.organizational_unit}-monitoring.${var.domain}"
+    FLUENTD_PORT     = 15000
+    TAG              = "${module.this.environment}-${module.this.namespace}-${module.this.stage}-${module.this.name}"
+  }
 }
 
 module "service_task" {
@@ -131,7 +154,7 @@ module "service_task" {
   deployment_maximum_percent         = var.deployment_maximum_percent
   deployment_minimum_healthy_percent = var.deployment_minimum_healthy_percent
   desired_count                      = var.desired_count
-  ecs_cluster_arn                    = var.ecs_cluster_arn
+  ecs_cluster_arn                    = data.aws_ecs_cluster.default.arn
   ecs_load_balancers                 = local.ecs_load_balancers
   exec_enabled                       = var.exec_enabled
   ignore_changes_desired_count       = var.ignore_changes_desired_count
@@ -144,7 +167,7 @@ module "service_task" {
   task_exec_policy_arns              = local.task_policies
   task_memory                        = local.task_memory
   task_policy_arns                   = local.task_policies
-  vpc_id                             = var.vpc_id
+  vpc_id                             = data.aws_vpc.default.id
   wait_for_steady_state              = var.wait_for_steady_state
 
   label_orders = var.label_orders

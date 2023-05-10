@@ -39,7 +39,7 @@ module "ecs_service_task_predefined_autoscaling" {
   context = module.this.context
 
   aws_account_id = var.aws_account_id
-  cluster_name   = var.ecs_cluster_name
+  cluster_name   = data.aws_ecs_cluster.default.cluster_name
   service_name   = module.this.id
   enabled        = var.autoscaling_enabled
   min_capacity   = var.autoscaling_min_capacity
@@ -68,7 +68,7 @@ module "ecs_service_task_customized_autoscaling" {
   context = module.this.context
 
   aws_account_id = var.aws_account_id
-  cluster_name   = var.ecs_cluster_name
+  cluster_name   = data.aws_ecs_cluster.default.cluster_name
   service_name   = module.this.id
   enabled        = var.autoscaling_enabled
   min_capacity   = var.autoscaling_min_capacity
@@ -99,7 +99,7 @@ module "ecs_service_task_schedule" {
   context = module.this.context
 
   aws_account_id = var.aws_account_id
-  cluster_name   = var.ecs_cluster_name
+  cluster_name   = data.aws_ecs_cluster.default.cluster_name
   service_name   = module.this.id
   enabled        = var.autoscaling_enabled
   schedule       = var.autoscaling_schedule
