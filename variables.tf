@@ -210,7 +210,7 @@ variable "label_orders" {
     ecr        = optional(list(string)),
     ecs        = optional(list(string), ["stage", "name"]),
     iam        = optional(list(string)),
-    sentry     = optional(list(string), ["stage"]),
+    sentry     = optional(list(string), ["stage", "name"]),
     ssm        = optional(list(string)),
     vpc        = optional(list(string))
   })
