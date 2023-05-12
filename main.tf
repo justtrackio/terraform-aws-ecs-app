@@ -8,7 +8,7 @@ locals {
   container_cpu = var.container_cpu != null ? var.container_cpu : data.aws_ssm_parameter.container_cpu[0].value
   docker_labels = merge(var.docker_labels, {
     Application                                                                                        = "${module.this.stage}-${module.this.name}"
-    Domain                                                                                             = "${module.this.environment}.${var.organizational_unit}.${module.this.namespace}"
+    Domain                                                                                             = "${module.this.environment}.${module.this.organizational_unit}.${module.this.namespace}"
     "traefik.enable"                                                                                   = true
     "traefik.http.routers.metadata-${module.this.stage}-${module.this.name}.entrypoints"               = "metadata"
     "traefik.http.routers.metadata-${module.this.name}.service"                                        = "metadata-${module.this.stage}-${module.this.name}"
@@ -68,8 +68,8 @@ locals {
 }
 
 module "ecs_label" {
-  source  = "cloudposse/label/null"
-  version = "0.25.0"
+  source  = "justtrackio/label/null"
+  version = "0.26.0"
 
   label_order = var.label_orders.ecs
 
@@ -98,7 +98,7 @@ module "container_definition" {
   healthcheck                  = local.healthcheck
   map_environment = merge(var.container_map_environment, {
     AWS_SDK_RETRIES                                              = 10
-    AWS_DEFAULT_REGION                                           = var.aws_region
+    AWS_DEFAULT_REGION                                           = module.this.aws_region
     ENV                                                          = module.this.environment
     ENVIRONMENT                                                  = module.this.environment
     SENTRY_DSN                                                   = module.sentry.dsn
@@ -147,12 +147,12 @@ module "container_definition_fluentbit" {
     logDriver = "awslogs"
     options = {
       awslogs-group  = try(aws_cloudwatch_log_group.default[0].name, ""),
-      awslogs-region = var.aws_region
+      awslogs-region = module.this.aws_region
     }
   }
 
   map_environment = {
-    FLUENTD_HOSTNAME = "fluentd.${var.organizational_unit}-monitoring.${var.domain}"
+    FLUENTD_HOSTNAME = "fluentd.${module.this.organizational_unit}-monitoring.${var.domain}"
     FLUENTD_PORT     = 15000
     TAG              = "${module.this.environment}-${module.this.namespace}-${module.this.stage}-${module.this.name}"
   }

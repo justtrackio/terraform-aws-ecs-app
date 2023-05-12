@@ -1,6 +1,6 @@
 module "ssm_label" {
-  source  = "cloudposse/label/null"
-  version = "0.25.0"
+  source  = "justtrackio/label/null"
+  version = "0.26.0"
 
   delimiter   = "/"
   label_order = var.label_orders.ssm
@@ -33,6 +33,6 @@ data "aws_ssm_parameter" "sentry_token" {
 
 data "aws_vpc" "default" {
   tags = {
-    account_name = "${var.organizational_unit}-${module.this.namespace}"
+    account_name = "${module.this.organizational_unit}-${module.this.namespace}"
   }
 }

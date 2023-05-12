@@ -80,16 +80,6 @@ variable "autoscaling_target_value" {
   default     = null
 }
 
-variable "aws_account_id" {
-  type        = string
-  description = "AWS Account ID"
-}
-
-variable "aws_region" {
-  type        = string
-  description = "The AWS region"
-}
-
 variable "circuit_breaker_deployment_enabled" {
   type        = bool
   description = "If `true`, enable the deployment circuit breaker logic for the service"
@@ -172,6 +162,11 @@ variable "docker_labels" {
   type        = map(string)
   description = "The configuration options to send to the `docker_labels`"
   default     = null
+}
+
+variable "domain" {
+  type        = string
+  description = ""
 }
 
 variable "exec_enabled" {
@@ -389,14 +384,4 @@ variable "working_directory" {
   type        = string
   description = "The working directory to run commands inside the container"
   default     = "/app"
-}
-
-variable "domain" {
-  type        = string
-  description = ""
-}
-
-variable "organizational_unit" {
-  type        = string
-  description = ""
 }
