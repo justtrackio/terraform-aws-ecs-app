@@ -1,6 +1,6 @@
 module "sentry" {
-  source = "./terraform-sentry-project"
-  #version = "1.0.0"
+  source  = "justtrackio/project/sentry"
+  version = "1.1.0"
 
   context     = module.this.context
   label_order = var.label_orders.sentry

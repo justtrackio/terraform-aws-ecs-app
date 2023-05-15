@@ -7,7 +7,7 @@ locals {
   }] : []
   container_cpu = var.container_cpu != null ? var.container_cpu : data.aws_ssm_parameter.container_cpu[0].value
   docker_labels = merge(var.docker_labels, {
-    Application                                                                                        = "${module.this.stage}-${module.this.name}"
+    Application                                                                                        = "${module.this.name}.${module.this.stage}"
     Domain                                                                                             = "${module.this.environment}.${module.this.organizational_unit}.${module.this.namespace}"
     "traefik.enable"                                                                                   = true
     "traefik.http.routers.metadata-${module.this.stage}-${module.this.name}.entrypoints"               = "metadata"
