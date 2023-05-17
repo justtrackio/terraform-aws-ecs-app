@@ -11,7 +11,7 @@ locals {
     Domain                                                                                             = "${module.this.environment}.${module.this.organizational_unit}.${module.this.namespace}"
     "traefik.enable"                                                                                   = true
     "traefik.http.routers.metadata-${module.this.stage}-${module.this.name}.entrypoints"               = "metadata"
-    "traefik.http.routers.metadata-${module.this.name}.service"                                        = "metadata-${module.this.stage}-${module.this.name}"
+    "traefik.http.routers.metadata-${module.this.stage}-${module.this.name}.service"                   = "metadata-${module.this.stage}-${module.this.name}"
     "traefik.http.services.metadata-${module.this.stage}-${module.this.name}.loadbalancer.server.port" = 8070
     "traefik.http.routers.gateway-${module.this.stage}-${module.this.name}.entrypoints"                = "gateway"
     "traefik.http.routers.gateway-${module.this.stage}-${module.this.name}.service"                    = "gateway-${module.this.stage}-${module.this.name}"
@@ -35,6 +35,9 @@ locals {
     "arn:aws:iam::aws:policy/CloudWatchFullAccess",
     "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
     "arn:aws:iam::aws:policy/AmazonRoute53AutoNamingReadOnlyAccess",
+    "arn:aws:iam::aws:policy/AWSXrayFullAccess",
+    "arn:aws:iam::aws:policy/AmazonSQSFullAccess",
+    "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess",
   ]
   default_port_mappings = [
     {
@@ -97,25 +100,26 @@ module "container_definition" {
   stop_timeout                 = var.container_stop_timeout
   healthcheck                  = local.healthcheck
   map_environment = merge(var.container_map_environment, {
-    AWS_SDK_RETRIES                                              = 10
-    AWS_DEFAULT_REGION                                           = module.this.aws_region
-    ENV                                                          = module.this.environment
-    ENVIRONMENT                                                  = module.this.environment
-    SENTRY_DSN                                                   = module.sentry.dsn
-    SENTRY_ENVIRONMENT                                           = module.this.environment
-    METRIC_WRITER                                                = "cw"
-    REDIS_DEFAULT_ADDRESS                                        = ""
-    REDIS_DEFAULT_DIALER                                         = "srv"
-    CLOUD_AWS_DEFAULTS_ENDPOINT                                  = ""
-    CLOUD_AWS_SQS_CLIENTS_AUTOMATION_NAMING_PATTERN              = "!nodecode {env}-{app}-{queueId}"
-    LOG_HANDLERS_MAIN_FORMATTER                                  = "json"
-    LOG_HANDLERS_MAIN_TIMESTAMP_FORMAT                           = "2006-01-02T15:04:05.999Z07:00"
-    METRIC_CLOUDWATCH_NAMING_PATTERN                             = "!nodecode {env}/{group}-{app}"
-    STREAM_METRICS_MESSAGES_PER_RUNNER_ECS_SERVICE               = "{app_group}-{app_name}"
-    STREAM_METRICS_MESSAGES_PER_RUNNER_CLOUDWATCH_NAMING_PATTERN = "!nodecode {env}/{group}-{app}"
-    STREAM_METRICS_MESSAGES_PER_RUNNER_DYNAMODB_NAMING_PATTERN   = "!nodecode {env}-{modelId}"
-    TRACING_ADDR_TYPE                                            = "srv"
-    FIXTURE_GROUP_NAME                                           = "$FIXTURE_GROUP_NAME"
+    AWS_SDK_RETRIES                                            = 10
+    AWS_DEFAULT_REGION                                         = module.this.aws_region
+    ENV                                                        = module.this.environment
+    ENVIRONMENT                                                = module.this.environment
+    SENTRY_DSN                                                 = module.sentry.dsn
+    SENTRY_ENVIRONMENT                                         = module.this.environment
+    METRIC_WRITER                                              = "cw"
+    REDIS_DEFAULT_ADDRESS                                      = ""
+    REDIS_DEFAULT_DIALER                                       = "srv"
+    CLOUD_AWS_DEFAULTS_ENDPOINT                                = ""
+    LOG_HANDLERS_MAIN_FORMATTER                                = "json"
+    LOG_HANDLERS_MAIN_TIMESTAMP_FORMAT                         = "2006-01-02T15:04:05.999Z07:00"
+    STREAM_METRICS_MESSAGES_PER_RUNNER_ECS_SERVICE             = "{app_group}-{app_name}"
+    STREAM_METRICS_MESSAGES_PER_RUNNER_DYNAMODB_NAMING_PATTERN = "!nodecode {env}-{modelId}"
+    CLOUD_AWS_DYNAMODB_CLIENTS_DEFAULT_NAMING_PATTERN          = "!nodecode {env}-{group}-{modelId}"
+    CLOUD_AWS_SQS_CLIENTS_DEFAULT_NAMING_PATTERN               = "!nodecode {env}-{group}-{queueId}"
+    METRIC_CLOUDWATCH_NAMING_PATTERN                           = "!nodecode {env}/{group}/{app}"
+    CLOUD_AWS_KINESIS_CLIENTS_DEFAULT_NAMING_PATTERN           = "!nodecode {env}-{group}-{streamName}"
+    TRACING_ADDR_TYPE                                          = "srv"
+    FIXTURE_GROUP_NAME                                         = "$FIXTURE_GROUP_NAME"
   })
   map_secrets       = var.container_map_secrets
   port_mappings     = local.port_mappings
