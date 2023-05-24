@@ -1,6 +1,6 @@
 module "monitoring" {
-  source = "./terraform-aws-ecs-gosoline-monitoring"
-  #version = "1.3.0"
+  source  = "justtrackio/ecs-gosoline-monitoring/aws"
+  version = "2.0.0"
 
   context = module.this.context
 
