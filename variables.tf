@@ -1,3 +1,9 @@
+variable "alarm_enabled" {
+  type        = bool
+  default     = false
+  description = "Defines if alarms should be created"
+}
+
 variable "app_image_tag" {
   type        = string
   description = "The default container image to use in container definition"
