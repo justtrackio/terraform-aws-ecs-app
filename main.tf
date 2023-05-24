@@ -6,7 +6,7 @@ locals {
     container_port   = var.port_gateway
   }] : []
   container_cpu = var.container_cpu != null ? var.container_cpu : data.aws_ssm_parameter.container_cpu[0].value
-  docker_labels = merge(var.docker_labels, {
+  docker_labels = merge({
     Application                                                                      = "${module.this.name}.${module.this.stage}"
     Domain                                                                           = "${module.this.environment}.${module.this.organizational_unit}.${module.this.namespace}"
     "traefik.enable"                                                                 = true
@@ -22,7 +22,7 @@ locals {
     "traefik.http.routers.health-${module.ecs_label.id}.entrypoints"                 = "health"
     "traefik.http.routers.health-${module.ecs_label.id}.service"                     = "health-${module.ecs_label.id}"
     "traefik.http.services.health-${module.ecs_label.id}.loadbalancer.server.port"   = 8090
-  })
+  }, var.docker_labels)
   total_cpu             = local.container_cpu + var.log_router_container_cpu
   task_cpu              = var.task_cpu != null ? local.total_cpu > var.task_cpu ? local.total_cpu : var.task_cpu : null
   container_memory      = var.container_memory_reservation != null ? var.container_memory_reservation : data.aws_ssm_parameter.container_memory_reservation[0].value
@@ -107,7 +107,7 @@ module "container_definition" {
   start_timeout                = var.container_start_timeout
   stop_timeout                 = var.container_stop_timeout
   healthcheck                  = local.healthcheck
-  map_environment = merge(var.container_map_environment, {
+  map_environment = merge({
     AWS_SDK_RETRIES                                            = 10
     AWS_DEFAULT_REGION                                         = module.this.aws_region
     ENV                                                        = module.this.environment
@@ -128,7 +128,7 @@ module "container_definition" {
     CLOUD_AWS_KINESIS_CLIENTS_DEFAULT_NAMING_PATTERN           = "!nodecode {env}-{group}-{streamName}"
     TRACING_ADDR_TYPE                                          = "srv"
     FIXTURE_GROUP_NAME                                         = "$FIXTURE_GROUP_NAME"
-  })
+  }, var.container_map_environment)
   map_secrets       = var.container_map_secrets
   port_mappings     = local.port_mappings
   ulimits           = var.ulimits

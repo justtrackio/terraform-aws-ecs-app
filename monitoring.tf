@@ -6,7 +6,7 @@ module "monitoring" {
 
   alarm_enabled       = var.alarm_enabled
   domain              = var.domain
-  organizational_unit = var.organizational_unit
+  organizational_unit = module.this.organizational_unit
   label_orders        = var.label_orders
 
   alarm_consumer  = var.alarm_consumer
