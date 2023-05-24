@@ -7,18 +7,21 @@ locals {
   }] : []
   container_cpu = var.container_cpu != null ? var.container_cpu : data.aws_ssm_parameter.container_cpu[0].value
   docker_labels = merge(var.docker_labels, {
-    Application                                                                                        = "${module.this.name}.${module.this.stage}"
-    Domain                                                                                             = "${module.this.environment}.${module.this.organizational_unit}.${module.this.namespace}"
-    "traefik.enable"                                                                                   = true
-    "traefik.http.routers.metadata-${module.this.stage}-${module.this.name}.entrypoints"               = "metadata"
-    "traefik.http.routers.metadata-${module.this.stage}-${module.this.name}.service"                   = "metadata-${module.this.stage}-${module.this.name}"
-    "traefik.http.services.metadata-${module.this.stage}-${module.this.name}.loadbalancer.server.port" = 8070
-    "traefik.http.routers.gateway-${module.this.stage}-${module.this.name}.entrypoints"                = "gateway"
-    "traefik.http.routers.gateway-${module.this.stage}-${module.this.name}.service"                    = "gateway-${module.this.stage}-${module.this.name}"
-    "traefik.http.services.gateway-${module.this.stage}-${module.this.name}.loadbalancer.server.port"  = 8088
-    "traefik.http.routers.health-${module.this.stage}-${module.this.name}.entrypoints"                 = "health"
-    "traefik.http.routers.health-${module.this.stage}-${module.this.name}.service"                     = "health-${module.this.stage}-${module.this.name}"
-    "traefik.http.services.health-${module.this.stage}-${module.this.name}.loadbalancer.server.port"   = 8090
+    Application                                                                      = "${module.this.name}.${module.this.stage}"
+    Domain                                                                           = "${module.this.environment}.${module.this.organizational_unit}.${module.this.namespace}"
+    "traefik.enable"                                                                 = true
+    "traefik.http.routers.metadata-${module.ecs_label.id}.entrypoints"               = "metadata"
+    "traefik.http.routers.metadata-${module.ecs_label.id}.service"                   = "metadata-${module.ecs_label.id}"
+    "traefik.http.services.metadata-${module.ecs_label.id}.loadbalancer.server.port" = 8070
+    "traefik.http.routers.gateway-${module.ecs_label.id}.entrypoints"                = "gateway"
+    "traefik.http.routers.gateway-${module.ecs_label.id}.service"                    = "gateway-${module.ecs_label.id}"
+    "traefik.http.services.gateway-${module.ecs_label.id}.loadbalancer.server.port"  = 8088
+    "traefik.http.routers.grpc-${module.ecs_label.id}.entrypoints"                   = "grpc"
+    "traefik.http.routers.grpc-${module.ecs_label.id}.service"                       = "grpc-${module.ecs_label.id}"
+    "traefik.http.services.grpc-${module.ecs_label.id}.loadbalancer.server.port"     = 8081
+    "traefik.http.routers.health-${module.ecs_label.id}.entrypoints"                 = "health"
+    "traefik.http.routers.health-${module.ecs_label.id}.service"                     = "health-${module.ecs_label.id}"
+    "traefik.http.services.health-${module.ecs_label.id}.loadbalancer.server.port"   = 8090
   })
   total_cpu             = local.container_cpu + var.log_router_container_cpu
   task_cpu              = var.task_cpu != null ? local.total_cpu > var.task_cpu ? local.total_cpu : var.task_cpu : null
@@ -47,6 +50,11 @@ locals {
     },
     {
       containerPort = var.port_gateway
+      hostPort      = 0
+      protocol      = "tcp"
+    },
+    {
+      containerPort = var.port_grpc
       hostPort      = 0
       protocol      = "tcp"
     },
