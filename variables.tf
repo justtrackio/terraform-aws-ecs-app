@@ -290,13 +290,14 @@ variable "ignore_changes_task_definition" {
 
 variable "label_orders" {
   type = object({
-    cloudwatch = optional(list(string)),
-    ecr        = optional(list(string)),
-    ecs        = optional(list(string), ["stage", "name"]),
-    iam        = optional(list(string)),
-    sentry     = optional(list(string), ["stage", "name"]),
-    ssm        = optional(list(string)),
-    vpc        = optional(list(string))
+    cloudwatch    = optional(list(string), ["environment", "stage", "name"]),
+    ecr           = optional(list(string)),
+    ecs           = optional(list(string), ["stage", "name"]),
+    iam           = optional(list(string)),
+    sentry        = optional(list(string), ["stage", "name"]),
+    ssm           = optional(list(string)),
+    vpc           = optional(list(string)),
+    elasticsearch = optional(list(string), ["environment", "stage", "name"])
   })
   default     = {}
   description = "Overrides the `labels_order` for the different labels to modify ID elements appear in the `id`"
