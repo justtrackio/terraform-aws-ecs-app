@@ -1,7 +1,55 @@
+variable "alarm_consumer" {
+  type = object({
+    alarm_description      = optional(string)
+    datapoints_to_alarm    = optional(number, 1)
+    evaluation_periods     = optional(number, 1)
+    period                 = optional(number, 60)
+    success_rate_threshold = optional(number, 99)
+  })
+  default     = {}
+  description = "This can be used to override alarms for consumers. Keys are names of the consumers."
+}
+
 variable "alarm_enabled" {
   type        = bool
   default     = false
   description = "Defines if alarms should be created"
+}
+
+variable "alarm_gateway" {
+  type = object({
+    alarm_description      = optional(string)
+    datapoints_to_alarm    = optional(number, 3)
+    evaluation_periods     = optional(number, 3)
+    period                 = optional(number, 60)
+    success_rate_threshold = optional(number, 99)
+  })
+  default     = {}
+  description = "This can be used to override alarms for gateway routes. Keys are names of the gateway route."
+}
+
+variable "alarm_kinsumer" {
+  type = object({
+    alarm_description        = optional(string)
+    datapoints_to_alarm      = optional(number, 1)
+    evaluation_periods       = optional(number, 1)
+    period                   = optional(number, 60)
+    threshold_seconds_behind = optional(number, 60)
+  })
+  default     = {}
+  description = "This can be used to override alarms for kinsumers. Keys are names of the kinsumers."
+}
+
+variable "alarm_scheduled" {
+  type = object({
+    alarm_description   = optional(string)
+    datapoints_to_alarm = optional(number, 1)
+    evaluation_periods  = optional(number, 1)
+    period              = optional(number, 60)
+    threshold           = optional(number, 0)
+  })
+  default     = {}
+  description = "This can be used to override scheduled alarm"
 }
 
 variable "app_image_tag" {
@@ -172,7 +220,42 @@ variable "docker_labels" {
 
 variable "domain" {
   type        = string
-  description = ""
+  description = "The default domain"
+}
+
+variable "elasticsearch_index_template" {
+  type = object({
+    additional_fields  = map(any)
+    name               = string
+    priority           = number
+    node_name          = string
+    number_of_shards   = number
+    number_of_replicas = number
+  })
+  default = {
+    additional_fields  = {}
+    name               = ""
+    priority           = 250
+    node_name          = "*"
+    number_of_shards   = 1
+    number_of_replicas = 1
+  }
+  description = "This defines the properties used within the index template (Only used if create_elasticsearch_data_stream is true)"
+}
+
+variable "elasticsearch_lifecycle_policy" {
+  type = object({
+    delete_phase_min_age             = string
+    hot_phase_max_primary_shard_size = string
+    hot_phase_max_age                = optional(string)
+    warm_phase_number_of_replicas    = number
+  })
+  default = {
+    delete_phase_min_age             = "28d"
+    hot_phase_max_primary_shard_size = "10gb"
+    warm_phase_number_of_replicas    = 0
+  }
+  description = "This defines the properties used within the index lifecycle management policy (Only used if create_elasticsearch_data_stream is true)"
 }
 
 variable "exec_enabled" {
@@ -258,12 +341,6 @@ variable "log_router_image_tag" {
   type        = string
   description = "The default container image to use in container definition"
   default     = "stable"
-}
-
-variable "log_router_map_environment" {
-  type        = map(string)
-  description = "The environment variables to pass to the container. This is a map of string: {key: value}. `environment` overrides `map_environment`"
-  default     = null
 }
 
 variable "log_router_options" {
