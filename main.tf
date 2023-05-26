@@ -114,6 +114,7 @@ module "container_definition" {
     ENVIRONMENT                                                = module.this.environment
     SENTRY_DSN                                                 = module.sentry.dsn
     SENTRY_ENVIRONMENT                                         = module.this.environment
+    METRIC_ENABLED                                             = var.metric_enabled
     METRIC_WRITER                                              = "cw"
     REDIS_DEFAULT_ADDRESS                                      = ""
     REDIS_DEFAULT_DIALER                                       = "srv"
@@ -126,6 +127,7 @@ module "container_definition" {
     CLOUD_AWS_SQS_CLIENTS_DEFAULT_NAMING_PATTERN               = "!nodecode {env}-{group}-{queueId}"
     METRIC_CLOUDWATCH_NAMING_PATTERN                           = "!nodecode {env}/{group}/{app}"
     CLOUD_AWS_KINESIS_CLIENTS_DEFAULT_NAMING_PATTERN           = "!nodecode {env}-{group}-{streamName}"
+    TRACING_ENABLED                                            = var.tracing_enabled
     TRACING_ADDR_TYPE                                          = "srv"
     FIXTURE_GROUP_NAME                                         = "$FIXTURE_GROUP_NAME"
   }, var.container_map_environment)

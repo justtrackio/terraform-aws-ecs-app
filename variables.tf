@@ -477,3 +477,13 @@ variable "working_directory" {
   description = "The working directory to run commands inside the container"
   default     = "/app"
 }
+
+variable "metric_enabled" {
+  type        = bool
+  description = "Defines if metrics should be written"
+}
+
+variable "tracing_enabled" {
+  type        = bool
+  description = "Defines if tracing should be enabled"
+}
