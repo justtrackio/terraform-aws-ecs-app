@@ -36,3 +36,7 @@ data "aws_vpc" "default" {
     account_name = "${module.this.organizational_unit}-${module.this.namespace}"
   }
 }
+
+data "aws_ssm_parameter" "grafana_token" {
+  name = "/grafana/token"
+}

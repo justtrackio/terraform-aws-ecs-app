@@ -223,6 +223,12 @@ variable "domain" {
   description = "The default domain"
 }
 
+variable "elasticsearch_host" {
+  type        = string
+  default     = null
+  description = "Defines the elasticsearch host to query for logs"
+}
+
 variable "elasticsearch_index_template" {
   type = object({
     additional_fields  = map(any)
@@ -264,6 +270,40 @@ variable "exec_enabled" {
   type        = bool
   description = "Specifies whether to enable Amazon ECS Exec for the tasks within the service"
   default     = true
+}
+
+variable "gosoline_metadata" {
+  type = object({
+    domain    = optional(string),
+    use_https = optional(string),
+    port      = optional(string)
+  })
+  description = "Define custom metadata for the gosoline provider"
+  default     = null
+}
+
+variable "gosoline_name_patterns" {
+  type = object({
+    hostname                         = optional(string),
+    cloudwatch_namespace             = optional(string),
+    ecs_cluster                      = optional(string),
+    ecs_service                      = optional(string),
+    grafana_elasticsearch_datasource = optional(string)
+  })
+  description = "Define custom name patters for the gosoline provider"
+  default = {
+    hostname                         = "{scheme}://{app}.{group}.{env}.{metadata_domain}:{port}"
+    cloudwatch_namespace             = "{env}/{group}/{app}"
+    ecs_cluster                      = "{env}"
+    ecs_service                      = "{group}-{app}"
+    grafana_elasticsearch_datasource = "elasticsearch-{env}-logs-{group}-{app}"
+  }
+}
+
+variable "grafana_dashboard_url" {
+  type        = string
+  description = "Url of the grafana dashboard"
+  default     = null
 }
 
 variable "healthcheck" {
@@ -361,6 +401,17 @@ variable "log_router_type" {
   default     = "fluentbit"
 }
 
+variable "metric_enabled" {
+  type        = bool
+  description = "Defines if metrics should be written"
+}
+
+variable "monitoring_enabled" {
+  type        = bool
+  default     = true
+  description = "Defines if the monitoring module should be created"
+}
+
 variable "mpr_enabled" {
   type        = bool
   description = "Whether to use the StreamMprMessagesPerRunner metric for autoscaling (gosoline feature), see: https://github.com/justtrackio/gosoline"
@@ -456,6 +507,11 @@ variable "task_policy_arns" {
   default     = []
 }
 
+variable "tracing_enabled" {
+  type        = bool
+  description = "Defines if tracing should be enabled"
+}
+
 variable "ulimits" {
   type = list(object({
     name      = string
@@ -476,14 +532,4 @@ variable "working_directory" {
   type        = string
   description = "The working directory to run commands inside the container"
   default     = "/app"
-}
-
-variable "metric_enabled" {
-  type        = bool
-  description = "Defines if metrics should be written"
-}
-
-variable "tracing_enabled" {
-  type        = bool
-  description = "Defines if tracing should be enabled"
 }

@@ -8,6 +8,10 @@ Terraform module which creates a ecs app
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.67 |
+| <a name="requirement_elasticsearch"></a> [elasticsearch](#requirement\_elasticsearch) | 2.0.7 |
+| <a name="requirement_elasticstack"></a> [elasticstack](#requirement\_elasticstack) | 0.5.0 |
+| <a name="requirement_gosoline"></a> [gosoline](#requirement\_gosoline) | 0.0.12 |
+| <a name="requirement_grafana"></a> [grafana](#requirement\_grafana) | 1.40.1 |
 
 ## Providers
 
@@ -28,7 +32,7 @@ Terraform module which creates a ecs app
 | <a name="module_ecs_service_task_customized_autoscaling"></a> [ecs\_service\_task\_customized\_autoscaling](#module\_ecs\_service\_task\_customized\_autoscaling) | justtrackio/ecs-autoscaling/aws | 1.1.0 |
 | <a name="module_ecs_service_task_predefined_autoscaling"></a> [ecs\_service\_task\_predefined\_autoscaling](#module\_ecs\_service\_task\_predefined\_autoscaling) | justtrackio/ecs-autoscaling/aws | 1.1.0 |
 | <a name="module_ecs_service_task_schedule"></a> [ecs\_service\_task\_schedule](#module\_ecs\_service\_task\_schedule) | justtrackio/ecs-autoscaling/aws | 1.1.0 |
-| <a name="module_monitoring"></a> [monitoring](#module\_monitoring) | justtrackio/ecs-gosoline-monitoring/aws | 2.0.0 |
+| <a name="module_monitoring"></a> [monitoring](#module\_monitoring) | github.com/justtrackio/terraform-aws-ecs-gosoline-monitoring | remove_provider_config_in_favor_of_count |
 | <a name="module_sentry"></a> [sentry](#module\_sentry) | justtrackio/project/sentry | 1.1.1 |
 | <a name="module_service_task"></a> [service\_task](#module\_service\_task) | justtrackio/ecs-alb-service-task/aws | 1.2.0 |
 | <a name="module_ssm_label"></a> [ssm\_label](#module\_ssm\_label) | justtrackio/label/null | 0.26.0 |
@@ -43,6 +47,7 @@ Terraform module which creates a ecs app
 | [aws_ssm_parameter.container_cpu](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ssm_parameter) | data source |
 | [aws_ssm_parameter.container_memory_reservation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ssm_parameter) | data source |
 | [aws_ssm_parameter.container_tag](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ssm_parameter) | data source |
+| [aws_ssm_parameter.grafana_token](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ssm_parameter) | data source |
 | [aws_ssm_parameter.sentry_token](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ssm_parameter) | data source |
 | [aws_vpc.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) | data source |
 
@@ -90,11 +95,15 @@ Terraform module which creates a ecs app
 | <a name="input_desired_count"></a> [desired\_count](#input\_desired\_count) | The desired number of tasks to start with. Set this to 0 if using DAEMON Service type. (FARGATE does not suppoert DAEMON Service type) | `number` | `1` | no |
 | <a name="input_docker_labels"></a> [docker\_labels](#input\_docker\_labels) | The configuration options to send to the `docker_labels` | `map(string)` | `null` | no |
 | <a name="input_domain"></a> [domain](#input\_domain) | The default domain | `string` | n/a | yes |
+| <a name="input_elasticsearch_host"></a> [elasticsearch\_host](#input\_elasticsearch\_host) | Defines the elasticsearch host to query for logs | `string` | `null` | no |
 | <a name="input_elasticsearch_index_template"></a> [elasticsearch\_index\_template](#input\_elasticsearch\_index\_template) | This defines the properties used within the index template (Only used if create\_elasticsearch\_data\_stream is true) | <pre>object({<br>    additional_fields  = map(any)<br>    name               = string<br>    priority           = number<br>    node_name          = string<br>    number_of_shards   = number<br>    number_of_replicas = number<br>  })</pre> | <pre>{<br>  "additional_fields": {},<br>  "name": "",<br>  "node_name": "*",<br>  "number_of_replicas": 1,<br>  "number_of_shards": 1,<br>  "priority": 250<br>}</pre> | no |
 | <a name="input_elasticsearch_lifecycle_policy"></a> [elasticsearch\_lifecycle\_policy](#input\_elasticsearch\_lifecycle\_policy) | This defines the properties used within the index lifecycle management policy (Only used if create\_elasticsearch\_data\_stream is true) | <pre>object({<br>    delete_phase_min_age             = string<br>    hot_phase_max_primary_shard_size = string<br>    hot_phase_max_age                = optional(string)<br>    warm_phase_min_age               = string<br>    warm_phase_number_of_replicas    = number<br>  })</pre> | <pre>{<br>  "delete_phase_min_age": "28d",<br>  "hot_phase_max_primary_shard_size": "10gb",<br>  "warm_phase_min_age": "1d",<br>  "warm_phase_number_of_replicas": 0<br>}</pre> | no |
 | <a name="input_enabled"></a> [enabled](#input\_enabled) | Set to false to prevent the module from creating any resources | `bool` | `null` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | ID element. Usually used for region e.g. 'uw2', 'us-west-2', OR role 'prod', 'staging', 'dev', 'UAT' | `string` | `null` | no |
 | <a name="input_exec_enabled"></a> [exec\_enabled](#input\_exec\_enabled) | Specifies whether to enable Amazon ECS Exec for the tasks within the service | `bool` | `true` | no |
+| <a name="input_gosoline_metadata"></a> [gosoline\_metadata](#input\_gosoline\_metadata) | Define custom metadata for the gosoline provider | <pre>object({<br>    domain    = optional(string),<br>    use_https = optional(string),<br>    port      = optional(string)<br>  })</pre> | `null` | no |
+| <a name="input_gosoline_name_patterns"></a> [gosoline\_name\_patterns](#input\_gosoline\_name\_patterns) | Define custom name patters for the gosoline provider | <pre>object({<br>    hostname                         = optional(string),<br>    cloudwatch_namespace             = optional(string),<br>    ecs_cluster                      = optional(string),<br>    ecs_service                      = optional(string),<br>    grafana_elasticsearch_datasource = optional(string)<br>  })</pre> | <pre>{<br>  "cloudwatch_namespace": "{env}/{group}/{app}",<br>  "ecs_cluster": "{env}",<br>  "ecs_service": "{group}-{app}",<br>  "grafana_elasticsearch_datasource": "elasticsearch-{env}-logs-{group}-{app}",<br>  "hostname": "{scheme}://{app}.{group}.{env}.{metadata_domain}:{port}"<br>}</pre> | no |
+| <a name="input_grafana_dashboard_url"></a> [grafana\_dashboard\_url](#input\_grafana\_dashboard\_url) | Url of the grafana dashboard | `string` | `null` | no |
 | <a name="input_healthcheck"></a> [healthcheck](#input\_healthcheck) | A map containing command (string), timeout, interval (duration in seconds), retries (1-10, number of times to retry before marking container unhealthy), and startPeriod (0-300, optional grace period to wait, in seconds, before failed healthchecks count toward retries) | <pre>object({<br>    command     = list(string)<br>    retries     = number<br>    timeout     = number<br>    interval    = number<br>    startPeriod = number<br>  })</pre> | `null` | no |
 | <a name="input_id_length_limit"></a> [id\_length\_limit](#input\_id\_length\_limit) | Limit `id` to this many characters (minimum 6).<br>Set to `0` for unlimited length.<br>Set to `null` for keep the existing setting, which defaults to `0`.<br>Does not affect `id_full`. | `number` | `null` | no |
 | <a name="input_ignore_changes_desired_count"></a> [ignore\_changes\_desired\_count](#input\_ignore\_changes\_desired\_count) | Whether to ignore changes for desired count in the ECS service | `bool` | `true` | no |
@@ -114,6 +123,7 @@ Terraform module which creates a ecs app
 | <a name="input_log_router_options"></a> [log\_router\_options](#input\_log\_router\_options) | The log router options to use | `map(string)` | <pre>{<br>  "config-file-type": "file",<br>  "config-file-value": "/fluent-bit/etc/extra.conf"<br>}</pre> | no |
 | <a name="input_log_router_type"></a> [log\_router\_type](#input\_log\_router\_type) | The log router type to use | `string` | `"fluentbit"` | no |
 | <a name="input_metric_enabled"></a> [metric\_enabled](#input\_metric\_enabled) | Defines if metrics should be written | `bool` | n/a | yes |
+| <a name="input_monitoring_enabled"></a> [monitoring\_enabled](#input\_monitoring\_enabled) | Defines if the monitoring module should be created | `bool` | `true` | no |
 | <a name="input_mpr_enabled"></a> [mpr\_enabled](#input\_mpr\_enabled) | Whether to use the StreamMprMessagesPerRunner metric for autoscaling (gosoline feature), see: https://github.com/justtrackio/gosoline | `bool` | `false` | no |
 | <a name="input_name"></a> [name](#input\_name) | ID element. Usually the component or solution name, e.g. 'app' or 'jenkins'.<br>This is the only ID element not also included as a `tag`.<br>The "name" tag is set to the full `id` string. There is no tag with the value of the `name` input. | `string` | `null` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | ID element. Usually an abbreviation of your organization name, e.g. 'eg' or 'cp', to help ensure generated IDs are globally unique | `string` | `null` | no |
