@@ -124,6 +124,7 @@ module "container_definition" {
     STREAM_METRICS_MESSAGES_PER_RUNNER_ECS_SERVICE             = "{app_group}-{app_name}"
     STREAM_METRICS_MESSAGES_PER_RUNNER_DYNAMODB_NAMING_PATTERN = "!nodecode {env}-{modelId}"
     CLOUD_AWS_DYNAMODB_CLIENTS_DEFAULT_NAMING_PATTERN          = "!nodecode {env}-{group}-{modelId}"
+    CLOUD_AWS_SNS_CLIENTS_DEFAULT_NAMING_PATTERN               = "!nodecode {env}-{group}-{topicId}"
     CLOUD_AWS_SQS_CLIENTS_DEFAULT_NAMING_PATTERN               = "!nodecode {env}-{group}-{queueId}"
     METRIC_CLOUDWATCH_NAMING_PATTERN                           = "!nodecode {env}/{group}/{app}"
     CLOUD_AWS_KINESIS_CLIENTS_DEFAULT_NAMING_PATTERN           = "!nodecode {env}-{group}-{streamName}"
