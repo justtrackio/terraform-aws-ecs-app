@@ -52,8 +52,8 @@ data "aws_lb_listener" "http" {
   port              = 80
 }
 
-#data "aws_lb_listener" "https" {
-#  count             = length(var.alb_name) > 0 ? 1 : 0
-#  load_balancer_arn = data.aws_lb.default[0].arn
-#  port              = 443
-#}
+data "aws_lb_listener" "https" {
+  count             = length(var.alb_name) > 0 ? 1 : 0
+  load_balancer_arn = data.aws_lb.default[0].arn
+  port              = 443
+}
