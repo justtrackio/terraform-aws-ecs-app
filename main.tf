@@ -1,6 +1,6 @@
 locals {
-  ecs_load_balancers = local.alb_enabled ? [{
-    target_group_arn = var.target_group_arn
+  ecs_load_balancers = length(var.alb_name) > 0 ? [{
+    target_group_arn = module.alb_ingress.target_group_arn
     container_name   = module.ecs_label.id
     elb_name         = null
     container_port   = var.port_gateway

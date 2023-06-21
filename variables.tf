@@ -52,6 +52,30 @@ variable "alarm_scheduled" {
   description = "This can be used to override scheduled alarm"
 }
 
+variable "alb_name" {
+  type        = string
+  description = "Name of the alb used to attach the target group"
+  default     = ""
+}
+
+variable "alb_unauthenticated_hosts" {
+  type        = list(string)
+  default     = []
+  description = "Unauthenticated hosts to match in Hosts header"
+}
+
+variable "alb_unauthenticated_paths" {
+  type        = list(string)
+  default     = []
+  description = "Unauthenticated path pattern to match (a maximum of 1 can be defined)"
+}
+
+variable "alb_unauthenticated_priority" {
+  type        = number
+  default     = 100
+  description = "The priority for the rules without authentication, between 1 and 50000 (1 being highest priority). Must be different from `authenticated_priority` since a listener can't have multiple rules with the same priority"
+}
+
 variable "app_image_tag" {
   type        = string
   description = "The default container image to use in container definition"
@@ -335,6 +359,7 @@ variable "label_orders" {
     cloudwatch    = optional(list(string), ["environment", "stage", "name"]),
     ecr           = optional(list(string)),
     ecs           = optional(list(string), ["stage", "name"]),
+    ec2           = optional(list(string), ["environment", "stage", "name"]),
     iam           = optional(list(string)),
     sentry        = optional(list(string), ["stage", "name"]),
     ssm           = optional(list(string)),

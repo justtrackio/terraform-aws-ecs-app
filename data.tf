@@ -40,3 +40,20 @@ data "aws_vpc" "default" {
 data "aws_ssm_parameter" "grafana_token" {
   name = "/grafana/token"
 }
+
+data "aws_lb" "default" {
+  count = length(var.alb_name) > 0 ? 1 : 0
+  name  = "${module.this.environment}-${var.alb_name}"
+}
+
+data "aws_lb_listener" "http" {
+  count             = length(var.alb_name) > 0 ? 1 : 0
+  load_balancer_arn = data.aws_lb.default[0].arn
+  port              = 80
+}
+
+#data "aws_lb_listener" "https" {
+#  count             = length(var.alb_name) > 0 ? 1 : 0
+#  load_balancer_arn = data.aws_lb.default[0].arn
+#  port              = 443
+#}
