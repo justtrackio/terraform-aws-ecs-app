@@ -34,7 +34,7 @@ module "cloudwatch_label" {
 module "ecs_service_task_predefined_autoscaling" {
   count   = local.predefined_autoscaling_enabled ? 1 : 0
   source  = "justtrackio/ecs-autoscaling/aws"
-  version = "1.0.0"
+  version = "1.1.0"
 
   context = module.this.context
 
@@ -63,7 +63,7 @@ module "ecs_service_task_predefined_autoscaling" {
 module "ecs_service_task_customized_autoscaling" {
   count   = local.customized_autoscaling_enabled ? 1 : 0
   source  = "justtrackio/ecs-autoscaling/aws"
-  version = "1.0.0"
+  version = "1.1.0"
 
   context = module.this.context
 
@@ -94,7 +94,7 @@ module "ecs_service_task_customized_autoscaling" {
 module "ecs_service_task_schedule" {
   count   = var.autoscaling_enabled && length(var.autoscaling_schedule) > 0 ? 1 : 0
   source  = "justtrackio/ecs-autoscaling/aws"
-  version = "1.0.0"
+  version = "1.1.0"
 
   context = module.this.context
 
