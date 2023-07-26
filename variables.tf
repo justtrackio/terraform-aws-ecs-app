@@ -52,10 +52,34 @@ variable "alarm_scheduled" {
   description = "This can be used to override scheduled alarm"
 }
 
+variable "alb_health_check_interval" {
+  type        = number
+  default     = 30
+  description = "The duration in seconds in between health checks"
+}
+
+variable "alb_health_check_matcher" {
+  type        = string
+  default     = "200"
+  description = "The HTTP response codes to indicate a healthy check"
+}
+
+variable "alb_health_check_path" {
+  type        = string
+  default     = "/health"
+  description = "The destination for the health check request"
+}
+
 variable "alb_name" {
   type        = string
   description = "Name of the alb used to attach the target group"
   default     = ""
+}
+
+variable "alb_stickiness_enabled" {
+  type        = bool
+  default     = false
+  description = "Boolean to enable / disable `stickiness`. Default is `true`"
 }
 
 variable "alb_unauthenticated_hosts" {
