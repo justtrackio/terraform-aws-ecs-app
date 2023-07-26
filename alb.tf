@@ -16,5 +16,7 @@ module "alb_ingress" {
 
   health_check_path     = "/health"
   health_check_matcher  = "200"
-  health_check_interval = 60
+  health_check_interval = 30
+
+  stickiness_enabled = false
 }
