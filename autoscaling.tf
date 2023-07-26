@@ -22,8 +22,8 @@ locals {
 }
 
 module "cloudwatch_label" {
-  source  = "cloudposse/label/null"
-  version = "0.25.0"
+  source  = "justtrackio/label/null"
+  version = "0.26.0"
 
   delimiter   = "/"
   label_order = var.label_orders.cloudwatch
@@ -34,12 +34,12 @@ module "cloudwatch_label" {
 module "ecs_service_task_predefined_autoscaling" {
   count   = local.predefined_autoscaling_enabled ? 1 : 0
   source  = "justtrackio/ecs-autoscaling/aws"
-  version = "1.0.0"
+  version = "1.1.0"
 
   context = module.this.context
 
-  aws_account_id = var.aws_account_id
-  cluster_name   = var.ecs_cluster_name
+  aws_account_id = module.this.aws_account_id
+  cluster_name   = data.aws_ecs_cluster.default.cluster_name
   service_name   = module.this.id
   enabled        = var.autoscaling_enabled
   min_capacity   = var.autoscaling_min_capacity
@@ -63,12 +63,12 @@ module "ecs_service_task_predefined_autoscaling" {
 module "ecs_service_task_customized_autoscaling" {
   count   = local.customized_autoscaling_enabled ? 1 : 0
   source  = "justtrackio/ecs-autoscaling/aws"
-  version = "1.0.0"
+  version = "1.1.0"
 
   context = module.this.context
 
-  aws_account_id = var.aws_account_id
-  cluster_name   = var.ecs_cluster_name
+  aws_account_id = module.this.aws_account_id
+  cluster_name   = data.aws_ecs_cluster.default.cluster_name
   service_name   = module.this.id
   enabled        = var.autoscaling_enabled
   min_capacity   = var.autoscaling_min_capacity
@@ -94,12 +94,12 @@ module "ecs_service_task_customized_autoscaling" {
 module "ecs_service_task_schedule" {
   count   = var.autoscaling_enabled && length(var.autoscaling_schedule) > 0 ? 1 : 0
   source  = "justtrackio/ecs-autoscaling/aws"
-  version = "1.0.0"
+  version = "1.1.0"
 
   context = module.this.context
 
-  aws_account_id = var.aws_account_id
-  cluster_name   = var.ecs_cluster_name
+  aws_account_id = module.this.aws_account_id
+  cluster_name   = data.aws_ecs_cluster.default.cluster_name
   service_name   = module.this.id
   enabled        = var.autoscaling_enabled
   schedule       = var.autoscaling_schedule

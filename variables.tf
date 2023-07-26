@@ -1,7 +1,103 @@
-variable "app_image_repository" {
+variable "alarm_consumer" {
+  type = object({
+    alarm_description      = optional(string)
+    datapoints_to_alarm    = optional(number, 1)
+    evaluation_periods     = optional(number, 1)
+    period                 = optional(number, 60)
+    success_rate_threshold = optional(number, 99)
+  })
+  default     = {}
+  description = "This can be used to override alarms for consumers. Keys are names of the consumers."
+}
+
+variable "alarm_enabled" {
+  type        = bool
+  default     = false
+  description = "Defines if alarms should be created"
+}
+
+variable "alarm_gateway" {
+  type = object({
+    alarm_description      = optional(string)
+    datapoints_to_alarm    = optional(number, 3)
+    evaluation_periods     = optional(number, 3)
+    period                 = optional(number, 60)
+    success_rate_threshold = optional(number, 99)
+  })
+  default     = {}
+  description = "This can be used to override alarms for gateway routes. Keys are names of the gateway route."
+}
+
+variable "alarm_kinsumer" {
+  type = object({
+    alarm_description        = optional(string)
+    datapoints_to_alarm      = optional(number, 1)
+    evaluation_periods       = optional(number, 1)
+    period                   = optional(number, 60)
+    threshold_seconds_behind = optional(number, 60)
+  })
+  default     = {}
+  description = "This can be used to override alarms for kinsumers. Keys are names of the kinsumers."
+}
+
+variable "alarm_scheduled" {
+  type = object({
+    alarm_description   = optional(string)
+    datapoints_to_alarm = optional(number, 1)
+    evaluation_periods  = optional(number, 1)
+    period              = optional(number, 60)
+    threshold           = optional(number, 0)
+  })
+  default     = {}
+  description = "This can be used to override scheduled alarm"
+}
+
+variable "alb_health_check_interval" {
+  type        = number
+  default     = 30
+  description = "The duration in seconds in between health checks"
+}
+
+variable "alb_health_check_matcher" {
   type        = string
-  description = "Container registry repository url"
+  default     = "200"
+  description = "The HTTP response codes to indicate a healthy check"
+}
+
+variable "alb_health_check_path" {
+  type        = string
+  default     = "/health"
+  description = "The destination for the health check request"
+}
+
+variable "alb_name" {
+  type        = string
+  description = "Name of the alb used to attach the target group"
   default     = ""
+}
+
+variable "alb_stickiness_enabled" {
+  type        = bool
+  default     = false
+  description = "Boolean to enable / disable `stickiness`. Default is `true`"
+}
+
+variable "alb_unauthenticated_hosts" {
+  type        = list(string)
+  default     = []
+  description = "Unauthenticated hosts to match in Hosts header"
+}
+
+variable "alb_unauthenticated_paths" {
+  type        = list(string)
+  default     = ["*"]
+  description = "Unauthenticated path pattern to match (a maximum of 1 can be defined)"
+}
+
+variable "alb_unauthenticated_priority" {
+  type        = number
+  default     = 100
+  description = "The priority for the rules without authentication, between 1 and 50000 (1 being highest priority). Must be different from `authenticated_priority` since a listener can't have multiple rules with the same priority"
 }
 
 variable "app_image_tag" {
@@ -34,16 +130,16 @@ variable "autoscaling_enabled" {
   description = "Defines if autoscaling should be enabled"
 }
 
-variable "autoscaling_min_capacity" {
-  type        = number
-  description = "Minimum number of running instances of a Service"
-  default     = 1
-}
-
 variable "autoscaling_max_capacity" {
   type        = number
   description = "Maximum number of running instances of a Service"
   default     = 200
+}
+
+variable "autoscaling_min_capacity" {
+  type        = number
+  description = "Minimum number of running instances of a Service"
+  default     = 1
 }
 
 variable "autoscaling_predefined_metric_type" {
@@ -83,17 +179,6 @@ variable "autoscaling_schedule" {
 variable "autoscaling_target_value" {
   type        = number
   description = "The target value for the metric"
-  default     = null
-}
-
-variable "aws_account_id" {
-  type        = string
-  description = "AWS Account ID"
-}
-
-variable "aws_region" {
-  type        = string
-  description = "The AWS region"
   default     = null
 }
 
@@ -181,14 +266,52 @@ variable "docker_labels" {
   default     = null
 }
 
-variable "ecs_cluster_arn" {
+variable "domain" {
   type        = string
-  description = "The ECS Cluster ARN where ECS Service will be provisioned"
+  description = "The default domain"
 }
 
-variable "ecs_cluster_name" {
+variable "elasticsearch_host" {
   type        = string
-  description = "The ECS Cluster Name used by scaling resources"
+  default     = null
+  description = "Defines the elasticsearch host to query for logs"
+}
+
+variable "elasticsearch_index_template" {
+  type = object({
+    additional_fields  = map(any)
+    name               = string
+    priority           = number
+    node_name          = string
+    number_of_shards   = number
+    number_of_replicas = number
+  })
+  default = {
+    additional_fields  = {}
+    name               = ""
+    priority           = 250
+    node_name          = "*"
+    number_of_shards   = 1
+    number_of_replicas = 1
+  }
+  description = "This defines the properties used within the index template (Only used if create_elasticsearch_data_stream is true)"
+}
+
+variable "elasticsearch_lifecycle_policy" {
+  type = object({
+    delete_phase_min_age             = string
+    hot_phase_max_primary_shard_size = string
+    hot_phase_max_age                = optional(string)
+    warm_phase_min_age               = string
+    warm_phase_number_of_replicas    = number
+  })
+  default = {
+    delete_phase_min_age             = "28d"
+    hot_phase_max_primary_shard_size = "10gb"
+    warm_phase_min_age               = "1d"
+    warm_phase_number_of_replicas    = 0
+  }
+  description = "This defines the properties used within the index lifecycle management policy (Only used if create_elasticsearch_data_stream is true)"
 }
 
 variable "exec_enabled" {
@@ -197,7 +320,42 @@ variable "exec_enabled" {
   default     = true
 }
 
-# https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_HealthCheck.html
+variable "gosoline_metadata" {
+  type = object({
+    domain    = optional(string),
+    use_https = optional(string),
+    port      = optional(string)
+  })
+  description = "Define custom metadata for the gosoline provider"
+  default     = null
+}
+
+variable "gosoline_name_patterns" {
+  type = object({
+    hostname                         = optional(string),
+    cloudwatch_namespace             = optional(string),
+    ecs_cluster                      = optional(string),
+    ecs_service                      = optional(string),
+    grafana_cloudwatch_datasource    = optional(string),
+    grafana_elasticsearch_datasource = optional(string)
+  })
+  description = "Define custom name patters for the gosoline provider"
+  default = {
+    hostname                         = "{scheme}://{app}.{group}.{env}.{metadata_domain}:{port}"
+    cloudwatch_namespace             = "{env}/{group}/{app}"
+    ecs_cluster                      = "{env}"
+    ecs_service                      = "{group}-{app}"
+    grafana_cloudwatch_datasource    = "cloudwatch-{family}"
+    grafana_elasticsearch_datasource = "elasticsearch-{env}-logs-{group}-{app}"
+  }
+}
+
+variable "grafana_dashboard_url" {
+  type        = string
+  description = "Url of the grafana dashboard"
+  default     = null
+}
+
 variable "healthcheck" {
   type = object({
     command     = list(string)
@@ -210,16 +368,32 @@ variable "healthcheck" {
   default     = null
 }
 
+variable "ignore_changes_desired_count" {
+  type        = bool
+  description = "Whether to ignore changes for desired count in the ECS service"
+  default     = true
+}
+
 variable "ignore_changes_task_definition" {
   type        = bool
   description = "Ignore changes (like environment variables) to the ECS task definition"
   default     = false
 }
 
-variable "ignore_changes_desired_count" {
-  type        = bool
-  description = "Whether to ignore changes for desired count in the ECS service"
-  default     = true
+variable "label_orders" {
+  type = object({
+    cloudwatch    = optional(list(string), ["environment", "stage", "name"]),
+    ecr           = optional(list(string)),
+    ecs           = optional(list(string), ["stage", "name"]),
+    ec2           = optional(list(string), ["environment", "stage", "name"]),
+    iam           = optional(list(string)),
+    sentry        = optional(list(string), ["stage", "name"]),
+    ssm           = optional(list(string)),
+    vpc           = optional(list(string)),
+    elasticsearch = optional(list(string), ["environment", "stage", "name"])
+  })
+  default     = {}
+  description = "Overrides the `labels_order` for the different labels to modify ID elements appear in the `id`"
 }
 
 variable "launch_type" {
@@ -255,19 +429,12 @@ variable "log_router_container_memory_reservation" {
 variable "log_router_image_repository" {
   type        = string
   description = "Container registry repository url"
-  default     = ""
 }
 
 variable "log_router_image_tag" {
   type        = string
   description = "The default container image to use in container definition"
-  default     = null
-}
-
-variable "log_router_map_environment" {
-  type        = map(string)
-  description = "The environment variables to pass to the container. This is a map of string: {key: value}. `environment` overrides `map_environment`"
-  default     = null
+  default     = "stable"
 }
 
 variable "log_router_options" {
@@ -283,6 +450,17 @@ variable "log_router_type" {
   type        = string
   description = "The log router type to use"
   default     = "fluentbit"
+}
+
+variable "metric_enabled" {
+  type        = bool
+  description = "Defines if metrics should be written"
+}
+
+variable "monitoring_enabled" {
+  type        = bool
+  default     = true
+  description = "Defines if the monitoring module should be created"
 }
 
 variable "mpr_enabled" {
@@ -319,6 +497,12 @@ variable "port_gateway" {
   default     = 8088
 }
 
+variable "port_grpc" {
+  type        = number
+  description = "Define the grpc port"
+  default     = 8081
+}
+
 variable "port_health" {
   type        = number
   description = "Define the health port"
@@ -341,12 +525,6 @@ variable "port_metadata" {
   default     = 8070
 }
 
-variable "target_group_arn" {
-  type        = string
-  description = "The ARN of the Target Group to which to route traffic"
-  default     = ""
-}
-
 variable "service_placement_constraints" {
   type = list(object({
     type       = string
@@ -354,6 +532,12 @@ variable "service_placement_constraints" {
   }))
   description = "The rules that are taken into consideration during task placement. Maximum number of placement_constraints is 10. See [`placement_constraints`](https://www.terraform.io/docs/providers/aws/r/ecs_service.html#placement_constraints-1) docs"
   default     = []
+}
+
+variable "target_group_arn" {
+  type        = string
+  description = "The ARN of the Target Group to which to route traffic"
+  default     = ""
 }
 
 variable "task_cpu" {
@@ -372,6 +556,11 @@ variable "task_policy_arns" {
   type        = list(string)
   description = "A list of IAM Policy ARNs to attach to the generated task role."
   default     = []
+}
+
+variable "tracing_enabled" {
+  type        = bool
+  description = "Defines if tracing should be enabled"
 }
 
 variable "ulimits" {
@@ -394,22 +583,4 @@ variable "working_directory" {
   type        = string
   description = "The working directory to run commands inside the container"
   default     = "/app"
-}
-
-variable "vpc_id" {
-  type        = string
-  description = "The VPC ID where resources are created"
-  default     = ""
-}
-
-variable "label_orders" {
-  type = object({
-    cloudwatch = optional(list(string)),
-    ecs        = optional(list(string)),
-    iam        = optional(list(string)),
-    ssm        = optional(list(string)),
-    vpc        = optional(list(string))
-  })
-  default     = {}
-  description = "Overrides the `labels_order` for the different labels to modify ID elements appear in the `id`"
 }
