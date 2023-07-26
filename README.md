@@ -10,7 +10,7 @@ Terraform module which creates a ecs app
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.67 |
 | <a name="requirement_elasticsearch"></a> [elasticsearch](#requirement\_elasticsearch) | 2.0.7 |
 | <a name="requirement_elasticstack"></a> [elasticstack](#requirement\_elasticstack) | 0.5.0 |
-| <a name="requirement_gosoline"></a> [gosoline](#requirement\_gosoline) | 0.0.12 |
+| <a name="requirement_gosoline"></a> [gosoline](#requirement\_gosoline) | 1.0.0 |
 | <a name="requirement_grafana"></a> [grafana](#requirement\_grafana) | 1.40.1 |
 
 ## Providers
@@ -33,7 +33,7 @@ Terraform module which creates a ecs app
 | <a name="module_ecs_service_task_customized_autoscaling"></a> [ecs\_service\_task\_customized\_autoscaling](#module\_ecs\_service\_task\_customized\_autoscaling) | justtrackio/ecs-autoscaling/aws | 1.1.0 |
 | <a name="module_ecs_service_task_predefined_autoscaling"></a> [ecs\_service\_task\_predefined\_autoscaling](#module\_ecs\_service\_task\_predefined\_autoscaling) | justtrackio/ecs-autoscaling/aws | 1.1.0 |
 | <a name="module_ecs_service_task_schedule"></a> [ecs\_service\_task\_schedule](#module\_ecs\_service\_task\_schedule) | justtrackio/ecs-autoscaling/aws | 1.1.0 |
-| <a name="module_monitoring"></a> [monitoring](#module\_monitoring) | justtrackio/ecs-gosoline-monitoring/aws | 2.0.1 |
+| <a name="module_monitoring"></a> [monitoring](#module\_monitoring) | justtrackio/ecs-gosoline-monitoring/aws | 2.1.0 |
 | <a name="module_sentry"></a> [sentry](#module\_sentry) | justtrackio/project/sentry | 1.1.1 |
 | <a name="module_service_task"></a> [service\_task](#module\_service\_task) | justtrackio/ecs-alb-service-task/aws | 1.2.0 |
 | <a name="module_ssm_label"></a> [ssm\_label](#module\_ssm\_label) | justtrackio/label/null | 0.26.0 |
@@ -114,7 +114,7 @@ Terraform module which creates a ecs app
 | <a name="input_environment"></a> [environment](#input\_environment) | ID element. Usually used for region e.g. 'uw2', 'us-west-2', OR role 'prod', 'staging', 'dev', 'UAT' | `string` | `null` | no |
 | <a name="input_exec_enabled"></a> [exec\_enabled](#input\_exec\_enabled) | Specifies whether to enable Amazon ECS Exec for the tasks within the service | `bool` | `true` | no |
 | <a name="input_gosoline_metadata"></a> [gosoline\_metadata](#input\_gosoline\_metadata) | Define custom metadata for the gosoline provider | <pre>object({<br>    domain    = optional(string),<br>    use_https = optional(string),<br>    port      = optional(string)<br>  })</pre> | `null` | no |
-| <a name="input_gosoline_name_patterns"></a> [gosoline\_name\_patterns](#input\_gosoline\_name\_patterns) | Define custom name patters for the gosoline provider | <pre>object({<br>    hostname                         = optional(string),<br>    cloudwatch_namespace             = optional(string),<br>    ecs_cluster                      = optional(string),<br>    ecs_service                      = optional(string),<br>    grafana_elasticsearch_datasource = optional(string)<br>  })</pre> | <pre>{<br>  "cloudwatch_namespace": "{env}/{group}/{app}",<br>  "ecs_cluster": "{env}",<br>  "ecs_service": "{group}-{app}",<br>  "grafana_elasticsearch_datasource": "elasticsearch-{env}-logs-{group}-{app}",<br>  "hostname": "{scheme}://{app}.{group}.{env}.{metadata_domain}:{port}"<br>}</pre> | no |
+| <a name="input_gosoline_name_patterns"></a> [gosoline\_name\_patterns](#input\_gosoline\_name\_patterns) | Define custom name patters for the gosoline provider | <pre>object({<br>    hostname                         = optional(string),<br>    cloudwatch_namespace             = optional(string),<br>    ecs_cluster                      = optional(string),<br>    ecs_service                      = optional(string),<br>    grafana_cloudwatch_datasource    = optional(string),<br>    grafana_elasticsearch_datasource = optional(string)<br>  })</pre> | <pre>{<br>  "cloudwatch_namespace": "{env}/{group}/{app}",<br>  "ecs_cluster": "{env}",<br>  "ecs_service": "{group}-{app}",<br>  "grafana_cloudwatch_datasource": "cloudwatch-{family}",<br>  "grafana_elasticsearch_datasource": "elasticsearch-{env}-logs-{group}-{app}",<br>  "hostname": "{scheme}://{app}.{group}.{env}.{metadata_domain}:{port}"<br>}</pre> | no |
 | <a name="input_grafana_dashboard_url"></a> [grafana\_dashboard\_url](#input\_grafana\_dashboard\_url) | Url of the grafana dashboard | `string` | `null` | no |
 | <a name="input_healthcheck"></a> [healthcheck](#input\_healthcheck) | A map containing command (string), timeout, interval (duration in seconds), retries (1-10, number of times to retry before marking container unhealthy), and startPeriod (0-300, optional grace period to wait, in seconds, before failed healthchecks count toward retries) | <pre>object({<br>    command     = list(string)<br>    retries     = number<br>    timeout     = number<br>    interval    = number<br>    startPeriod = number<br>  })</pre> | `null` | no |
 | <a name="input_id_length_limit"></a> [id\_length\_limit](#input\_id\_length\_limit) | Limit `id` to this many characters (minimum 6).<br>Set to `0` for unlimited length.<br>Set to `null` for keep the existing setting, which defaults to `0`.<br>Does not affect `id_full`. | `number` | `null` | no |

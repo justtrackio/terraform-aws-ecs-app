@@ -336,6 +336,7 @@ variable "gosoline_name_patterns" {
     cloudwatch_namespace             = optional(string),
     ecs_cluster                      = optional(string),
     ecs_service                      = optional(string),
+    grafana_cloudwatch_datasource    = optional(string),
     grafana_elasticsearch_datasource = optional(string)
   })
   description = "Define custom name patters for the gosoline provider"
@@ -344,6 +345,7 @@ variable "gosoline_name_patterns" {
     cloudwatch_namespace             = "{env}/{group}/{app}"
     ecs_cluster                      = "{env}"
     ecs_service                      = "{group}-{app}"
+    grafana_cloudwatch_datasource    = "cloudwatch-{family}"
     grafana_elasticsearch_datasource = "elasticsearch-{env}-logs-{group}-{app}"
   }
 }
