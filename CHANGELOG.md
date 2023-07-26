@@ -1,3 +1,14 @@
+## [2.0.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v1.1.0...v2.0.0) (2023-07-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* add_common_capabilities (#21)
+
+### Features
+
+* add_common_capabilities ([#21](https://github.com/justtrackio/terraform-aws-ecs-app/issues/21)) ([850e210](https://github.com/justtrackio/terraform-aws-ecs-app/commit/850e210ed8594eae0beaca1f5a4ea8c55edbd4a2))
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
