@@ -9,8 +9,9 @@ locals {
 }
 
 module "monitoring" {
-  count  = var.monitoring_enabled ? 1 : 0
-  source = "github.com/justtrackio/terraform-aws-ecs-gosoline-monitoring?ref=remove_provider_config_in_favor_of_count"
+  count   = var.monitoring_enabled ? 1 : 0
+  source  = "justtrackio/ecs-gosoline-monitoring/aws"
+  version = "2.0.1"
 
   context = module.this.context
 
