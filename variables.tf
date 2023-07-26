@@ -90,7 +90,7 @@ variable "alb_unauthenticated_hosts" {
 
 variable "alb_unauthenticated_paths" {
   type        = list(string)
-  default     = []
+  default     = ["*"]
   description = "Unauthenticated path pattern to match (a maximum of 1 can be defined)"
 }
 
