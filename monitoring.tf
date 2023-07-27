@@ -26,4 +26,5 @@ module "monitoring" {
 
   elasticsearch_index_template   = var.elasticsearch_index_template
   elasticsearch_lifecycle_policy = var.elasticsearch_lifecycle_policy
+  elasticsearch_host             = local.elasticsearch_host
 }

@@ -390,7 +390,7 @@ variable "label_orders" {
     sentry        = optional(list(string), ["stage", "name"]),
     ssm           = optional(list(string)),
     vpc           = optional(list(string)),
-    elasticsearch = optional(list(string), ["environment", "stage", "name"])
+    elasticsearch = optional(list(string), ["environment", "namespace", "stage", "name"])
   })
   default     = {}
   description = "Overrides the `labels_order` for the different labels to modify ID elements appear in the `id`"
