@@ -1,3 +1,10 @@
+## [2.2.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.1.1...v2.2.0) (2023-07-27)
+
+
+### Features
+
+* update_sentry_module ([#37](https://github.com/justtrackio/terraform-aws-ecs-app/issues/37)) ([038e705](https://github.com/justtrackio/terraform-aws-ecs-app/commit/038e705f4e7a77e20350aac95c51551fbaa443ec))
+
 ## [2.1.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.1.0...v2.1.1) (2023-07-27)
 
 
