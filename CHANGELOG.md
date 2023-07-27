@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.1.0...v2.1.1) (2023-07-27)
+
+
+### Bug Fixes
+
+* elasticsearch_host var not forwarded to gosoline-monitoring module ([#36](https://github.com/justtrackio/terraform-aws-ecs-app/issues/36)) ([7135f81](https://github.com/justtrackio/terraform-aws-ecs-app/commit/7135f819f5da11442f8e24af26d099e8842d31f9))
+
 ## [2.1.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.0.0...v2.1.0) (2023-07-27)
 
 
