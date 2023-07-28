@@ -191,6 +191,7 @@ module "service_task" {
   launch_type                        = var.launch_type
   network_mode                       = var.network_mode
   ordered_placement_strategy         = var.ordered_placement_strategy
+  propagate_tags                     = var.propagate_tags
   service_placement_constraints      = var.service_placement_constraints
   task_cpu                           = local.task_cpu
   task_exec_policy_arns              = local.task_policies
