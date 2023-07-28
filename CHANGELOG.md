@@ -1,3 +1,10 @@
+## [2.3.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.2.0...v2.3.0) (2023-07-28)
+
+
+### Features
+
+* add tag propagation ([#39](https://github.com/justtrackio/terraform-aws-ecs-app/issues/39)) ([98c6eb9](https://github.com/justtrackio/terraform-aws-ecs-app/commit/98c6eb930c79bcb16e5a3403e9124ed5ac224a9d))
+
 ## [2.2.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.1.1...v2.2.0) (2023-07-27)
 
 
