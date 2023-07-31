@@ -1,3 +1,10 @@
+## [2.3.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.3.0...v2.3.1) (2023-07-31)
+
+
+### Bug Fixes
+
+* get_lb_autoscaling_data_inside_module ([#40](https://github.com/justtrackio/terraform-aws-ecs-app/issues/40)) ([28ec418](https://github.com/justtrackio/terraform-aws-ecs-app/commit/28ec41850c0253f0885dec6407f2d42ba53d1d5a))
+
 ## [2.3.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.2.0...v2.3.0) (2023-07-28)
 
 
