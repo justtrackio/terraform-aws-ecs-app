@@ -148,12 +148,6 @@ variable "autoscaling_predefined_metric_type" {
   default     = null
 }
 
-variable "autoscaling_predefined_resource_label" {
-  type        = string
-  description = "Needs lb arn suffix and target group arn suffix"
-  default     = null
-}
-
 variable "autoscaling_scale_in_cooldown" {
   type        = number
   description = "The amount of time, in seconds, after a scale in activity completes before another scale in activity can start"
@@ -538,12 +532,6 @@ variable "service_placement_constraints" {
   }))
   description = "The rules that are taken into consideration during task placement. Maximum number of placement_constraints is 10. See [`placement_constraints`](https://www.terraform.io/docs/providers/aws/r/ecs_service.html#placement_constraints-1) docs"
   default     = []
-}
-
-variable "target_group_arn" {
-  type        = string
-  description = "The ARN of the Target Group to which to route traffic"
-  default     = ""
 }
 
 variable "task_cpu" {

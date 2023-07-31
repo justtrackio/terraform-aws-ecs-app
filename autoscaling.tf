@@ -1,5 +1,5 @@
 locals {
-  alb_enabled                         = length(var.target_group_arn) > 0
+  alb_enabled                         = length(var.alb_name) > 0
   mpr_enabled                         = var.mpr_enabled
   internal_predefined_metric_type     = local.alb_enabled ? "ALBRequestCountPerTarget" : "ECSServiceAverageCPUUtilization"
   internal_predefined_target_value    = local.alb_enabled ? 1000 : 100
@@ -51,7 +51,7 @@ module "ecs_service_task_predefined_autoscaling" {
     customized_metric_specification = []
     predefined_metric_specification = [{
       predefined_metric_type = local.autoscaling_predefined_metric_type
-      resource_label         = var.autoscaling_predefined_resource_label
+      resource_label         = local.alb_enabled ? "${data.aws_lb.default[0].arn_suffix}/${module.alb_ingress.target_group_arn_suffix}" : null
     }]
   }]
 
