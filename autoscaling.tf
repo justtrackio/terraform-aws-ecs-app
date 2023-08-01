@@ -40,7 +40,7 @@ module "ecs_service_task_predefined_autoscaling" {
 
   aws_account_id = module.this.aws_account_id
   cluster_name   = data.aws_ecs_cluster.default.cluster_name
-  service_name   = module.this.id
+  service_name   = module.ecs_label.id
   enabled        = var.autoscaling_enabled
   min_capacity   = var.autoscaling_min_capacity
   max_capacity   = var.autoscaling_max_capacity
@@ -51,7 +51,7 @@ module "ecs_service_task_predefined_autoscaling" {
     customized_metric_specification = []
     predefined_metric_specification = [{
       predefined_metric_type = local.autoscaling_predefined_metric_type
-      resource_label         = local.alb_enabled ? "${data.aws_lb.default[0].arn_suffix}/${module.alb_ingress.target_group_arn_suffix}" : null
+      resource_label         = local.alb_enabled ? "${data.aws_lb.default[0].arn_suffix}/${module.alb_ingress[0].target_group_arn_suffix}" : null
     }]
   }]
 
@@ -69,7 +69,7 @@ module "ecs_service_task_customized_autoscaling" {
 
   aws_account_id = module.this.aws_account_id
   cluster_name   = data.aws_ecs_cluster.default.cluster_name
-  service_name   = module.this.id
+  service_name   = module.ecs_label.id
   enabled        = var.autoscaling_enabled
   min_capacity   = var.autoscaling_min_capacity
   max_capacity   = var.autoscaling_max_capacity
@@ -100,7 +100,7 @@ module "ecs_service_task_schedule" {
 
   aws_account_id = module.this.aws_account_id
   cluster_name   = data.aws_ecs_cluster.default.cluster_name
-  service_name   = module.this.id
+  service_name   = module.ecs_label.id
   enabled        = var.autoscaling_enabled
   schedule       = var.autoscaling_schedule
 }
