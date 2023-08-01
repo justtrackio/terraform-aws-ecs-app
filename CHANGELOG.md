@@ -1,3 +1,10 @@
+## [2.3.2](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.3.1...v2.3.2) (2023-08-01)
+
+
+### Bug Fixes
+
+* adjust-autoscaling-service-name ([#41](https://github.com/justtrackio/terraform-aws-ecs-app/issues/41)) ([ba7a68b](https://github.com/justtrackio/terraform-aws-ecs-app/commit/ba7a68bded086d8051b078d7876e6bbfb01824db))
+
 ## [2.3.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.3.0...v2.3.1) (2023-07-31)
 
 
