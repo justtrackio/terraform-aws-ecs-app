@@ -128,6 +128,7 @@ module "container_definition" {
     CLOUD_AWS_SQS_CLIENTS_DEFAULT_NAMING_PATTERN               = "!nodecode {env}-{group}-{queueId}"
     METRIC_CLOUDWATCH_NAMING_PATTERN                           = "!nodecode {env}/{group}/{app}"
     CLOUD_AWS_KINESIS_CLIENTS_DEFAULT_NAMING_PATTERN           = "!nodecode {env}-{group}-{streamName}"
+    REDIS_DEFAULT_NAMING_PATTERN                               = "!nodecode {name}.{group}.{env}.{family}"
     TRACING_ENABLED                                            = var.tracing_enabled
     TRACING_ADDR_TYPE                                          = "srv"
     FIXTURE_GROUP_NAME                                         = "$FIXTURE_GROUP_NAME"
