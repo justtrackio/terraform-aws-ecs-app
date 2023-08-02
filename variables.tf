@@ -82,6 +82,12 @@ variable "alb_stickiness_enabled" {
   description = "Boolean to enable / disable `stickiness`. Default is `true`"
 }
 
+variable "alb_target_group_name" {
+  type        = string
+  default     = ""
+  description = "Override the target group name"
+}
+
 variable "alb_unauthenticated_hosts" {
   type        = list(string)
   default     = []
