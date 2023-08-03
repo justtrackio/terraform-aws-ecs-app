@@ -1,3 +1,10 @@
+## [2.3.3](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.3.2...v2.3.3) (2023-08-03)
+
+
+### Bug Fixes
+
+* add-default-redis-naming-pattern ([#44](https://github.com/justtrackio/terraform-aws-ecs-app/issues/44)) ([8d9b415](https://github.com/justtrackio/terraform-aws-ecs-app/commit/8d9b415307df2f9ee45da21ac30ac3b90a73160a))
+
 ## [2.3.2](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.3.1...v2.3.2) (2023-08-01)
 
 
