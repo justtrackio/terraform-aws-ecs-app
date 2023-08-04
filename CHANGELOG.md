@@ -1,3 +1,10 @@
+## [2.4.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.3.3...v2.4.0) (2023-08-04)
+
+
+### Features
+
+* bumped ecs-alb-service-task module for secrets manager access ([#45](https://github.com/justtrackio/terraform-aws-ecs-app/issues/45)) ([0043e16](https://github.com/justtrackio/terraform-aws-ecs-app/commit/0043e16014f704f17a0a3640ca1f85c74369513f))
+
 ## [2.3.3](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.3.2...v2.3.3) (2023-08-03)
 
 
