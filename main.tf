@@ -128,8 +128,8 @@ module "container_definition" {
     REDIS_DEFAULT_NAMING_PATTERN                                 = "!nodecode {name}.{group}.{env}.{family}"
     SENTRY_DSN                                                   = module.sentry.dsn
     SENTRY_ENVIRONMENT                                           = module.this.environment
-    STREAM_METRICS_MESSAGES_PER_RUNNER_ECS_SERVICE               = "{app_group}-{app_name}"
     STREAM_METRICS_MESSAGES_PER_RUNNER_CLOUDWATCH_NAMING_PATTERN = "!nodecode {env}/{group}/{app}"
+    STREAM_METRICS_MESSAGES_PER_RUNNER_ECS_SERVICE               = "{app_group}-{app_name}"
     STREAM_METRICS_MESSAGES_PER_RUNNER_DYNAMODB_NAMING_PATTERN   = "!nodecode {env}-{modelId}"
     TRACING_ENABLED                                              = var.tracing_enabled
     TRACING_ADDR_TYPE                                            = "srv"
