@@ -131,8 +131,8 @@ module "container_definition" {
     STREAM_METRICS_MESSAGES_PER_RUNNER_CLOUDWATCH_NAMING_PATTERN = "!nodecode {env}/{group}/{app}"
     STREAM_METRICS_MESSAGES_PER_RUNNER_ECS_SERVICE               = "{app_group}-{app_name}"
     STREAM_METRICS_MESSAGES_PER_RUNNER_DYNAMODB_NAMING_PATTERN   = "!nodecode {env}-{modelId}"
-    TRACING_ENABLED                                              = var.tracing_enabled
     TRACING_ADDR_TYPE                                            = "srv"
+    TRACING_ENABLED                                              = var.tracing_enabled
   }, var.container_map_environment)
   map_secrets       = var.container_map_secrets
   port_mappings     = local.port_mappings
