@@ -1,3 +1,10 @@
+## [2.5.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.4.0...v2.5.0) (2023-08-09)
+
+
+### Features
+
+* add default mpr metric naming pattern ([#47](https://github.com/justtrackio/terraform-aws-ecs-app/issues/47)) ([26303e4](https://github.com/justtrackio/terraform-aws-ecs-app/commit/26303e4d99c3488541d66abd6463932e9271471e))
+
 ## [2.4.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.3.3...v2.4.0) (2023-08-04)
 
 
