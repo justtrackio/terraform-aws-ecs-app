@@ -485,12 +485,6 @@ variable "ordered_placement_strategy" {
     EOT
 }
 
-variable "target_group_arn" {
-  type        = string
-  description = "ARN of the target group to register the task into. Only works when alb_name is not specified. Can be used for services that are made available via a vpc endpoint"
-  default     = ""
-}
-
 variable "port_gateway" {
   type        = number
   description = "Define the gateway port"
@@ -550,6 +544,12 @@ variable "service_placement_constraints" {
   }))
   description = "The rules that are taken into consideration during task placement. Maximum number of placement_constraints is 10. See [`placement_constraints`](https://www.terraform.io/docs/providers/aws/r/ecs_service.html#placement_constraints-1) docs"
   default     = []
+}
+
+variable "target_group_arn" {
+  type        = string
+  description = "ARN of the target group to register the task into. Only works when alb_name is not specified. Can be used for services that are made available via a vpc endpoint"
+  default     = ""
 }
 
 variable "task_cpu" {
