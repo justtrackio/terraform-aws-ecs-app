@@ -485,12 +485,6 @@ variable "ordered_placement_strategy" {
     EOT
 }
 
-variable "propagate_tags" {
-  type        = string
-  description = "Specifies whether to propagate the tags from the task definition or the service to the tasks. The valid values are SERVICE and TASK_DEFINITION"
-  default     = null
-}
-
 variable "target_group_arn" {
   type        = string
   description = "ARN of the target group to register the task into. Only works when alb_name is not specified. Can be used for services that are made available via a vpc endpoint"
@@ -529,6 +523,24 @@ variable "port_metadata" {
   type        = number
   description = "Define the metadata port"
   default     = 8070
+}
+
+variable "propagate_tags" {
+  type        = string
+  description = "Specifies whether to propagate the tags from the task definition or the service to the tasks. The valid values are SERVICE and TASK_DEFINITION"
+  default     = null
+}
+
+variable "sentry_dsn" {
+  type        = string
+  description = "Define a custom sentry dsn if `sentry_enabled` is set to ``false"
+  default     = null
+}
+
+variable "sentry_enabled" {
+  type        = bool
+  description = "Set to false to prevent the module from creating any resources for sentry"
+  default     = true
 }
 
 variable "service_placement_constraints" {

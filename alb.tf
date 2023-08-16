@@ -1,7 +1,7 @@
 module "alb_ingress" {
   count   = length(var.alb_name) > 0 ? 1 : 0
   source  = "cloudposse/alb-ingress/aws"
-  version = "0.25.1"
+  version = "0.28.0"
 
   label_order = var.label_orders.ec2
 
