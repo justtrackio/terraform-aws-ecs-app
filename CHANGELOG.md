@@ -1,3 +1,10 @@
+## [2.6.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.5.0...v2.6.0) (2023-08-16)
+
+
+### Features
+
+* allow to specify target group to register the service in as alt… ([#50](https://github.com/justtrackio/terraform-aws-ecs-app/issues/50)) ([9e4843a](https://github.com/justtrackio/terraform-aws-ecs-app/commit/9e4843a41e624f8d9f0b33c38c70ac9bbc2427fb))
+
 ## [2.5.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.4.0...v2.5.0) (2023-08-09)
 
 
