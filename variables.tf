@@ -491,6 +491,12 @@ variable "propagate_tags" {
   default     = null
 }
 
+variable "target_group_arn" {
+  type        = string
+  description = "ARN of the target group to register the task into. Only works when alb_name is not specified. Can be used for services that are made available via a vpc endpoint"
+  default     = ""
+}
+
 variable "port_gateway" {
   type        = number
   description = "Define the gateway port"

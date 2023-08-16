@@ -4,6 +4,11 @@ locals {
     container_name   = module.ecs_label.id
     elb_name         = null
     container_port   = var.port_gateway
+    }] : length(var.target_group_arn) > 0 ? [{
+    target_group_arn = var.target_group_arn
+    container_name   = module.ecs_label.id
+    elb_name         = null
+    container_port   = var.port_gateway
   }] : []
   container_cpu = var.container_cpu != null ? var.container_cpu : data.aws_ssm_parameter.container_cpu[0].value
   docker_labels = merge({
