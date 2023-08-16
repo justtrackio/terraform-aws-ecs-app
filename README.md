@@ -162,5 +162,7 @@ Terraform module which creates a ecs app
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_alb_ingress_target_group_arn"></a> [alb\_ingress\_target\_group\_arn](#output\_alb\_ingress\_target\_group\_arn) | ARN of the ALB's target group where the ecs service registers itself into |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
