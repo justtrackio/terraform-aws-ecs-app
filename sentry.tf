@@ -1,6 +1,6 @@
 module "sentry" {
   source  = "justtrackio/project/sentry"
-  version = "1.2.0"
+  version = "1.3.0"
 
   context     = module.this.context
   label_order = var.label_orders.sentry
