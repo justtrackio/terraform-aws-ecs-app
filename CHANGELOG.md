@@ -1,3 +1,10 @@
+## [2.7.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.6.0...v2.7.0) (2023-08-18)
+
+
+### Features
+
+* make-sentry-optional ([#49](https://github.com/justtrackio/terraform-aws-ecs-app/issues/49)) ([43a62b8](https://github.com/justtrackio/terraform-aws-ecs-app/commit/43a62b8e88c407671cbbbd2837c7540eec9f2149))
+
 ## [2.6.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.5.0...v2.6.0) (2023-08-16)
 
 
