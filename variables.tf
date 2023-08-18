@@ -485,18 +485,6 @@ variable "ordered_placement_strategy" {
     EOT
 }
 
-variable "propagate_tags" {
-  type        = string
-  description = "Specifies whether to propagate the tags from the task definition or the service to the tasks. The valid values are SERVICE and TASK_DEFINITION"
-  default     = null
-}
-
-variable "target_group_arn" {
-  type        = string
-  description = "ARN of the target group to register the task into. Only works when alb_name is not specified. Can be used for services that are made available via a vpc endpoint"
-  default     = ""
-}
-
 variable "port_gateway" {
   type        = number
   description = "Define the gateway port"
@@ -531,6 +519,24 @@ variable "port_metadata" {
   default     = 8070
 }
 
+variable "propagate_tags" {
+  type        = string
+  description = "Specifies whether to propagate the tags from the task definition or the service to the tasks. The valid values are SERVICE and TASK_DEFINITION"
+  default     = null
+}
+
+variable "sentry_dsn" {
+  type        = string
+  description = "Define a custom sentry dsn if `sentry_enabled` is set to ``false"
+  default     = null
+}
+
+variable "sentry_enabled" {
+  type        = bool
+  description = "Set to false to prevent the module from creating any resources for sentry"
+  default     = true
+}
+
 variable "service_placement_constraints" {
   type = list(object({
     type       = string
@@ -538,6 +544,12 @@ variable "service_placement_constraints" {
   }))
   description = "The rules that are taken into consideration during task placement. Maximum number of placement_constraints is 10. See [`placement_constraints`](https://www.terraform.io/docs/providers/aws/r/ecs_service.html#placement_constraints-1) docs"
   default     = []
+}
+
+variable "target_group_arn" {
+  type        = string
+  description = "ARN of the target group to register the task into. Only works when alb_name is not specified. Can be used for services that are made available via a vpc endpoint"
+  default     = ""
 }
 
 variable "task_cpu" {

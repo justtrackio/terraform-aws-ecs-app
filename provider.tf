@@ -18,3 +18,8 @@ provider "elasticstack" {
     insecure  = true
   }
 }
+
+provider "sentry" {
+  base_url = "http://sentry.${module.this.organizational_unit}-monitoring.${var.domain}"
+  token    = data.aws_ssm_parameter.sentry_token.value
+}
