@@ -340,7 +340,7 @@ variable "gosoline_name_patterns" {
     ecs_cluster                      = "{env}"
     ecs_service                      = "{group}-{app}"
     grafana_cloudwatch_datasource    = "cloudwatch-{family}"
-    grafana_elasticsearch_datasource = "elasticsearch-{env}-logs-{group}-{app}"
+    grafana_elasticsearch_datasource = "elasticsearch-{env}-{group}-{app}"
   }
 }
 
