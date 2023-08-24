@@ -1,3 +1,10 @@
+## [2.7.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.7.0...v2.7.1) (2023-08-24)
+
+
+### Bug Fixes
+
+* update elastic grafana datasource default ([#54](https://github.com/justtrackio/terraform-aws-ecs-app/issues/54)) ([b649a13](https://github.com/justtrackio/terraform-aws-ecs-app/commit/b649a135f8d954d4308cdf0c468a87f05fa12fa2))
+
 ## [2.7.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.6.0...v2.7.0) (2023-08-18)
 
 
