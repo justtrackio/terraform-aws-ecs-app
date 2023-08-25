@@ -1,3 +1,10 @@
+## [2.7.2](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.7.1...v2.7.2) (2023-08-25)
+
+
+### Bug Fixes
+
+* missing-family-inside-grafana-elastic-pattern ([#55](https://github.com/justtrackio/terraform-aws-ecs-app/issues/55)) ([4f32c71](https://github.com/justtrackio/terraform-aws-ecs-app/commit/4f32c71ed7aafa201a232326c7f469e108f3a09c))
+
 ## [2.7.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.7.0...v2.7.1) (2023-08-24)
 
 
