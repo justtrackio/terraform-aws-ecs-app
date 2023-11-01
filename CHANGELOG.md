@@ -1,3 +1,10 @@
+## [2.7.3](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.7.2...v2.7.3) (2023-11-01)
+
+
+### Bug Fixes
+
+* aws managed policy CloudWatchFullAccess becomes CloudWatchFullAc… ([#67](https://github.com/justtrackio/terraform-aws-ecs-app/issues/67)) ([7eedfe1](https://github.com/justtrackio/terraform-aws-ecs-app/commit/7eedfe1c0f4df1d2b14095bd8198354278a4d001))
+
 ## [2.7.2](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.7.1...v2.7.2) (2023-08-25)
 
 
