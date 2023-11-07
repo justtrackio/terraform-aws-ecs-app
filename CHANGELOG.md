@@ -1,3 +1,10 @@
+## [2.7.4](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.7.3...v2.7.4) (2023-11-07)
+
+
+### Bug Fixes
+
+* update terraform gosoline to v1.2.4 ([#56](https://github.com/justtrackio/terraform-aws-ecs-app/issues/56)) ([8126636](https://github.com/justtrackio/terraform-aws-ecs-app/commit/8126636a57812ee9190b6f79305f86c3697e342a))
+
 ## [2.7.3](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.7.2...v2.7.3) (2023-11-01)
 
 
