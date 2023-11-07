@@ -331,7 +331,7 @@ variable "gosoline_name_patterns" {
     ecs_cluster                      = optional(string),
     ecs_service                      = optional(string),
     grafana_cloudwatch_datasource    = optional(string),
-    grafana_elasticsearch_datasource = optional(string),
+    grafana_elasticsearch_datasource = optional(string)
   })
   description = "Define custom name patters for the gosoline provider"
   default = {
