@@ -76,12 +76,6 @@ variable "alb_name" {
   default     = ""
 }
 
-variable "alb_protocol_version" {
-  type        = string
-  description = "Only applicable when protocol is `HTTP` or `HTTPS`. The protocol version. Specify GRPC to send requests to targets using gRPC. Specify HTTP2 to send requests to targets using HTTP/2."
-  default     = "HTTP1"
-}
-
 variable "alb_stickiness_enabled" {
   type        = bool
   default     = false

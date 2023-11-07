@@ -70,7 +70,6 @@ Terraform module which creates a ecs app
 | <a name="input_alb_health_check_matcher"></a> [alb\_health\_check\_matcher](#input\_alb\_health\_check\_matcher) | The HTTP response codes to indicate a healthy check | `string` | `"200"` | no |
 | <a name="input_alb_health_check_path"></a> [alb\_health\_check\_path](#input\_alb\_health\_check\_path) | The destination for the health check request | `string` | `"/health"` | no |
 | <a name="input_alb_name"></a> [alb\_name](#input\_alb\_name) | Name of the alb used to attach the target group | `string` | `""` | no |
-| <a name="input_alb_protocol_version"></a> [alb\_protocol\_version](#input\_alb\_protocol\_version) | Only applicable when protocol is `HTTP` or `HTTPS`. The protocol version. Specify GRPC to send requests to targets using gRPC. Specify HTTP2 to send requests to targets using HTTP/2. | `string` | `"HTTP1"` | no |
 | <a name="input_alb_stickiness_enabled"></a> [alb\_stickiness\_enabled](#input\_alb\_stickiness\_enabled) | Boolean to enable / disable `stickiness`. Default is `true` | `bool` | `false` | no |
 | <a name="input_alb_unauthenticated_hosts"></a> [alb\_unauthenticated\_hosts](#input\_alb\_unauthenticated\_hosts) | Unauthenticated hosts to match in Hosts header | `list(string)` | `[]` | no |
 | <a name="input_alb_unauthenticated_paths"></a> [alb\_unauthenticated\_paths](#input\_alb\_unauthenticated\_paths) | Unauthenticated path pattern to match (a maximum of 1 can be defined) | `list(string)` | <pre>[<br>  "*"<br>]</pre> | no |
