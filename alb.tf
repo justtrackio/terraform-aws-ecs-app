@@ -19,4 +19,5 @@ module "alb_ingress" {
   health_check_interval = var.alb_health_check_interval
 
   stickiness_enabled = var.alb_stickiness_enabled
+  protocol_version   = var.alb_protocol_version
 }

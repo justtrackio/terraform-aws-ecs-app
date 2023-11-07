@@ -1,6 +1,7 @@
 provider "gosoline" {
   metadata      = local.gosoline_metadata
   name_patterns = var.gosoline_name_patterns
+  orchestrator  = "ecs"
 }
 
 provider "grafana" {

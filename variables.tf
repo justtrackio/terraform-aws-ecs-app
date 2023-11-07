@@ -76,6 +76,12 @@ variable "alb_name" {
   default     = ""
 }
 
+variable "alb_protocol_version" {
+  type        = string
+  description = "Only applicable when protocol is `HTTP` or `HTTPS`. The protocol version. Specify GRPC to send requests to targets using gRPC. Specify HTTP2 to send requests to targets using HTTP/2."
+  default     = "HTTP1"
+}
+
 variable "alb_stickiness_enabled" {
   type        = bool
   default     = false
@@ -331,7 +337,10 @@ variable "gosoline_name_patterns" {
     ecs_cluster                      = optional(string),
     ecs_service                      = optional(string),
     grafana_cloudwatch_datasource    = optional(string),
-    grafana_elasticsearch_datasource = optional(string)
+    grafana_elasticsearch_datasource = optional(string),
+    kubernetes_namespace             = optional(string),
+    kubernetes_pod                   = optional(string),
+    traefik_service_name             = optional(string)
   })
   description = "Define custom name patters for the gosoline provider"
   default = {
@@ -341,6 +350,9 @@ variable "gosoline_name_patterns" {
     ecs_service                      = "{group}-{app}"
     grafana_cloudwatch_datasource    = "cloudwatch-{family}"
     grafana_elasticsearch_datasource = "elasticsearch-{env}-{family}-{group}-{app}"
+    kubernetes_namespace             = ""
+    kubernetes_pod                   = ""
+    traefik_service_name             = ""
   }
 }
 
