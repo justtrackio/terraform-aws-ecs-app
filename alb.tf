@@ -18,6 +18,5 @@ module "alb_ingress" {
   health_check_matcher  = var.alb_health_check_matcher
   health_check_interval = var.alb_health_check_interval
 
-  protocol_version   = "HTTP2"
   stickiness_enabled = var.alb_stickiness_enabled
 }
