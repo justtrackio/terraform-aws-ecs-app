@@ -44,6 +44,7 @@ locals {
     "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
     "arn:aws:iam::aws:policy/AmazonRoute53AutoNamingReadOnlyAccess",
     "arn:aws:iam::aws:policy/AWSXrayFullAccess",
+    "arn:aws:iam::aws:policy/AmazonSNSFullAccess",
     "arn:aws:iam::aws:policy/AmazonSQSFullAccess",
     "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess",
   ]
