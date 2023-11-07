@@ -332,9 +332,6 @@ variable "gosoline_name_patterns" {
     ecs_service                      = optional(string),
     grafana_cloudwatch_datasource    = optional(string),
     grafana_elasticsearch_datasource = optional(string),
-    kubernetes_namespace             = optional(string),
-    kubernetes_pod                   = optional(string),
-    traefik_service_name             = optional(string)
   })
   description = "Define custom name patters for the gosoline provider"
   default = {
@@ -344,9 +341,6 @@ variable "gosoline_name_patterns" {
     ecs_service                      = "{group}-{app}"
     grafana_cloudwatch_datasource    = "cloudwatch-{family}"
     grafana_elasticsearch_datasource = "elasticsearch-{env}-{family}-{group}-{app}"
-    kubernetes_namespace             = ""
-    kubernetes_pod                   = ""
-    traefik_service_name             = ""
   }
 }
 

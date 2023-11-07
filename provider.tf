@@ -1,7 +1,11 @@
 provider "gosoline" {
-  metadata      = local.gosoline_metadata
-  name_patterns = var.gosoline_name_patterns
-  orchestrator  = "ecs"
+  metadata = local.gosoline_metadata
+  name_patterns = merge(var.gosoline_name_patterns, {
+    kubernetes_namespace = ""
+    kubernetes_pod       = ""
+    traefik_service_name = ""
+  })
+  orchestrator = "ecs"
 }
 
 provider "grafana" {
