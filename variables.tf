@@ -460,7 +460,7 @@ variable "monitoring_enabled" {
 variable "mpr_enabled" {
   type        = bool
   description = "Whether to use the StreamMprMessagesPerRunner metric for autoscaling (gosoline feature), see: https://github.com/justtrackio/gosoline"
-  default     = false
+  default     = null
 }
 
 variable "network_mode" {
