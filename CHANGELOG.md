@@ -1,3 +1,10 @@
+## [2.7.5](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.7.4...v2.7.5) (2023-11-21)
+
+
+### Bug Fixes
+
+* enable custom autoscaling based on type ([#71](https://github.com/justtrackio/terraform-aws-ecs-app/issues/71)) ([662e0d0](https://github.com/justtrackio/terraform-aws-ecs-app/commit/662e0d03d41fd6774af0aef30c942be6b3b3b0d9))
+
 ## [2.7.4](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.7.3...v2.7.4) (2023-11-07)
 
 
