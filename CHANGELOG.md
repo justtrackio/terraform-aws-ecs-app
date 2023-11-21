@@ -1,3 +1,10 @@
+## [2.8.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.7.5...v2.8.0) (2023-11-21)
+
+
+### Features
+
+* update terraform justtrackio/ecs-gosoline-monitoring/aws to v2.2.0 ([#60](https://github.com/justtrackio/terraform-aws-ecs-app/issues/60)) ([ccda268](https://github.com/justtrackio/terraform-aws-ecs-app/commit/ccda2685312b850539ea3e416def548fdb490aed))
+
 ## [2.7.5](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.7.4...v2.7.5) (2023-11-21)
 
 
