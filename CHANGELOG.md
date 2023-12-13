@@ -1,3 +1,10 @@
+## [2.8.2](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.8.1...v2.8.2) (2023-12-13)
+
+
+### Bug Fixes
+
+* change sentry to https ([#76](https://github.com/justtrackio/terraform-aws-ecs-app/issues/76)) ([1263934](https://github.com/justtrackio/terraform-aws-ecs-app/commit/12639349dd19702fb4cc25b7044faf8eb0ee988a))
+
 ## [2.8.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.8.0...v2.8.1) (2023-11-21)
 
 
