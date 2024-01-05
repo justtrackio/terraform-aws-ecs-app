@@ -1,43 +1,20 @@
 locals {
-  ecs_load_balancers = length(var.alb_name) > 0 ? [{
-    target_group_arn = module.alb_ingress[0].target_group_arn
-    container_name   = module.ecs_label.id
-    elb_name         = null
-    container_port   = var.port_gateway
-    }] : length(var.target_group_arn) > 0 ? [{
-    target_group_arn = var.target_group_arn
-    container_name   = module.ecs_label.id
-    elb_name         = null
-    container_port   = var.port_gateway
-  }] : []
-  container_cpu = var.container_cpu != null ? var.container_cpu : data.aws_ssm_parameter.container_cpu[0].value
-  docker_labels = merge({
-    Application                                                                      = "${module.this.name}.${module.this.stage}"
-    Domain                                                                           = "${module.this.environment}.${module.this.organizational_unit}.${module.this.namespace}"
-    "traefik.enable"                                                                 = true
-    "traefik.http.routers.metadata-${module.ecs_label.id}.entrypoints"               = "metadata"
-    "traefik.http.routers.metadata-${module.ecs_label.id}.service"                   = "metadata-${module.ecs_label.id}"
-    "traefik.http.services.metadata-${module.ecs_label.id}.loadbalancer.server.port" = 8070
-    "traefik.http.routers.gateway-${module.ecs_label.id}.entrypoints"                = "gateway"
-    "traefik.http.routers.gateway-${module.ecs_label.id}.service"                    = "gateway-${module.ecs_label.id}"
-    "traefik.http.services.gateway-${module.ecs_label.id}.loadbalancer.server.port"  = 8088
-    "traefik.http.routers.grpc-${module.ecs_label.id}.entrypoints"                   = "grpc"
-    "traefik.http.routers.grpc-${module.ecs_label.id}.service"                       = "grpc-${module.ecs_label.id}"
-    "traefik.http.services.grpc-${module.ecs_label.id}.loadbalancer.server.port"     = 8081
-    "traefik.http.routers.health-${module.ecs_label.id}.entrypoints"                 = "health"
-    "traefik.http.routers.health-${module.ecs_label.id}.service"                     = "health-${module.ecs_label.id}"
-    "traefik.http.services.health-${module.ecs_label.id}.loadbalancer.server.port"   = 8090
-  }, var.docker_labels)
-  total_cpu             = local.container_cpu + var.log_router_container_cpu
-  task_cpu              = var.task_cpu != null ? local.total_cpu > var.task_cpu ? local.total_cpu : var.task_cpu : null
-  container_memory      = var.container_memory_reservation != null ? var.container_memory_reservation : data.aws_ssm_parameter.container_memory_reservation[0].value
-  total_memory          = local.container_memory + var.log_router_container_memory_reservation
-  task_memory           = var.task_memory != null ? local.total_memory > var.task_memory ? local.total_memory : var.task_memory : null
-  image_tag             = var.app_image_tag == null ? data.aws_ssm_parameter.container_tag[0].value : var.app_image_tag
-  port_mappings         = length(var.port_mappings) != 0 ? var.port_mappings : local.default_port_mappings
-  healthcheck           = var.healthcheck != null ? var.healthcheck : local.default_healthcheck
-  container_definitions = "[${module.container_definition.json_map_encoded}, ${module.container_definition_fluentbit.json_map_encoded}]"
-  task_policies         = setunion(var.task_policy_arns, local.default_policies)
+  container_cpu                = var.container_cpu != null ? var.container_cpu : aws_ssm_parameter.container_cpu.value
+  container_definitions        = "[${module.container_definition.json_map_encoded}, ${module.container_definition_fluentbit.json_map_encoded}]"
+  container_memory             = var.container_memory != null ? var.container_memory : local.container_memory_reservation
+  container_memory_reservation = var.container_memory_reservation != null ? var.container_memory_reservation : aws_ssm_parameter.container_memory.value
+  default_healthcheck = {
+    command = [
+      "CMD",
+      "/usr/bin/wget",
+      "--spider",
+      "localhost:${var.port_health}/health"
+    ],
+    retries     = 3
+    timeout     = 5
+    interval    = 10
+    startPeriod = 60
+  }
   default_policies = [
     "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess",
     "arn:aws:iam::aws:policy/CloudWatchFullAccessV2",
@@ -70,18 +47,42 @@ locals {
       protocol      = "tcp"
     }
   ]
-  default_healthcheck = {
-    command = [
-      "CMD",
-      "/usr/bin/wget",
-      "--spider",
-      "localhost:${var.port_health}/health"
-    ],
-    retries     = 3
-    timeout     = 5
-    interval    = 10
-    startPeriod = 60
-  }
+  docker_labels = merge({
+    Application                                                                      = "${module.this.name}.${module.this.stage}"
+    Domain                                                                           = "${module.this.environment}.${module.this.organizational_unit}.${module.this.namespace}"
+    "traefik.enable"                                                                 = true
+    "traefik.http.routers.metadata-${module.ecs_label.id}.entrypoints"               = "metadata"
+    "traefik.http.routers.metadata-${module.ecs_label.id}.service"                   = "metadata-${module.ecs_label.id}"
+    "traefik.http.services.metadata-${module.ecs_label.id}.loadbalancer.server.port" = 8070
+    "traefik.http.routers.gateway-${module.ecs_label.id}.entrypoints"                = "gateway"
+    "traefik.http.routers.gateway-${module.ecs_label.id}.service"                    = "gateway-${module.ecs_label.id}"
+    "traefik.http.services.gateway-${module.ecs_label.id}.loadbalancer.server.port"  = 8088
+    "traefik.http.routers.grpc-${module.ecs_label.id}.entrypoints"                   = "grpc"
+    "traefik.http.routers.grpc-${module.ecs_label.id}.service"                       = "grpc-${module.ecs_label.id}"
+    "traefik.http.services.grpc-${module.ecs_label.id}.loadbalancer.server.port"     = 8081
+    "traefik.http.routers.health-${module.ecs_label.id}.entrypoints"                 = "health"
+    "traefik.http.routers.health-${module.ecs_label.id}.service"                     = "health-${module.ecs_label.id}"
+    "traefik.http.services.health-${module.ecs_label.id}.loadbalancer.server.port"   = 8090
+  }, var.docker_labels)
+  ecs_load_balancers = length(var.alb_name) > 0 ? [{
+    target_group_arn = module.alb_ingress[0].target_group_arn
+    container_name   = module.ecs_label.id
+    elb_name         = null
+    container_port   = var.port_gateway
+    }] : length(var.target_group_arn) > 0 ? [{
+    target_group_arn = var.target_group_arn
+    container_name   = module.ecs_label.id
+    elb_name         = null
+    container_port   = var.port_gateway
+  }] : []
+  healthcheck   = var.healthcheck != null ? var.healthcheck : local.default_healthcheck
+  image_tag     = var.app_image_tag == null ? data.aws_ssm_parameter.container_tag[0].value : var.app_image_tag
+  port_mappings = length(var.port_mappings) != 0 ? var.port_mappings : local.default_port_mappings
+  task_cpu      = var.task_cpu != null ? local.total_cpu > var.task_cpu ? local.total_cpu : var.task_cpu : null
+  task_memory   = var.task_memory != null ? local.total_memory > var.task_memory ? local.total_memory : var.task_memory : null
+  total_cpu     = local.container_cpu + var.log_router_container_cpu
+  total_memory  = local.container_memory_reservation + var.log_router_container_memory_reservation
+  task_policies = setunion(var.task_policy_arns, local.default_policies)
 }
 
 module "ecs_label" {
@@ -105,14 +106,19 @@ module "container_definition" {
   source  = "cloudposse/ecs-container-definition/aws"
   version = "0.60.0"
 
-  container_name               = module.ecs_label.id
+  container_name = module.ecs_label.id
+
+  container_cpu                = local.container_cpu
   container_image              = "${module.ecr.repository_url}:${local.image_tag}"
-  container_memory             = var.container_memory
-  container_memory_reservation = var.container_memory_reservation
-  container_cpu                = var.container_cpu
-  start_timeout                = var.container_start_timeout
-  stop_timeout                 = var.container_stop_timeout
+  container_memory             = local.container_memory
+  container_memory_reservation = local.container_memory_reservation
+  docker_labels                = local.docker_labels
   healthcheck                  = local.healthcheck
+  log_configuration = {
+    logDriver     = var.log_driver
+    options       = {}
+    secretOptions = null
+  }
   map_environment = merge({
     AWS_DEFAULT_REGION                                           = module.this.aws_region
     AWS_SDK_RETRIES                                              = 10
@@ -142,15 +148,10 @@ module "container_definition" {
   }, var.container_map_environment)
   map_secrets       = var.container_map_secrets
   port_mappings     = local.port_mappings
+  start_timeout     = var.container_start_timeout
+  stop_timeout      = var.container_stop_timeout
   ulimits           = var.ulimits
   working_directory = var.working_directory
-  docker_labels     = local.docker_labels
-
-  log_configuration = {
-    logDriver     = var.log_driver
-    options       = {}
-    secretOptions = null
-  }
 }
 
 module "container_definition_fluentbit" {
