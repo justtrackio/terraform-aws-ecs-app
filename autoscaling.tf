@@ -51,7 +51,7 @@ module "ecs_service_task_predefined_autoscaling" {
     customized_metric_specification = []
     predefined_metric_specification = [{
       predefined_metric_type = local.autoscaling_predefined_metric_type
-      resource_label         = local.alb_enabled ? "${data.aws_lb.default[0].arn_suffix}/${module.alb_ingress[0].target_group_arn_suffix}" : null
+      resource_label         = local.alb_enabled && var.autoscaling_predefined_metric_type == null ? "${data.aws_lb.default[0].arn_suffix}/${module.alb_ingress[0].target_group_arn_suffix}" : null
     }]
   }]
 
