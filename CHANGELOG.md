@@ -1,3 +1,10 @@
+## [2.8.3](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.8.2...v2.8.3) (2024-01-08)
+
+
+### Bug Fixes
+
+* fixed resource_label statement in autoscaling.tf ([#78](https://github.com/justtrackio/terraform-aws-ecs-app/issues/78)) ([bb37a91](https://github.com/justtrackio/terraform-aws-ecs-app/commit/bb37a91e33425b87b05582edf9a7e869f931734b))
+
 ## [2.8.2](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.8.1...v2.8.2) (2023-12-13)
 
 
