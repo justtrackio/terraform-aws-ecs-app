@@ -197,7 +197,7 @@ variable "cloudwatch_log_group_enabled" {
 variable "container_cpu" {
   type        = number
   description = "The vCPU setting to control cpu limits of container. (If FARGATE launch type is used below, this must be a supported vCPU size from the table here: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html)"
-  default     = 128
+  default     = null
 }
 
 variable "container_map_environment" {
@@ -221,7 +221,7 @@ variable "container_memory" {
 variable "container_memory_reservation" {
   type        = number
   description = "The amount of RAM (Soft Limit) to allow container to use in MB. This value must be less than `container_memory` if set"
-  default     = 128
+  default     = null
 }
 
 variable "container_start_timeout" {
