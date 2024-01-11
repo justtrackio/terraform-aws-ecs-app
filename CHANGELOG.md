@@ -1,3 +1,10 @@
+## [2.9.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.8.3...v2.9.0) (2024-01-11)
+
+
+### Features
+
+* add default resource request ([#77](https://github.com/justtrackio/terraform-aws-ecs-app/issues/77)) ([9e90318](https://github.com/justtrackio/terraform-aws-ecs-app/commit/9e9031815fbce52de181601637035277287ac1ec))
+
 ## [2.8.3](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.8.2...v2.8.3) (2024-01-08)
 
 
