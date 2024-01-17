@@ -1,3 +1,10 @@
+## [2.10.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.9.0...v2.10.0) (2024-01-17)
+
+
+### Features
+
+* add alarm-service-resources module ([#80](https://github.com/justtrackio/terraform-aws-ecs-app/issues/80)) ([6a2d953](https://github.com/justtrackio/terraform-aws-ecs-app/commit/6a2d953d1d218b35775fae5e781d207270ae7dc8))
+
 ## [2.9.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.8.3...v2.9.0) (2024-01-11)
 
 
