@@ -1,6 +1,6 @@
 locals {
   alb_enabled                         = length(var.alb_name) > 0
-  mpr_enabled                         = var.mpr_enabled == true ? true : (lookup(module.this.tags, "Type") == "subscriber" || lookup(module.this.tags, "Type") == "consumer") && var.mpr_enabled == null ? true : false
+  mpr_enabled                         = var.mpr_enabled == true ? true : (module.this.tags["Type"] == "subscriber" || module.this.tags["Type"] == "consumer") && var.mpr_enabled == null ? true : false
   internal_predefined_metric_type     = local.alb_enabled ? "ALBRequestCountPerTarget" : "ECSServiceAverageCPUUtilization"
   internal_predefined_target_value    = local.alb_enabled ? 1000 : 100
   internal_customized_target_value    = 500

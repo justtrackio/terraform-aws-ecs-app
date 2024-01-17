@@ -40,6 +40,83 @@ variable "alarm_kinsumer" {
   description = "This can be used to override alarms for kinsumers. Keys are names of the kinsumers."
 }
 
+
+variable "alarm_service_resources_enabled" {
+  type        = bool
+  default     = null
+  description = "Defines if resource alarms should be created"
+}
+
+variable "alarm_service_resources_cpu_average" {
+  type = object({
+    datapoints_to_alarm = optional(number, 6)
+    evaluation_periods  = optional(number, 6)
+    period              = optional(number, 300)
+    threshold           = optional(number, 125)
+  })
+  description = "Average CPUUtilization alarm specs"
+  default = {
+    datapoints_to_alarm = 6
+    evaluation_periods  = 6
+    period              = 300
+    threshold           = 125
+  }
+}
+
+variable "alarm_service_resources_cpu_maximum" {
+  type = object({
+    datapoints_to_alarm = optional(number, 15)
+    evaluation_periods  = optional(number, 15)
+    period              = optional(number, 60)
+    threshold           = optional(number, 150)
+  })
+  description = "Maximum CPUUtilization alarm specs"
+  default = {
+    datapoints_to_alarm = 15
+    evaluation_periods  = 15
+    period              = 60
+    threshold           = 150
+  }
+}
+
+variable "alarm_service_resources_memory_average" {
+  type = object({
+    datapoints_to_alarm = optional(number, 6)
+    evaluation_periods  = optional(number, 6)
+    period              = optional(number, 300)
+    threshold           = optional(number, 125)
+  })
+  description = "Average MemoryUtilization alarm specs"
+  default = {
+    datapoints_to_alarm = 6
+    evaluation_periods  = 6
+    period              = 300
+    threshold           = 125
+  }
+}
+
+variable "alarm_service_resources_memory_maximum" {
+  type = object({
+    datapoints_to_alarm = optional(number, 15)
+    evaluation_periods  = optional(number, 15)
+    period              = optional(number, 60)
+    threshold           = optional(number, 150)
+  })
+  description = "Maximum MemoryUtilization alarm specs"
+  default = {
+    datapoints_to_alarm = 15
+    evaluation_periods  = 15
+    period              = 60
+    threshold           = 150
+  }
+}
+
+variable "alarm_service_resources_treat_missing_data" {
+  type        = string
+  default     = "breaching"
+  description = "How to treat missing data, defaults to 'breaching'"
+}
+
 variable "alarm_scheduled" {
   type = object({
     alarm_description   = optional(string)
@@ -428,7 +505,7 @@ variable "log_router_image_repository" {
 variable "log_router_image_tag" {
   type        = string
   description = "The default container image to use in container definition"
-  default     = "stable"
+  default     = "stable-2.2.2"
 }
 
 variable "log_router_options" {
