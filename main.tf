@@ -1,7 +1,6 @@
 locals {
   container_cpu                = var.container_cpu != null ? var.container_cpu : aws_ssm_parameter.container_cpu.value
   container_definitions        = "[${module.container_definition.json_map_encoded}, ${module.container_definition_fluentbit.json_map_encoded}]"
-  container_memory             = var.container_memory != null ? var.container_memory : local.container_memory_reservation
   container_memory_reservation = var.container_memory_reservation != null ? var.container_memory_reservation : aws_ssm_parameter.container_memory.value
   default_healthcheck = {
     command = [
@@ -110,7 +109,7 @@ module "container_definition" {
 
   container_cpu                = local.container_cpu
   container_image              = "${module.ecr.repository_url}:${local.image_tag}"
-  container_memory             = local.container_memory
+  container_memory             = var.container_memory
   container_memory_reservation = local.container_memory_reservation
   docker_labels                = local.docker_labels
   healthcheck                  = local.healthcheck
