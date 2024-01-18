@@ -1,3 +1,10 @@
+## [2.10.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.10.0...v2.10.1) (2024-01-18)
+
+
+### Bug Fixes
+
+* remove default container_memory ([#81](https://github.com/justtrackio/terraform-aws-ecs-app/issues/81)) ([4383729](https://github.com/justtrackio/terraform-aws-ecs-app/commit/43837293ce0c8c27d9454d088a4247ae6b534985))
+
 ## [2.10.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.9.0...v2.10.0) (2024-01-17)
 
 
