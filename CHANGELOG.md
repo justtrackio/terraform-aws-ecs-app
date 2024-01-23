@@ -1,3 +1,10 @@
+## [2.10.2](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.10.1...v2.10.2) (2024-01-23)
+
+
+### Bug Fixes
+
+* change alarm_service_resources_enabled default ([#83](https://github.com/justtrackio/terraform-aws-ecs-app/issues/83)) ([b3a512f](https://github.com/justtrackio/terraform-aws-ecs-app/commit/b3a512fc785d9b42a1f7e6f015d45c15dfe2f4a9))
+
 ## [2.10.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.10.0...v2.10.1) (2024-01-18)
 
 
