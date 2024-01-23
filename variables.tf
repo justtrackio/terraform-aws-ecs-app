@@ -43,7 +43,7 @@ variable "alarm_kinsumer" {
 
 variable "alarm_service_resources_enabled" {
   type        = bool
-  default     = null
+  default     = false
   description = "Defines if resource alarms should be created"
 }
 
