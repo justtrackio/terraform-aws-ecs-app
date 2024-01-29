@@ -5,6 +5,8 @@ module "sentry" {
 
   context     = module.this.context
   label_order = var.label_orders.sentry
+
+  id_length_limit = 50
 }
 
 moved {
