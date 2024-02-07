@@ -1,3 +1,10 @@
+## [2.11.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.10.2...v2.11.0) (2024-02-07)
+
+
+### Features
+
+* added health_check_grace_period_seconds parameter ([#85](https://github.com/justtrackio/terraform-aws-ecs-app/issues/85)) ([3f4be97](https://github.com/justtrackio/terraform-aws-ecs-app/commit/3f4be97de7ed2a82ef9ff5ba4e822fd4ea60ff1d))
+
 ## [2.10.2](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.10.1...v2.10.2) (2024-01-23)
 
 
