@@ -194,6 +194,7 @@ module "service_task" {
   ecs_cluster_arn                    = data.aws_ecs_cluster.default.arn
   ecs_load_balancers                 = local.ecs_load_balancers
   exec_enabled                       = var.exec_enabled
+  health_check_grace_period_seconds  = var.health_check_grace_period_seconds
   ignore_changes_desired_count       = var.ignore_changes_desired_count
   ignore_changes_task_definition     = var.ignore_changes_task_definition
   launch_type                        = var.launch_type
