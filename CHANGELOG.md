@@ -1,3 +1,10 @@
+## [2.12.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.11.0...v2.12.0) (2024-02-14)
+
+
+### Features
+
+* update provider justtrackio/gosoline to 1.3.0 ([#89](https://github.com/justtrackio/terraform-aws-ecs-app/issues/89)) ([a98d9ff](https://github.com/justtrackio/terraform-aws-ecs-app/commit/a98d9ff4714c55bab416738580bec344f74f65a2))
+
 ## [2.11.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.10.2...v2.11.0) (2024-02-07)
 
 
