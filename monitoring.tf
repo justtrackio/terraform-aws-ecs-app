@@ -11,7 +11,7 @@ locals {
 module "monitoring" {
   count   = var.monitoring_enabled ? 1 : 0
   source  = "justtrackio/ecs-gosoline-monitoring/aws"
-  version = "2.2.1"
+  version = "2.3.0"
 
   context = module.this.context
 
