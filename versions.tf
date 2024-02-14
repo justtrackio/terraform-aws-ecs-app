@@ -12,7 +12,7 @@ terraform {
 
     gosoline = {
       source  = "justtrackio/gosoline"
-      version = "1.2.6"
+      version = "1.3.0"
     }
 
     grafana = {
