@@ -15,6 +15,7 @@ locals {
     startPeriod = 60
   }
   default_policies = [
+    "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess",
     "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess",
     "arn:aws:iam::aws:policy/CloudWatchFullAccessV2",
     "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
