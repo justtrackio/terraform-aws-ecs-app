@@ -40,7 +40,6 @@ variable "alarm_kinsumer" {
   description = "This can be used to override alarms for kinsumers. Keys are names of the kinsumers."
 }
 
-
 variable "alarm_service_resources_enabled" {
   type        = bool
   default     = false
@@ -499,7 +498,7 @@ variable "log_router_container_cpu" {
 
 variable "log_router_container_memory_reservation" {
   type        = string
-  description = "The log router cpu reservation for the ECS task definition"
+  description = "The log router memory reservation for the ECS task definition"
   default     = 64
 }
 
