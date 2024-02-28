@@ -23,6 +23,19 @@ module "ecr" {
     rules = [
       {
         rulePriority = 1,
+        description  = "Keep the latest tag",
+        selection = {
+          countNumber   = 1
+          countType     = "imageCountMoreThan"
+          tagStatus     = "tagged"
+          tagPrefixList = ["latest"]
+        },
+        action = {
+          type = "expire"
+        }
+      },
+      {
+        rulePriority = 2,
         description  = "Remove untagged images",
         selection = {
           countNumber = 1
@@ -34,7 +47,7 @@ module "ecr" {
         }
       },
       {
-        rulePriority = 2,
+        rulePriority = 3,
         description  = "Keep last 30 images",
         selection = {
           tagStatus   = "any",
