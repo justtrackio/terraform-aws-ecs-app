@@ -1,3 +1,10 @@
+## [2.13.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.12.0...v2.13.0) (2024-02-28)
+
+
+### Features
+
+* keep the latest tag in ecr ([#94](https://github.com/justtrackio/terraform-aws-ecs-app/issues/94)) ([45bdcd5](https://github.com/justtrackio/terraform-aws-ecs-app/commit/45bdcd52b808cc9e04ff4646f9dc76969b755f06))
+
 ## [2.12.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.11.0...v2.12.0) (2024-02-14)
 
 
