@@ -9,10 +9,10 @@ Terraform module which creates a ecs app
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.67 |
 | <a name="requirement_elasticsearch"></a> [elasticsearch](#requirement\_elasticsearch) | 2.0.7 |
-| <a name="requirement_elasticstack"></a> [elasticstack](#requirement\_elasticstack) | 0.6.2 |
+| <a name="requirement_elasticstack"></a> [elasticstack](#requirement\_elasticstack) | 0.11.1 |
 | <a name="requirement_gosoline"></a> [gosoline](#requirement\_gosoline) | 1.3.0 |
-| <a name="requirement_grafana"></a> [grafana](#requirement\_grafana) | 2.2.0 |
-| <a name="requirement_sentry"></a> [sentry](#requirement\_sentry) | 0.11.2 |
+| <a name="requirement_grafana"></a> [grafana](#requirement\_grafana) | 2.13.0 |
+| <a name="requirement_sentry"></a> [sentry](#requirement\_sentry) | 0.12.2 |
 
 ## Providers
 
@@ -24,11 +24,11 @@ Terraform module which creates a ecs app
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_alarm_service_resources"></a> [alarm\_service\_resources](#module\_alarm\_service\_resources) | justtrackio/alarm-service-resources/aws | 1.0.0 |
+| <a name="module_alarm_service_resources"></a> [alarm\_service\_resources](#module\_alarm\_service\_resources) | justtrackio/alarm-service-resources/aws | 1.0.1 |
 | <a name="module_alb_ingress"></a> [alb\_ingress](#module\_alb\_ingress) | cloudposse/alb-ingress/aws | 0.28.0 |
 | <a name="module_cloudwatch_label"></a> [cloudwatch\_label](#module\_cloudwatch\_label) | justtrackio/label/null | 0.26.0 |
-| <a name="module_container_definition"></a> [container\_definition](#module\_container\_definition) | cloudposse/ecs-container-definition/aws | 0.60.0 |
-| <a name="module_container_definition_fluentbit"></a> [container\_definition\_fluentbit](#module\_container\_definition\_fluentbit) | cloudposse/ecs-container-definition/aws | 0.60.0 |
+| <a name="module_container_definition"></a> [container\_definition](#module\_container\_definition) | cloudposse/ecs-container-definition/aws | 0.61.1 |
+| <a name="module_container_definition_fluentbit"></a> [container\_definition\_fluentbit](#module\_container\_definition\_fluentbit) | cloudposse/ecs-container-definition/aws | 0.61.1 |
 | <a name="module_ecr"></a> [ecr](#module\_ecr) | terraform-aws-modules/ecr/aws | 1.6.0 |
 | <a name="module_ecr_label"></a> [ecr\_label](#module\_ecr\_label) | justtrackio/label/null | 0.26.0 |
 | <a name="module_ecs_label"></a> [ecs\_label](#module\_ecs\_label) | justtrackio/label/null | 0.26.0 |
