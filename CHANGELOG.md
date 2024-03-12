@@ -1,3 +1,10 @@
+## [2.14.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.13.0...v2.14.0) (2024-03-12)
+
+
+### Features
+
+* update dependencies ([#95](https://github.com/justtrackio/terraform-aws-ecs-app/issues/95)) ([0abf4fd](https://github.com/justtrackio/terraform-aws-ecs-app/commit/0abf4fde1f778d90b08cd6530b7638c222d9d0df))
+
 ## [2.13.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.12.0...v2.13.0) (2024-02-28)
 
 
