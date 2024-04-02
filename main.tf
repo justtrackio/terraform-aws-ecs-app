@@ -36,11 +36,6 @@ locals {
       protocol      = "tcp"
     },
     {
-      containerPort = var.port_grpc
-      hostPort      = 0
-      protocol      = "tcp"
-    },
-    {
       containerPort = var.port_metadata
       hostPort      = 0
       protocol      = "tcp"
@@ -56,9 +51,6 @@ locals {
     "traefik.http.routers.gateway-${module.ecs_label.id}.entrypoints"                = "gateway"
     "traefik.http.routers.gateway-${module.ecs_label.id}.service"                    = "gateway-${module.ecs_label.id}"
     "traefik.http.services.gateway-${module.ecs_label.id}.loadbalancer.server.port"  = 8088
-    "traefik.http.routers.grpc-${module.ecs_label.id}.entrypoints"                   = "grpc"
-    "traefik.http.routers.grpc-${module.ecs_label.id}.service"                       = "grpc-${module.ecs_label.id}"
-    "traefik.http.services.grpc-${module.ecs_label.id}.loadbalancer.server.port"     = 8081
     "traefik.http.routers.health-${module.ecs_label.id}.entrypoints"                 = "health"
     "traefik.http.routers.health-${module.ecs_label.id}.service"                     = "health-${module.ecs_label.id}"
     "traefik.http.services.health-${module.ecs_label.id}.loadbalancer.server.port"   = 8090
