@@ -1,3 +1,10 @@
+## [2.16.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.15.0...v2.16.0) (2024-04-02)
+
+
+### Features
+
+* added service registries ([#99](https://github.com/justtrackio/terraform-aws-ecs-app/issues/99)) ([3c89602](https://github.com/justtrackio/terraform-aws-ecs-app/commit/3c89602dd7cdc8c2fdc8e7f05ce9c7343e11773d))
+
 ## [2.15.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.14.0...v2.15.0) (2024-04-02)
 
 
