@@ -622,6 +622,21 @@ variable "service_placement_constraints" {
   default     = []
 }
 
+variable "service_registries" {
+  type        = list(any)
+  description = <<-EOT
+    Zero or one service discovery registries for the service.
+    The currently supported service registry is Amazon Route 53 Auto Naming Service - `aws_service_discovery_service`;
+    see `service_registries` docs https://www.terraform.io/docs/providers/aws/r/ecs_service.html#service_registries-1"
+    Service registry is object with required key `registry_arn = string` and optional keys
+      `port           = number`
+      `container_name = string`
+      `container_port = number`
+    EOT
+
+  default = []
+}
+
 variable "target_group_arn" {
   type        = string
   description = "ARN of the target group to register the task into. Only works when alb_name is not specified. Can be used for services that are made available via a vpc endpoint"

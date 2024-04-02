@@ -194,6 +194,7 @@ module "service_task" {
   ordered_placement_strategy         = var.ordered_placement_strategy
   propagate_tags                     = var.propagate_tags
   service_placement_constraints      = var.service_placement_constraints
+  service_registries                 = var.service_registries
   task_cpu                           = local.task_cpu
   task_exec_policy_arns              = local.task_policies
   task_memory                        = local.task_memory
