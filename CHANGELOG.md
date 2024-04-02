@@ -1,3 +1,10 @@
+## [2.15.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.14.0...v2.15.0) (2024-04-02)
+
+
+### Features
+
+* remove grpc port ([#98](https://github.com/justtrackio/terraform-aws-ecs-app/issues/98)) ([a5a77a6](https://github.com/justtrackio/terraform-aws-ecs-app/commit/a5a77a61003ba0231e215908ac3ad782a45b9d00))
+
 ## [2.14.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.13.0...v2.14.0) (2024-03-12)
 
 
