@@ -1,3 +1,10 @@
+## [2.16.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.16.0...v2.16.1) (2024-04-15)
+
+
+### Bug Fixes
+
+* increase consumer alarm datapoints ([#104](https://github.com/justtrackio/terraform-aws-ecs-app/issues/104)) ([c287e4f](https://github.com/justtrackio/terraform-aws-ecs-app/commit/c287e4f38a65e09d204a17ed53ff204d69af9c78))
+
 ## [2.16.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.15.0...v2.16.0) (2024-04-02)
 
 
