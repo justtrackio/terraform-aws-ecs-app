@@ -1,3 +1,10 @@
+## [2.17.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.16.1...v2.17.0) (2024-04-15)
+
+
+### Features
+
+* add kinesis policy ([#105](https://github.com/justtrackio/terraform-aws-ecs-app/issues/105)) ([4686ae0](https://github.com/justtrackio/terraform-aws-ecs-app/commit/4686ae0a8b1d294aa40c6786bffee6db96a1bed5))
+
 ## [2.16.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.16.0...v2.16.1) (2024-04-15)
 
 
