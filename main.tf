@@ -23,6 +23,7 @@ locals {
     "arn:aws:iam::aws:policy/AmazonSNSFullAccess",
     "arn:aws:iam::aws:policy/AmazonSQSFullAccess",
     "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess",
+    "arn:aws:iam::aws:policy/AmazonKinesisFullAccess",
   ]
   default_port_mappings = [
     {
