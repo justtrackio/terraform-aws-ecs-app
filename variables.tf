@@ -1,8 +1,8 @@
 variable "alarm_consumer" {
   type = object({
     alarm_description      = optional(string)
-    datapoints_to_alarm    = optional(number, 1)
-    evaluation_periods     = optional(number, 1)
+    datapoints_to_alarm    = optional(number, 3)
+    evaluation_periods     = optional(number, 3)
     period                 = optional(number, 60)
     success_rate_threshold = optional(number, 99)
   })
