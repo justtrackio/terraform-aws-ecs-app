@@ -1,3 +1,10 @@
+## [2.18.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.17.0...v2.18.0) (2024-04-22)
+
+
+### Features
+
+* add resource alarm tags and severity to resource alarms ([#107](https://github.com/justtrackio/terraform-aws-ecs-app/issues/107)) ([b99a594](https://github.com/justtrackio/terraform-aws-ecs-app/commit/b99a5949a1e2355b83903359f4a7a27211b496c6))
+
 ## [2.17.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.16.1...v2.17.0) (2024-04-15)
 
 
