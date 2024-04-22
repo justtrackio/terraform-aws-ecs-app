@@ -24,7 +24,7 @@ Terraform module which creates a ecs app
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_alarm_service_resources"></a> [alarm\_service\_resources](#module\_alarm\_service\_resources) | justtrackio/alarm-service-resources/aws | 1.0.1 |
+| <a name="module_alarm_service_resources"></a> [alarm\_service\_resources](#module\_alarm\_service\_resources) | justtrackio/alarm-service-resources/aws | 1.1.0 |
 | <a name="module_alb_ingress"></a> [alb\_ingress](#module\_alb\_ingress) | cloudposse/alb-ingress/aws | 0.28.0 |
 | <a name="module_cloudwatch_label"></a> [cloudwatch\_label](#module\_cloudwatch\_label) | justtrackio/label/null | 0.26.0 |
 | <a name="module_container_definition"></a> [container\_definition](#module\_container\_definition) | cloudposse/ecs-container-definition/aws | 0.61.1 |
