@@ -1,3 +1,10 @@
+## [2.18.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.18.0...v2.18.1) (2024-05-07)
+
+
+### Bug Fixes
+
+* kinsumers with same name crashed module ([#112](https://github.com/justtrackio/terraform-aws-ecs-app/issues/112)) ([61ef341](https://github.com/justtrackio/terraform-aws-ecs-app/commit/61ef341bf64c3d3f0effa216568e8ea26756b5c1))
+
 ## [2.18.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.17.0...v2.18.0) (2024-04-22)
 
 
