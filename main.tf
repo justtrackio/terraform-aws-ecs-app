@@ -176,7 +176,7 @@ module "container_definition_fluentbit" {
 
 module "service_task" {
   source  = "justtrackio/ecs-alb-service-task/aws"
-  version = "1.3.0"
+  version = "1.4.0"
 
   circuit_breaker_deployment_enabled = var.circuit_breaker_deployment_enabled
   circuit_breaker_rollback_enabled   = var.circuit_breaker_rollback_enabled
