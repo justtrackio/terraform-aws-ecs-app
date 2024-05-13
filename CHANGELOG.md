@@ -1,3 +1,10 @@
+## [2.19.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.18.1...v2.19.0) (2024-05-13)
+
+
+### Features
+
+* bump alb-service-task module ([#113](https://github.com/justtrackio/terraform-aws-ecs-app/issues/113)) ([4472ee9](https://github.com/justtrackio/terraform-aws-ecs-app/commit/4472ee98c4915a26fc21e953bc2318d92449bd17))
+
 ## [2.18.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.18.0...v2.18.1) (2024-05-07)
 
 
