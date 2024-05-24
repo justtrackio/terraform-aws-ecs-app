@@ -34,16 +34,17 @@ module "cloudwatch_label" {
 module "ecs_service_task_predefined_autoscaling" {
   count   = local.predefined_autoscaling_enabled ? 1 : 0
   source  = "justtrackio/ecs-autoscaling/aws"
-  version = "1.1.0"
+  version = "1.2.0"
 
   context = module.this.context
 
-  aws_account_id = module.this.aws_account_id
-  cluster_name   = data.aws_ecs_cluster.default.cluster_name
-  service_name   = module.ecs_label.id
-  enabled        = var.autoscaling_enabled
-  min_capacity   = var.autoscaling_min_capacity
-  max_capacity   = var.autoscaling_max_capacity
+  aws_account_id                  = module.this.aws_account_id
+  cluster_name                    = data.aws_ecs_cluster.default.cluster_name
+  service_name                    = module.ecs_label.id
+  enabled                         = var.autoscaling_enabled
+  min_capacity                    = var.autoscaling_min_capacity
+  max_capacity                    = var.autoscaling_max_capacity
+  ignore_changes_min_max_capacity = var.metric_based_autoscaling_ignore_changes_min_max_capacity
   target_tracking = [{
     target_value                    = local.autoscaling_predefined_target_value
     scale_in_cooldown               = var.autoscaling_scale_in_cooldown
@@ -63,16 +64,17 @@ module "ecs_service_task_predefined_autoscaling" {
 module "ecs_service_task_customized_autoscaling" {
   count   = local.customized_autoscaling_enabled ? 1 : 0
   source  = "justtrackio/ecs-autoscaling/aws"
-  version = "1.1.0"
+  version = "1.2.0"
 
   context = module.this.context
 
-  aws_account_id = module.this.aws_account_id
-  cluster_name   = data.aws_ecs_cluster.default.cluster_name
-  service_name   = module.ecs_label.id
-  enabled        = var.autoscaling_enabled
-  min_capacity   = var.autoscaling_min_capacity
-  max_capacity   = var.autoscaling_max_capacity
+  aws_account_id                  = module.this.aws_account_id
+  cluster_name                    = data.aws_ecs_cluster.default.cluster_name
+  service_name                    = module.ecs_label.id
+  enabled                         = var.autoscaling_enabled
+  min_capacity                    = var.autoscaling_min_capacity
+  max_capacity                    = var.autoscaling_max_capacity
+  ignore_changes_min_max_capacity = var.metric_based_autoscaling_ignore_changes_min_max_capacity
   target_tracking = [{
     target_value                    = local.autoscaling_customized_target_value
     scale_in_cooldown               = var.autoscaling_scale_in_cooldown
@@ -94,13 +96,14 @@ module "ecs_service_task_customized_autoscaling" {
 module "ecs_service_task_schedule" {
   count   = var.autoscaling_enabled && length(var.autoscaling_schedule) > 0 ? 1 : 0
   source  = "justtrackio/ecs-autoscaling/aws"
-  version = "1.1.0"
+  version = "1.2.0"
 
   context = module.this.context
 
-  aws_account_id = module.this.aws_account_id
-  cluster_name   = data.aws_ecs_cluster.default.cluster_name
-  service_name   = module.ecs_label.id
-  enabled        = var.autoscaling_enabled
-  schedule       = var.autoscaling_schedule
+  aws_account_id                  = module.this.aws_account_id
+  cluster_name                    = data.aws_ecs_cluster.default.cluster_name
+  service_name                    = module.ecs_label.id
+  enabled                         = var.autoscaling_enabled
+  schedule                        = var.autoscaling_schedule
+  ignore_changes_min_max_capacity = var.scheduled_autoscaling_ignore_changes_min_max_capacity
 }

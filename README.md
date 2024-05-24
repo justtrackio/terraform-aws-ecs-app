@@ -32,9 +32,9 @@ Terraform module which creates a ecs app
 | <a name="module_ecr"></a> [ecr](#module\_ecr) | terraform-aws-modules/ecr/aws | 1.6.0 |
 | <a name="module_ecr_label"></a> [ecr\_label](#module\_ecr\_label) | justtrackio/label/null | 0.26.0 |
 | <a name="module_ecs_label"></a> [ecs\_label](#module\_ecs\_label) | justtrackio/label/null | 0.26.0 |
-| <a name="module_ecs_service_task_customized_autoscaling"></a> [ecs\_service\_task\_customized\_autoscaling](#module\_ecs\_service\_task\_customized\_autoscaling) | justtrackio/ecs-autoscaling/aws | 1.1.0 |
-| <a name="module_ecs_service_task_predefined_autoscaling"></a> [ecs\_service\_task\_predefined\_autoscaling](#module\_ecs\_service\_task\_predefined\_autoscaling) | justtrackio/ecs-autoscaling/aws | 1.1.0 |
-| <a name="module_ecs_service_task_schedule"></a> [ecs\_service\_task\_schedule](#module\_ecs\_service\_task\_schedule) | justtrackio/ecs-autoscaling/aws | 1.1.0 |
+| <a name="module_ecs_service_task_customized_autoscaling"></a> [ecs\_service\_task\_customized\_autoscaling](#module\_ecs\_service\_task\_customized\_autoscaling) | justtrackio/ecs-autoscaling/aws | 1.2.0 |
+| <a name="module_ecs_service_task_predefined_autoscaling"></a> [ecs\_service\_task\_predefined\_autoscaling](#module\_ecs\_service\_task\_predefined\_autoscaling) | justtrackio/ecs-autoscaling/aws | 1.2.0 |
+| <a name="module_ecs_service_task_schedule"></a> [ecs\_service\_task\_schedule](#module\_ecs\_service\_task\_schedule) | justtrackio/ecs-autoscaling/aws | 1.2.0 |
 | <a name="module_monitoring"></a> [monitoring](#module\_monitoring) | justtrackio/ecs-gosoline-monitoring/aws | 2.3.2 |
 | <a name="module_sentry"></a> [sentry](#module\_sentry) | justtrackio/project/sentry | 1.3.0 |
 | <a name="module_service_task"></a> [service\_task](#module\_service\_task) | justtrackio/ecs-alb-service-task/aws | 1.4.0 |
@@ -142,6 +142,7 @@ Terraform module which creates a ecs app
 | <a name="input_log_router_image_tag"></a> [log\_router\_image\_tag](#input\_log\_router\_image\_tag) | The default container image to use in container definition | `string` | `"stable-2.2.2"` | no |
 | <a name="input_log_router_options"></a> [log\_router\_options](#input\_log\_router\_options) | The log router options to use | `map(string)` | <pre>{<br>  "config-file-type": "file",<br>  "config-file-value": "/fluent-bit/etc/extra.conf"<br>}</pre> | no |
 | <a name="input_log_router_type"></a> [log\_router\_type](#input\_log\_router\_type) | The log router type to use | `string` | `"fluentbit"` | no |
+| <a name="input_metric_based_autoscaling_ignore_changes_min_max_capacity"></a> [metric\_based\_autoscaling\_ignore\_changes\_min\_max\_capacity](#input\_metric\_based\_autoscaling\_ignore\_changes\_min\_max\_capacity) | Whether or not to ignore min\_capacity/max\_capacity changes on the aws\_appautoscaling\_target of the metric based autoscaling module | `bool` | `false` | no |
 | <a name="input_metric_enabled"></a> [metric\_enabled](#input\_metric\_enabled) | Defines if metrics should be written | `bool` | n/a | yes |
 | <a name="input_monitoring_enabled"></a> [monitoring\_enabled](#input\_monitoring\_enabled) | Defines if the monitoring module should be created | `bool` | `true` | no |
 | <a name="input_mpr_enabled"></a> [mpr\_enabled](#input\_mpr\_enabled) | Whether to use the StreamMprMessagesPerRunner metric for autoscaling (gosoline feature), see: https://github.com/justtrackio/gosoline | `bool` | `null` | no |
@@ -156,6 +157,7 @@ Terraform module which creates a ecs app
 | <a name="input_port_metadata"></a> [port\_metadata](#input\_port\_metadata) | Define the metadata port | `number` | `8070` | no |
 | <a name="input_propagate_tags"></a> [propagate\_tags](#input\_propagate\_tags) | Specifies whether to propagate the tags from the task definition or the service to the tasks. The valid values are SERVICE and TASK\_DEFINITION | `string` | `null` | no |
 | <a name="input_regex_replace_chars"></a> [regex\_replace\_chars](#input\_regex\_replace\_chars) | Terraform regular expression (regex) string.<br>Characters matching the regex will be removed from the ID elements.<br>If not set, `"/[^a-zA-Z0-9-]/"` is used to remove all characters other than hyphens, letters and digits. | `string` | `null` | no |
+| <a name="input_scheduled_autoscaling_ignore_changes_min_max_capacity"></a> [scheduled\_autoscaling\_ignore\_changes\_min\_max\_capacity](#input\_scheduled\_autoscaling\_ignore\_changes\_min\_max\_capacity) | Whether or not to ignore min\_capacity/max\_capacity changes on the aws\_appautoscaling\_target of the scheduled autoscaling module | `bool` | `true` | no |
 | <a name="input_sentry_dsn"></a> [sentry\_dsn](#input\_sentry\_dsn) | Define a custom sentry dsn if `sentry_enabled` is set to `false` | `string` | `null` | no |
 | <a name="input_sentry_enabled"></a> [sentry\_enabled](#input\_sentry\_enabled) | Set to false to prevent the module from creating any resources for sentry | `bool` | `true` | no |
 | <a name="input_service_placement_constraints"></a> [service\_placement\_constraints](#input\_service\_placement\_constraints) | The rules that are taken into consideration during task placement. Maximum number of placement\_constraints is 10. See [`placement_constraints`](https://www.terraform.io/docs/providers/aws/r/ecs_service.html#placement_constraints-1) docs | <pre>list(object({<br>    type       = string<br>    expression = string<br>  }))</pre> | `[]` | no |
