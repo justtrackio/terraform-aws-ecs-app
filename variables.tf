@@ -1,11 +1,11 @@
 variable "alarm_consumer" {
-  type = object({
+  type = map(object({
     alarm_description      = optional(string)
     datapoints_to_alarm    = optional(number, 3)
     evaluation_periods     = optional(number, 3)
     period                 = optional(number, 60)
     success_rate_threshold = optional(number, 99)
-  })
+  }))
   default     = {}
   description = "This can be used to override alarms for consumers. Keys are names of the consumers."
 }
@@ -17,25 +17,25 @@ variable "alarm_enabled" {
 }
 
 variable "alarm_gateway" {
-  type = object({
+  type = map(object({
     alarm_description      = optional(string)
     datapoints_to_alarm    = optional(number, 3)
     evaluation_periods     = optional(number, 3)
     period                 = optional(number, 60)
     success_rate_threshold = optional(number, 99)
-  })
+  }))
   default     = {}
   description = "This can be used to override alarms for gateway routes. Keys are names of the gateway route."
 }
 
 variable "alarm_kinsumer" {
-  type = object({
+  type = map(object({
     alarm_description        = optional(string)
     datapoints_to_alarm      = optional(number, 1)
     evaluation_periods       = optional(number, 1)
     period                   = optional(number, 60)
-    threshold_seconds_behind = optional(number, 60)
-  })
+    threshold_seconds_behind = optional(number, 3600)
+  }))
   default     = {}
   description = "This can be used to override alarms for kinsumers. Keys are names of the kinsumers."
 }
