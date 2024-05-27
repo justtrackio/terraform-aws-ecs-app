@@ -1,3 +1,10 @@
+## [2.19.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.19.0...v2.19.1) (2024-05-27)
+
+
+### Bug Fixes
+
+* update monitoring module to 2.3.2 to allow individual alarm configuration ([#116](https://github.com/justtrackio/terraform-aws-ecs-app/issues/116)) ([46cdc20](https://github.com/justtrackio/terraform-aws-ecs-app/commit/46cdc205524ad4518cd88e5a2de6d65f947a1591))
+
 ## [2.19.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.18.1...v2.19.0) (2024-05-13)
 
 
