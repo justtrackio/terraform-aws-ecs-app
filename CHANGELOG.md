@@ -1,3 +1,10 @@
+## [2.20.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.20.0...v2.20.1) (2024-05-29)
+
+
+### Bug Fixes
+
+* autoscaling when scheduled scaling is enabled ([#115](https://github.com/justtrackio/terraform-aws-ecs-app/issues/115)) ([a6555f1](https://github.com/justtrackio/terraform-aws-ecs-app/commit/a6555f16172d7a7a5542c3a9b1796218b299bef5))
+
 ## [2.19.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.19.0...v2.19.1) (2024-05-27)
 
 
