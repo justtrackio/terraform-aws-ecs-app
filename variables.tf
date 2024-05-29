@@ -533,6 +533,12 @@ variable "metric_enabled" {
   description = "Defines if metrics should be written"
 }
 
+variable "metric_based_autoscaling_ignore_changes_min_max_capacity" {
+  type        = bool
+  description = "Whether or not to ignore min_capacity/max_capacity changes on the aws_appautoscaling_target of the metric based autoscaling module"
+  default     = false
+}
+
 variable "monitoring_enabled" {
   type        = bool
   default     = true
@@ -599,6 +605,12 @@ variable "propagate_tags" {
   type        = string
   description = "Specifies whether to propagate the tags from the task definition or the service to the tasks. The valid values are SERVICE and TASK_DEFINITION"
   default     = null
+}
+
+variable "scheduled_autoscaling_ignore_changes_min_max_capacity" {
+  type        = bool
+  description = "Whether or not to ignore min_capacity/max_capacity changes on the aws_appautoscaling_target of the scheduled autoscaling module"
+  default     = true
 }
 
 variable "sentry_dsn" {
