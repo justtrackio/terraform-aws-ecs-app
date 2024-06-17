@@ -24,6 +24,7 @@ locals {
     "arn:aws:iam::aws:policy/AmazonSQSFullAccess",
     "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess",
     "arn:aws:iam::aws:policy/AmazonKinesisFullAccess",
+    "arn:aws:iam::aws:policy/AWSCloudMapDiscoverInstanceAccess",
   ]
   default_port_mappings = [
     {
