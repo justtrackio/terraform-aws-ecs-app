@@ -1,3 +1,10 @@
+## [2.21.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.20.1...v2.21.0) (2024-06-18)
+
+
+### Features
+
+* add ability to resolve services by CloudMap by default ([#117](https://github.com/justtrackio/terraform-aws-ecs-app/issues/117)) ([bbf1050](https://github.com/justtrackio/terraform-aws-ecs-app/commit/bbf1050d22ab529a90c38effc4748f323965aaef))
+
 ## [2.20.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.20.0...v2.20.1) (2024-05-29)
 
 
