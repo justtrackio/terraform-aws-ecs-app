@@ -145,6 +145,11 @@ module "container_definition" {
   stop_timeout      = var.container_stop_timeout
   ulimits           = var.ulimits
   working_directory = var.working_directory
+
+  container_depends_on = [{
+    condition     = "START"
+    containerName = "log_router"
+  }]
 }
 
 module "container_definition_fluentbit" {
@@ -173,6 +178,9 @@ module "container_definition_fluentbit" {
     FLUENTD_PORT     = 15000
     TAG              = "${module.this.environment}-${module.this.namespace}-${module.this.stage}-${module.this.name}"
   }
+
+  essential    = var.log_router_essential
+  stop_timeout = var.log_router_stop_timeout
 }
 
 module "service_task" {

@@ -40,10 +40,16 @@ variable "alarm_kinsumer" {
   description = "This can be used to override alarms for kinsumers. Keys are names of the kinsumers."
 }
 
-variable "alarm_service_resources_enabled" {
-  type        = bool
-  default     = false
-  description = "Defines if resource alarms should be created"
+variable "alarm_scheduled" {
+  type = object({
+    alarm_description   = optional(string)
+    datapoints_to_alarm = optional(number, 1)
+    evaluation_periods  = optional(number, 1)
+    period              = optional(number, 60)
+    threshold           = optional(number, 0)
+  })
+  default     = {}
+  description = "This can be used to override scheduled alarm"
 }
 
 variable "alarm_service_resources_cpu_average" {
@@ -76,6 +82,12 @@ variable "alarm_service_resources_cpu_maximum" {
     period              = 60
     threshold           = 150
   }
+}
+
+variable "alarm_service_resources_enabled" {
+  type        = bool
+  default     = false
+  description = "Defines if resource alarms should be created"
 }
 
 variable "alarm_service_resources_memory_average" {
@@ -114,18 +126,6 @@ variable "alarm_service_resources_treat_missing_data" {
   type        = string
   default     = "breaching"
   description = "How to treat missing data, defaults to 'breaching'"
-}
-
-variable "alarm_scheduled" {
-  type = object({
-    alarm_description   = optional(string)
-    datapoints_to_alarm = optional(number, 1)
-    evaluation_periods  = optional(number, 1)
-    period              = optional(number, 60)
-    threshold           = optional(number, 0)
-  })
-  default     = {}
-  description = "This can be used to override scheduled alarm"
 }
 
 variable "alb_health_check_interval" {
@@ -390,12 +390,6 @@ variable "exec_enabled" {
   default     = true
 }
 
-variable "health_check_grace_period_seconds" {
-  type        = number
-  description = "Seconds to ignore failing load balancer health checks on newly instantiated tasks to prevent premature shutdown, up to 7200. Only valid for services configured to use load balancers"
-  default     = 0
-}
-
 variable "gosoline_metadata" {
   type = object({
     domain    = optional(string),
@@ -430,6 +424,12 @@ variable "grafana_dashboard_url" {
   type        = string
   description = "Url of the grafana dashboard"
   default     = null
+}
+
+variable "health_check_grace_period_seconds" {
+  type        = number
+  description = "Seconds to ignore failing load balancer health checks on newly instantiated tasks to prevent premature shutdown, up to 7200. Only valid for services configured to use load balancers"
+  default     = 0
 }
 
 variable "healthcheck" {
@@ -502,6 +502,12 @@ variable "log_router_container_memory_reservation" {
   default     = 64
 }
 
+variable "log_router_essential" {
+  type        = bool
+  description = "Determines whether all other containers in a task are stopped, if this container fails or stops for any reason. Due to how Terraform type casts booleans in json it is required to double quote this value"
+  default     = false
+}
+
 variable "log_router_image_repository" {
   type        = string
   description = "Container registry repository url"
@@ -510,7 +516,7 @@ variable "log_router_image_repository" {
 variable "log_router_image_tag" {
   type        = string
   description = "The default container image to use in container definition"
-  default     = "stable-2.2.2"
+  default     = "stable-3.0.7"
 }
 
 variable "log_router_options" {
@@ -522,21 +528,27 @@ variable "log_router_options" {
   }
 }
 
+variable "log_router_stop_timeout" {
+  type        = number
+  description = "Time duration (in seconds) to wait before the container is forcefully killed if it doesn't exit normally on its own"
+  default     = 60
+}
+
 variable "log_router_type" {
   type        = string
   description = "The log router type to use"
   default     = "fluentbit"
 }
 
-variable "metric_enabled" {
-  type        = bool
-  description = "Defines if metrics should be written"
-}
-
 variable "metric_based_autoscaling_ignore_changes_min_max_capacity" {
   type        = bool
   description = "Whether or not to ignore min_capacity/max_capacity changes on the aws_appautoscaling_target of the metric based autoscaling module"
   default     = false
+}
+
+variable "metric_enabled" {
+  type        = bool
+  description = "Defines if metrics should be written"
 }
 
 variable "monitoring_enabled" {
