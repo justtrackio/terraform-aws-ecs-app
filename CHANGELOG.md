@@ -1,3 +1,10 @@
+## [2.22.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.21.0...v2.22.0) (2024-06-20)
+
+
+### Features
+
+* add log router dependency ([#119](https://github.com/justtrackio/terraform-aws-ecs-app/issues/119)) ([a5035fa](https://github.com/justtrackio/terraform-aws-ecs-app/commit/a5035fab160aeb8c96569af814436d48faf62b03))
+
 ## [2.21.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.20.1...v2.21.0) (2024-06-18)
 
 
