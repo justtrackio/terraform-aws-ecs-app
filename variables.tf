@@ -456,6 +456,24 @@ variable "ignore_changes_task_definition" {
   default     = false
 }
 
+variable "kibana_data_view_enabled" {
+  type        = bool
+  default     = true
+  description = "Defines whether there will be a kibana data view"
+}
+
+variable "kibana_host" {
+  type        = string
+  default     = null
+  description = "Defines the kibana host"
+}
+
+variable "kibana_space_id" {
+  type        = string
+  default     = null
+  description = "Space identifier to place the kibana data view into"
+}
+
 variable "label_orders" {
   type = object({
     cloudwatch    = optional(list(string), ["environment", "stage", "name"]),
@@ -467,6 +485,7 @@ variable "label_orders" {
     ssm           = optional(list(string)),
     vpc           = optional(list(string)),
     elasticsearch = optional(list(string), ["environment", "namespace", "stage", "name"])
+    kibana        = optional(list(string))
   })
   default     = {}
   description = "Overrides the `labels_order` for the different labels to modify ID elements appear in the `id`"

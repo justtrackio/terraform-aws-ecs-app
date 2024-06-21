@@ -22,6 +22,9 @@ provider "elasticstack" {
     endpoints = [local.elasticsearch_host]
     insecure  = true
   }
+  kibana {
+    endpoints = [local.kibana_host]
+  }
 }
 
 provider "sentry" {
