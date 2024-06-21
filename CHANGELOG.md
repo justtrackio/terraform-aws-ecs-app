@@ -1,3 +1,10 @@
+## [2.23.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.22.0...v2.23.0) (2024-06-21)
+
+
+### Features
+
+* added kibana spaces and data views support for ecs monitoring m… ([#114](https://github.com/justtrackio/terraform-aws-ecs-app/issues/114)) ([73767d8](https://github.com/justtrackio/terraform-aws-ecs-app/commit/73767d886e949d16325de5f32f2584cd9840bb20))
+
 ## [2.22.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.21.0...v2.22.0) (2024-06-20)
 
 
