@@ -11,8 +11,8 @@ Terraform module which creates a ecs app
 | <a name="requirement_elasticsearch"></a> [elasticsearch](#requirement\_elasticsearch) | 2.0.7 |
 | <a name="requirement_elasticstack"></a> [elasticstack](#requirement\_elasticstack) | 0.11.4 |
 | <a name="requirement_gosoline"></a> [gosoline](#requirement\_gosoline) | 1.3.0 |
-| <a name="requirement_grafana"></a> [grafana](#requirement\_grafana) | 2.13.0 |
-| <a name="requirement_sentry"></a> [sentry](#requirement\_sentry) | 0.12.2 |
+| <a name="requirement_grafana"></a> [grafana](#requirement\_grafana) | 3.7.0 |
+| <a name="requirement_sentry"></a> [sentry](#requirement\_sentry) | 0.13.1 |
 
 ## Providers
 
@@ -29,7 +29,7 @@ Terraform module which creates a ecs app
 | <a name="module_cloudwatch_label"></a> [cloudwatch\_label](#module\_cloudwatch\_label) | justtrackio/label/null | 0.26.0 |
 | <a name="module_container_definition"></a> [container\_definition](#module\_container\_definition) | cloudposse/ecs-container-definition/aws | 0.61.1 |
 | <a name="module_container_definition_fluentbit"></a> [container\_definition\_fluentbit](#module\_container\_definition\_fluentbit) | cloudposse/ecs-container-definition/aws | 0.61.1 |
-| <a name="module_ecr"></a> [ecr](#module\_ecr) | terraform-aws-modules/ecr/aws | 1.6.0 |
+| <a name="module_ecr"></a> [ecr](#module\_ecr) | terraform-aws-modules/ecr/aws | 2.2.1 |
 | <a name="module_ecr_label"></a> [ecr\_label](#module\_ecr\_label) | justtrackio/label/null | 0.26.0 |
 | <a name="module_ecs_label"></a> [ecs\_label](#module\_ecs\_label) | justtrackio/label/null | 0.26.0 |
 | <a name="module_ecs_service_task_customized_autoscaling"></a> [ecs\_service\_task\_customized\_autoscaling](#module\_ecs\_service\_task\_customized\_autoscaling) | justtrackio/ecs-autoscaling/aws | 1.2.0 |
@@ -73,9 +73,7 @@ Terraform module which creates a ecs app
 | <a name="input_alarm_service_resources_memory_average"></a> [alarm\_service\_resources\_memory\_average](#input\_alarm\_service\_resources\_memory\_average) | Average MemoryUtilization alarm specs | <pre>object({<br>    datapoints_to_alarm = optional(number, 6)<br>    evaluation_periods  = optional(number, 6)<br>    period              = optional(number, 300)<br>    threshold           = optional(number, 125)<br>  })</pre> | <pre>{<br>  "datapoints_to_alarm": 6,<br>  "evaluation_periods": 6,<br>  "period": 300,<br>  "threshold": 125<br>}</pre> | no |
 | <a name="input_alarm_service_resources_memory_maximum"></a> [alarm\_service\_resources\_memory\_maximum](#input\_alarm\_service\_resources\_memory\_maximum) | Maximum MemoryUtilization alarm specs | <pre>object({<br>    datapoints_to_alarm = optional(number, 15)<br>    evaluation_periods  = optional(number, 15)<br>    period              = optional(number, 60)<br>    threshold           = optional(number, 150)<br>  })</pre> | <pre>{<br>  "datapoints_to_alarm": 15,<br>  "evaluation_periods": 15,<br>  "period": 60,<br>  "threshold": 150<br>}</pre> | no |
 | <a name="input_alarm_service_resources_treat_missing_data"></a> [alarm\_service\_resources\_treat\_missing\_data](#input\_alarm\_service\_resources\_treat\_missing\_data) | How to treat missing data, defaults to 'breaching' | `string` | `"breaching"` | no |
-| <a name="input_alb_health_check_interval"></a> [alb\_health\_check\_interval](#input\_alb\_health\_check\_interval) | The duration in seconds in between health checks | `number` | `30` | no |
-| <a name="input_alb_health_check_matcher"></a> [alb\_health\_check\_matcher](#input\_alb\_health\_check\_matcher) | The HTTP response codes to indicate a healthy check | `string` | `"200"` | no |
-| <a name="input_alb_health_check_path"></a> [alb\_health\_check\_path](#input\_alb\_health\_check\_path) | The destination for the health check request | `string` | `"/health"` | no |
+| <a name="input_alb_health_check"></a> [alb\_health\_check](#input\_alb\_health\_check) | ALB target group healthy check values | <pre>object({<br>    enabled             = optional(bool, true)<br>    healthy_threshold   = optional(number, 2)<br>    unhealthy_threshold = optional(number, 2)<br>    threshold           = optional(number, 2)<br>    interval            = optional(number, 30)<br>    timeout             = optional(number, 10)<br>    matcher             = optional(string, "200")<br>    path                = optional(string, "/health")<br>    port                = optional(string, "traffic-port")<br>    protocol            = optional(string, "HTTP")<br>  })</pre> | `{}` | no |
 | <a name="input_alb_name"></a> [alb\_name](#input\_alb\_name) | Name of the alb used to attach the target group | `string` | `""` | no |
 | <a name="input_alb_stickiness_enabled"></a> [alb\_stickiness\_enabled](#input\_alb\_stickiness\_enabled) | Boolean to enable / disable `stickiness`. Default is `true` | `bool` | `false` | no |
 | <a name="input_alb_unauthenticated_hosts"></a> [alb\_unauthenticated\_hosts](#input\_alb\_unauthenticated\_hosts) | Unauthenticated hosts to match in Hosts header | `list(string)` | `[]` | no |
