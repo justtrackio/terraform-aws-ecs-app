@@ -1,3 +1,10 @@
+## [2.24.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.23.0...v2.24.0) (2024-08-02)
+
+
+### Features
+
+* expose alb health check settings ([#126](https://github.com/justtrackio/terraform-aws-ecs-app/issues/126)) ([66e0811](https://github.com/justtrackio/terraform-aws-ecs-app/commit/66e081184288a7bd51834f4bec02e31db22f1881))
+
 ## [2.23.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.22.0...v2.23.0) (2024-06-21)
 
 
