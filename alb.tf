@@ -14,9 +14,15 @@ module "alb_ingress" {
   unauthenticated_hosts         = var.alb_unauthenticated_hosts
   unauthenticated_listener_arns = [data.aws_lb_listener.http[0].arn, data.aws_lb_listener.https[0].arn]
 
-  health_check_path     = var.alb_health_check_path
-  health_check_matcher  = var.alb_health_check_matcher
-  health_check_interval = var.alb_health_check_interval
+  health_check_enabled             = var.alb_health_check.enabled
+  health_check_healthy_threshold   = var.alb_health_check.healthy_threshold
+  health_check_interval            = var.alb_health_check.interval
+  health_check_matcher             = var.alb_health_check.matcher
+  health_check_path                = var.alb_health_check.path
+  health_check_port                = var.alb_health_check.port
+  health_check_protocol            = var.alb_health_check.protocol
+  health_check_timeout             = var.alb_health_check.timeout
+  health_check_unhealthy_threshold = var.alb_health_check.unhealthy_threshold
 
   stickiness_enabled = var.alb_stickiness_enabled
 }

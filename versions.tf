@@ -17,7 +17,7 @@ terraform {
 
     grafana = {
       source  = "grafana/grafana"
-      version = "2.13.0"
+      version = "3.7.0"
     }
 
     elasticstack = {
@@ -27,7 +27,7 @@ terraform {
 
     sentry = {
       source  = "jianyuan/sentry"
-      version = "0.12.2"
+      version = "0.13.1"
     }
   }
 

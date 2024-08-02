@@ -128,22 +128,21 @@ variable "alarm_service_resources_treat_missing_data" {
   description = "How to treat missing data, defaults to 'breaching'"
 }
 
-variable "alb_health_check_interval" {
-  type        = number
-  default     = 30
-  description = "The duration in seconds in between health checks"
-}
-
-variable "alb_health_check_matcher" {
-  type        = string
-  default     = "200"
-  description = "The HTTP response codes to indicate a healthy check"
-}
-
-variable "alb_health_check_path" {
-  type        = string
-  default     = "/health"
-  description = "The destination for the health check request"
+variable "alb_health_check" {
+  type = object({
+    enabled             = optional(bool, true)
+    healthy_threshold   = optional(number, 2)
+    unhealthy_threshold = optional(number, 2)
+    threshold           = optional(number, 2)
+    interval            = optional(number, 30)
+    timeout             = optional(number, 10)
+    matcher             = optional(string, "200")
+    path                = optional(string, "/health")
+    port                = optional(string, "traffic-port")
+    protocol            = optional(string, "HTTP")
+  })
+  default     = {}
+  description = "ALB target group healthy check values"
 }
 
 variable "alb_name" {
