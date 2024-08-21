@@ -575,9 +575,9 @@ variable "monitoring_enabled" {
   description = "Defines if the monitoring module should be created"
 }
 
-variable "mpr_enabled" {
+variable "metric_calculator_enabled" {
   type        = bool
-  description = "Whether to use the StreamMprMessagesPerRunner metric for autoscaling (gosoline feature), see: https://github.com/justtrackio/gosoline"
+  description = "Whether to use the metrics produced by the metric calculator for autoscaling (gosoline feature), see: https://github.com/justtrackio/gosoline"
   default     = null
 }
 

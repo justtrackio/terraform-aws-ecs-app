@@ -1,6 +1,6 @@
 locals {
   alb_enabled                         = length(var.alb_name) > 0
-  mpr_enabled                         = var.mpr_enabled == true ? true : (module.this.tags["Type"] == "subscriber" || module.this.tags["Type"] == "consumer") && var.mpr_enabled == null ? true : false
+  metric_calculator_enabled           = var.metric_calculator_enabled == true ? true : (module.this.tags["Type"] == "subscriber" || module.this.tags["Type"] == "consumer") && var.metric_calculator_enabled == null ? true : false
   internal_predefined_metric_type     = local.alb_enabled ? "ALBRequestCountPerTarget" : "ECSServiceAverageCPUUtilization"
   internal_predefined_target_value    = local.alb_enabled ? 1000 : 100
   internal_customized_target_value    = 500
@@ -11,12 +11,12 @@ locals {
     var.autoscaling_enabled &&
     !local.customized_autoscaling_enabled
   )
-  autoscaling_customized_metric_name = local.mpr_enabled ? "StreamMprMessagesPerRunner" : var.autoscaling_customized_metric_name
+  autoscaling_customized_metric_name = local.metric_calculator_enabled ? "PerRunnerStreamMessages" : var.autoscaling_customized_metric_name
   customized_autoscaling_enabled = (
     var.autoscaling_enabled &&
     (
       length(var.autoscaling_customized_metric_name) > 0 ||
-      local.mpr_enabled
+      local.metric_calculator_enabled
     )
   )
 }
