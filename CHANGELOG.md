@@ -1,3 +1,10 @@
+## [2.25.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.24.0...v2.25.0) (2024-08-22)
+
+
+### Features
+
+* autoscaling uses the new metric_calculator implemention from gosoline; ([#129](https://github.com/justtrackio/terraform-aws-ecs-app/issues/129)) ([2b9cc44](https://github.com/justtrackio/terraform-aws-ecs-app/commit/2b9cc441bc6584b418471658a9cd7d65dae5165b))
+
 ## [2.24.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.23.0...v2.24.0) (2024-08-02)
 
 
