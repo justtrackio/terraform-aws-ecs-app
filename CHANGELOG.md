@@ -1,3 +1,10 @@
+## [2.26.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.25.0...v2.26.0) (2024-10-11)
+
+
+### Features
+
+* skip faulty version for aws provider ([#137](https://github.com/justtrackio/terraform-aws-ecs-app/issues/137)) ([9d30c38](https://github.com/justtrackio/terraform-aws-ecs-app/commit/9d30c38535109555ec875e63b8e77e415a9fa8f8))
+
 ## [2.25.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.24.0...v2.25.0) (2024-08-22)
 
 
