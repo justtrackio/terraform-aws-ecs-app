@@ -7,18 +7,18 @@ Terraform module which creates a ecs app
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.67, != 5.71.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.67 |
 | <a name="requirement_elasticsearch"></a> [elasticsearch](#requirement\_elasticsearch) | 2.0.7 |
-| <a name="requirement_elasticstack"></a> [elasticstack](#requirement\_elasticstack) | 0.11.4 |
+| <a name="requirement_elasticstack"></a> [elasticstack](#requirement\_elasticstack) | 0.11.9 |
 | <a name="requirement_gosoline"></a> [gosoline](#requirement\_gosoline) | 1.3.0 |
-| <a name="requirement_grafana"></a> [grafana](#requirement\_grafana) | 3.7.0 |
-| <a name="requirement_sentry"></a> [sentry](#requirement\_sentry) | 0.13.1 |
+| <a name="requirement_grafana"></a> [grafana](#requirement\_grafana) | 3.10.0 |
+| <a name="requirement_sentry"></a> [sentry](#requirement\_sentry) | 0.13.2 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.67, != 5.71.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.67 |
 
 ## Modules
 
@@ -29,15 +29,15 @@ Terraform module which creates a ecs app
 | <a name="module_cloudwatch_label"></a> [cloudwatch\_label](#module\_cloudwatch\_label) | justtrackio/label/null | 0.26.0 |
 | <a name="module_container_definition"></a> [container\_definition](#module\_container\_definition) | cloudposse/ecs-container-definition/aws | 0.61.1 |
 | <a name="module_container_definition_fluentbit"></a> [container\_definition\_fluentbit](#module\_container\_definition\_fluentbit) | cloudposse/ecs-container-definition/aws | 0.61.1 |
-| <a name="module_ecr"></a> [ecr](#module\_ecr) | terraform-aws-modules/ecr/aws | 2.2.1 |
+| <a name="module_ecr"></a> [ecr](#module\_ecr) | terraform-aws-modules/ecr/aws | 2.3.0 |
 | <a name="module_ecr_label"></a> [ecr\_label](#module\_ecr\_label) | justtrackio/label/null | 0.26.0 |
 | <a name="module_ecs_label"></a> [ecs\_label](#module\_ecs\_label) | justtrackio/label/null | 0.26.0 |
 | <a name="module_ecs_service_task_customized_autoscaling"></a> [ecs\_service\_task\_customized\_autoscaling](#module\_ecs\_service\_task\_customized\_autoscaling) | justtrackio/ecs-autoscaling/aws | 1.2.0 |
 | <a name="module_ecs_service_task_predefined_autoscaling"></a> [ecs\_service\_task\_predefined\_autoscaling](#module\_ecs\_service\_task\_predefined\_autoscaling) | justtrackio/ecs-autoscaling/aws | 1.2.0 |
 | <a name="module_ecs_service_task_schedule"></a> [ecs\_service\_task\_schedule](#module\_ecs\_service\_task\_schedule) | justtrackio/ecs-autoscaling/aws | 1.2.0 |
-| <a name="module_monitoring"></a> [monitoring](#module\_monitoring) | justtrackio/ecs-gosoline-monitoring/aws | 2.4.0 |
-| <a name="module_sentry"></a> [sentry](#module\_sentry) | justtrackio/project/sentry | 1.3.0 |
-| <a name="module_service_task"></a> [service\_task](#module\_service\_task) | justtrackio/ecs-alb-service-task/aws | 1.4.0 |
+| <a name="module_monitoring"></a> [monitoring](#module\_monitoring) | justtrackio/ecs-gosoline-monitoring/aws | 2.5.0 |
+| <a name="module_sentry"></a> [sentry](#module\_sentry) | justtrackio/project/sentry | 1.4.1 |
+| <a name="module_service_task"></a> [service\_task](#module\_service\_task) | justtrackio/ecs-alb-service-task/aws | 1.5.0 |
 | <a name="module_ssm_label"></a> [ssm\_label](#module\_ssm\_label) | justtrackio/label/null | 0.26.0 |
 | <a name="module_this"></a> [this](#module\_this) | justtrackio/label/null | 0.26.0 |
 
@@ -54,6 +54,7 @@ Terraform module which creates a ecs app
 | [aws_lb_listener.https](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/lb_listener) | data source |
 | [aws_ssm_parameter.container_tag](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ssm_parameter) | data source |
 | [aws_ssm_parameter.grafana_token](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ssm_parameter) | data source |
+| [aws_ssm_parameter.keep_api_key](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ssm_parameter) | data source |
 | [aws_ssm_parameter.sentry_token](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ssm_parameter) | data source |
 | [aws_vpc.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) | data source |
 
@@ -161,6 +162,12 @@ Terraform module which creates a ecs app
 | <a name="input_propagate_tags"></a> [propagate\_tags](#input\_propagate\_tags) | Specifies whether to propagate the tags from the task definition or the service to the tasks. The valid values are SERVICE and TASK\_DEFINITION | `string` | `null` | no |
 | <a name="input_regex_replace_chars"></a> [regex\_replace\_chars](#input\_regex\_replace\_chars) | Terraform regular expression (regex) string.<br/>Characters matching the regex will be removed from the ID elements.<br/>If not set, `"/[^a-zA-Z0-9-]/"` is used to remove all characters other than hyphens, letters and digits. | `string` | `null` | no |
 | <a name="input_scheduled_autoscaling_ignore_changes_min_max_capacity"></a> [scheduled\_autoscaling\_ignore\_changes\_min\_max\_capacity](#input\_scheduled\_autoscaling\_ignore\_changes\_min\_max\_capacity) | Whether or not to ignore min\_capacity/max\_capacity changes on the aws\_appautoscaling\_target of the scheduled autoscaling module | `bool` | `true` | no |
+| <a name="input_sentry_alarm_action_match"></a> [sentry\_alarm\_action\_match](#input\_sentry\_alarm\_action\_match) | Trigger actions when an event is captured by Sentry and `any` or `all` of the specified conditions happen. | `string` | `"any"` | no |
+| <a name="input_sentry_alarm_actions"></a> [sentry\_alarm\_actions](#input\_sentry\_alarm\_actions) | List of actions. In JSON string format. | `string` | `"[]"` | no |
+| <a name="input_sentry_alarm_conditions"></a> [sentry\_alarm\_conditions](#input\_sentry\_alarm\_conditions) | List of conditions. In JSON string format. | `string` | `"[]"` | no |
+| <a name="input_sentry_alarm_filter_match"></a> [sentry\_alarm\_filter\_match](#input\_sentry\_alarm\_filter\_match) | A string determining which filters need to be true before any actions take place. Required when a value is provided for filters. | `string` | `"all"` | no |
+| <a name="input_sentry_alarm_filters"></a> [sentry\_alarm\_filters](#input\_sentry\_alarm\_filters) | A list of filters that determine if a rule fires after the necessary conditions have been met. In JSON string format. | `string` | `null` | no |
+| <a name="input_sentry_alarm_frequency"></a> [sentry\_alarm\_frequency](#input\_sentry\_alarm\_frequency) | Perform actions at most once every X minutes for this issue. | `number` | `5` | no |
 | <a name="input_sentry_dsn"></a> [sentry\_dsn](#input\_sentry\_dsn) | Define a custom sentry dsn if `sentry_enabled` is set to `false` | `string` | `null` | no |
 | <a name="input_sentry_enabled"></a> [sentry\_enabled](#input\_sentry\_enabled) | Set to false to prevent the module from creating any resources for sentry | `bool` | `true` | no |
 | <a name="input_service_placement_constraints"></a> [service\_placement\_constraints](#input\_service\_placement\_constraints) | The rules that are taken into consideration during task placement. Maximum number of placement\_constraints is 10. See [`placement_constraints`](https://www.terraform.io/docs/providers/aws/r/ecs_service.html#placement_constraints-1) docs | <pre>list(object({<br/>    type       = string<br/>    expression = string<br/>  }))</pre> | `[]` | no |

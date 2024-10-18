@@ -17,6 +17,10 @@ data "aws_ecs_cluster" "default" {
   cluster_name = module.this.environment
 }
 
+data "aws_ssm_parameter" "keep_api_key" {
+  name = "/keep/api_key"
+}
+
 data "aws_ssm_parameter" "sentry_token" {
   name = "/sentry/token"
 }

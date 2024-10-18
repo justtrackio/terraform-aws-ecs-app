@@ -643,6 +643,42 @@ variable "scheduled_autoscaling_ignore_changes_min_max_capacity" {
   default     = true
 }
 
+variable "sentry_alarm_actions" {
+  type        = string
+  description = "List of actions. In JSON string format."
+  default     = "[]"
+}
+
+variable "sentry_alarm_action_match" {
+  type        = string
+  description = "Trigger actions when an event is captured by Sentry and `any` or `all` of the specified conditions happen."
+  default     = "any"
+}
+
+variable "sentry_alarm_conditions" {
+  type        = string
+  description = "List of conditions. In JSON string format."
+  default     = "[]"
+}
+
+variable "sentry_alarm_filters" {
+  type        = string
+  description = "A list of filters that determine if a rule fires after the necessary conditions have been met. In JSON string format."
+  default     = null
+}
+
+variable "sentry_alarm_filter_match" {
+  type        = string
+  description = "A string determining which filters need to be true before any actions take place. Required when a value is provided for filters."
+  default     = "all"
+}
+
+variable "sentry_alarm_frequency" {
+  type        = number
+  description = "Perform actions at most once every X minutes for this issue."
+  default     = 5
+}
+
 variable "sentry_dsn" {
   type        = string
   description = "Define a custom sentry dsn if `sentry_enabled` is set to ``false"

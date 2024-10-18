@@ -2,7 +2,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = ">= 4.67, != 5.71.0"
+      version = ">= 4.67"
     }
 
     elasticsearch = {
@@ -17,17 +17,17 @@ terraform {
 
     grafana = {
       source  = "grafana/grafana"
-      version = "3.7.0"
+      version = "3.10.0"
     }
 
     elasticstack = {
       source  = "elastic/elasticstack"
-      version = "0.11.4"
+      version = "0.11.9"
     }
 
     sentry = {
       source  = "jianyuan/sentry"
-      version = "0.13.1"
+      version = "0.13.2"
     }
   }
 
