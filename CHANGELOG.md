@@ -1,3 +1,10 @@
+## [2.27.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.26.0...v2.27.0) (2024-10-18)
+
+
+### Features
+
+* add sentry alarms ([#141](https://github.com/justtrackio/terraform-aws-ecs-app/issues/141)) ([5f3dbb0](https://github.com/justtrackio/terraform-aws-ecs-app/commit/5f3dbb0fb0ef9384c1b3d6591b5f7fb6ff2006c5))
+
 ## [2.26.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.25.0...v2.26.0) (2024-10-11)
 
 
