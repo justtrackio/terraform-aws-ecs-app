@@ -340,6 +340,12 @@ variable "domain" {
   description = "The default domain"
 }
 
+variable "ecr_repository_lifecycle_policy" {
+  type        = string
+  default     = null
+  description = "The policy document. This is a JSON formatted string. See more details about [Policy Parameters](http://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html#lifecycle_policy_parameters) in the official AWS docs"
+}
+
 variable "elasticsearch_host" {
   type        = string
   default     = null
