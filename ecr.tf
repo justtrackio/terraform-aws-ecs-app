@@ -1,3 +1,63 @@
+locals {
+  ecr_repository_lifecycle_policy = var.ecr_repository_lifecycle_policy != "" ? var.ecr_repository_lifecycle_policy != null ? var.ecr_repository_lifecycle_policy : data.aws_ecr_lifecycle_policy_document.lifecycle.json : null
+}
+
+data "aws_ecr_lifecycle_policy_document" "lifecycle" {
+  rule {
+    priority    = 10
+    description = "Keep the latest tag"
+    selection {
+      count_number    = 1
+      count_type      = "imageCountMoreThan"
+      tag_status      = "tagged"
+      tag_prefix_list = ["latest"]
+    }
+    action {
+      type = "expire"
+    }
+  }
+
+  rule {
+    priority    = 20
+    description = "Keep 5 deployed tags"
+    selection {
+      count_number    = 5
+      count_type      = "imageCountMoreThan"
+      tag_status      = "tagged"
+      tag_prefix_list = ["deployed-"]
+    }
+    action {
+      type = "expire"
+    }
+  }
+
+  rule {
+    priority    = 30
+    description = "Remove untagged images"
+    selection {
+      count_number = 1
+      count_type   = "imageCountMoreThan"
+      tag_status   = "untagged"
+    }
+    action {
+      type = "expire"
+    }
+  }
+
+  rule {
+    priority    = 40
+    description = "Keep last 30 images"
+    selection {
+      count_number = 30
+      count_type   = "imageCountMoreThan"
+      tag_status   = "any"
+    }
+    action {
+      type = "expire"
+    }
+  }
+}
+
 module "ecr_label" {
   source  = "justtrackio/label/null"
   version = "0.26.0"
@@ -19,45 +79,5 @@ module "ecr" {
   repository_image_scan_on_push   = false
   repository_image_tag_mutability = "MUTABLE"
   repository_force_delete         = true
-  repository_lifecycle_policy = jsonencode({
-    rules = [
-      {
-        rulePriority = 1,
-        description  = "Keep the latest tag",
-        selection = {
-          countNumber   = 1
-          countType     = "imageCountMoreThan"
-          tagStatus     = "tagged"
-          tagPrefixList = ["latest"]
-        },
-        action = {
-          type = "expire"
-        }
-      },
-      {
-        rulePriority = 2,
-        description  = "Remove untagged images",
-        selection = {
-          countNumber = 1
-          countType   = "imageCountMoreThan"
-          tagStatus   = "untagged"
-        },
-        action = {
-          type = "expire"
-        }
-      },
-      {
-        rulePriority = 3,
-        description  = "Keep last 30 images",
-        selection = {
-          tagStatus   = "any",
-          countType   = "imageCountMoreThan",
-          countNumber = 30
-        },
-        action = {
-          type = "expire"
-        }
-      }
-    ]
-  })
+  repository_lifecycle_policy     = local.ecr_repository_lifecycle_policy
 }
