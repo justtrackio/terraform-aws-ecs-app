@@ -1,3 +1,10 @@
+## [2.28.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.27.0...v2.28.0) (2024-10-29)
+
+
+### Features
+
+* expose ecr repository lifecycle policy settings + keep 5 "deplo… ([#143](https://github.com/justtrackio/terraform-aws-ecs-app/issues/143)) ([077cd2b](https://github.com/justtrackio/terraform-aws-ecs-app/commit/077cd2b3042f75a9b715bb65f753124f2003bcff))
+
 ## [2.27.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.26.0...v2.27.0) (2024-10-18)
 
 
