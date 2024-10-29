@@ -1,3 +1,10 @@
+## [2.28.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.28.0...v2.28.1) (2024-10-29)
+
+
+### Bug Fixes
+
+* bump sentry version ([#145](https://github.com/justtrackio/terraform-aws-ecs-app/issues/145)) ([e59f84d](https://github.com/justtrackio/terraform-aws-ecs-app/commit/e59f84dd98218dbf1d27b42e2f671431823cb2e9))
+
 ## [2.28.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.27.0...v2.28.0) (2024-10-29)
 
 
