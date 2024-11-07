@@ -9,8 +9,8 @@ Terraform module which creates a ecs app
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.67 |
 | <a name="requirement_elasticsearch"></a> [elasticsearch](#requirement\_elasticsearch) | 2.0.7 |
-| <a name="requirement_elasticstack"></a> [elasticstack](#requirement\_elasticstack) | 0.11.9 |
-| <a name="requirement_gosoline"></a> [gosoline](#requirement\_gosoline) | 1.3.0 |
+| <a name="requirement_elasticstack"></a> [elasticstack](#requirement\_elasticstack) | 0.11.11 |
+| <a name="requirement_gosoline"></a> [gosoline](#requirement\_gosoline) | 1.4.1 |
 | <a name="requirement_grafana"></a> [grafana](#requirement\_grafana) | 3.10.0 |
 | <a name="requirement_sentry"></a> [sentry](#requirement\_sentry) | 0.13.2 |
 

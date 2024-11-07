@@ -5,9 +5,9 @@ locals {
 data "aws_ecr_lifecycle_policy_document" "lifecycle" {
   rule {
     priority    = 10
-    description = "Keep the latest tag"
+    description = "Keep 3 latest tags" # latest, latest-amd64, latest-arm64
     selection {
-      count_number    = 1
+      count_number    = 3
       count_type      = "imageCountMoreThan"
       tag_status      = "tagged"
       tag_prefix_list = ["latest"]
