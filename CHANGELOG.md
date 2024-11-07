@@ -1,3 +1,10 @@
+## [2.28.2](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.28.1...v2.28.2) (2024-11-07)
+
+
+### Bug Fixes
+
+* image retention for latest ([#149](https://github.com/justtrackio/terraform-aws-ecs-app/issues/149)) ([ae8e217](https://github.com/justtrackio/terraform-aws-ecs-app/commit/ae8e21760fc14a56e498519c489520055a0dc7c0))
+
 ## [2.28.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.28.0...v2.28.1) (2024-10-29)
 
 
