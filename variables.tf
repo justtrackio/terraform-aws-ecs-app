@@ -5,6 +5,8 @@ variable "alarm_consumer" {
     evaluation_periods     = optional(number, 3)
     period                 = optional(number, 60)
     success_rate_threshold = optional(number, 99)
+    alarm_priority_high    = optional(string, "high")
+    alarm_priority_warning = optional(string, "warning")
   }))
   default     = {}
   description = "This can be used to override alarms for consumers. Keys are names of the consumers."
@@ -23,6 +25,8 @@ variable "alarm_gateway" {
     evaluation_periods     = optional(number, 3)
     period                 = optional(number, 60)
     success_rate_threshold = optional(number, 99)
+    alarm_priority_high    = optional(string, "high")
+    alarm_priority_warning = optional(string, "warning")
   }))
   default     = {}
   description = "This can be used to override alarms for gateway routes. Keys are names of the gateway route."
@@ -35,6 +39,8 @@ variable "alarm_kinsumer" {
     evaluation_periods       = optional(number, 1)
     period                   = optional(number, 60)
     threshold_seconds_behind = optional(number, 3600)
+    alarm_priority_high      = optional(string, "high")
+    alarm_priority_warning   = optional(string, "warning")
   }))
   default     = {}
   description = "This can be used to override alarms for kinsumers. Keys are names of the kinsumers."
@@ -47,6 +53,7 @@ variable "alarm_scheduled" {
     evaluation_periods  = optional(number, 1)
     period              = optional(number, 60)
     threshold           = optional(number, 0)
+    alarm_priority      = optional(string, "high")
   })
   default     = {}
   description = "This can be used to override scheduled alarm"
@@ -120,6 +127,12 @@ variable "alarm_service_resources_memory_maximum" {
     period              = 60
     threshold           = 150
   }
+}
+
+variable "alarm_service_resources_priority" {
+  type        = string
+  description = "Priority for service resources alarms"
+  default     = "high"
 }
 
 variable "alarm_service_resources_treat_missing_data" {
@@ -570,6 +583,12 @@ variable "metric_based_autoscaling_ignore_changes_min_max_capacity" {
   default     = false
 }
 
+variable "metric_calculator_enabled" {
+  type        = bool
+  description = "Whether to use the metrics produced by the metric calculator for autoscaling (gosoline feature), see: https://github.com/justtrackio/gosoline"
+  default     = null
+}
+
 variable "metric_enabled" {
   type        = bool
   description = "Defines if metrics should be written"
@@ -579,12 +598,6 @@ variable "monitoring_enabled" {
   type        = bool
   default     = true
   description = "Defines if the monitoring module should be created"
-}
-
-variable "metric_calculator_enabled" {
-  type        = bool
-  description = "Whether to use the metrics produced by the metric calculator for autoscaling (gosoline feature), see: https://github.com/justtrackio/gosoline"
-  default     = null
 }
 
 variable "network_mode" {
@@ -649,16 +662,16 @@ variable "scheduled_autoscaling_ignore_changes_min_max_capacity" {
   default     = true
 }
 
-variable "sentry_alarm_actions" {
-  type        = string
-  description = "List of actions. In JSON string format."
-  default     = "[]"
-}
-
 variable "sentry_alarm_action_match" {
   type        = string
   description = "Trigger actions when an event is captured by Sentry and `any` or `all` of the specified conditions happen."
   default     = "any"
+}
+
+variable "sentry_alarm_actions" {
+  type        = string
+  description = "List of actions. In JSON string format."
+  default     = "[]"
 }
 
 variable "sentry_alarm_conditions" {
@@ -667,16 +680,16 @@ variable "sentry_alarm_conditions" {
   default     = "[]"
 }
 
-variable "sentry_alarm_filters" {
-  type        = string
-  description = "A list of filters that determine if a rule fires after the necessary conditions have been met. In JSON string format."
-  default     = null
-}
-
 variable "sentry_alarm_filter_match" {
   type        = string
   description = "A string determining which filters need to be true before any actions take place. Required when a value is provided for filters."
   default     = "all"
+}
+
+variable "sentry_alarm_filters" {
+  type        = string
+  description = "A list of filters that determine if a rule fires after the necessary conditions have been met. In JSON string format."
+  default     = null
 }
 
 variable "sentry_alarm_frequency" {
