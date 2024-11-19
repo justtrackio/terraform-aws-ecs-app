@@ -1,3 +1,10 @@
+## [2.29.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.28.2...v2.29.0) (2024-11-19)
+
+
+### Features
+
+* add alarm levels ([#154](https://github.com/justtrackio/terraform-aws-ecs-app/issues/154)) ([1e48053](https://github.com/justtrackio/terraform-aws-ecs-app/commit/1e48053cb34eb0aac577c9562acd81433033a8ec))
+
 ## [2.28.2](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.28.1...v2.28.2) (2024-11-07)
 
 
