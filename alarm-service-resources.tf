@@ -2,7 +2,7 @@ module "alarm_service_resources" {
   count = var.alarm_service_resources_enabled ? 1 : 0
 
   source  = "justtrackio/alarm-service-resources/aws"
-  version = "1.1.0"
+  version = "1.2.0"
 
   context      = module.this.context
   label_orders = var.label_orders
