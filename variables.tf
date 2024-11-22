@@ -132,7 +132,7 @@ variable "alarm_service_resources_memory_maximum" {
 variable "alarm_service_resources_priority" {
   type        = string
   description = "Priority for service resources alarms"
-  default     = "high"
+  default     = "info"
 }
 
 variable "alarm_service_resources_treat_missing_data" {
