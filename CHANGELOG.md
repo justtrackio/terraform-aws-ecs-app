@@ -1,3 +1,10 @@
+## [2.29.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.29.0...v2.29.1) (2024-11-22)
+
+
+### Bug Fixes
+
+* change service resource alert default ([#155](https://github.com/justtrackio/terraform-aws-ecs-app/issues/155)) ([03bbb2d](https://github.com/justtrackio/terraform-aws-ecs-app/commit/03bbb2d0adaeaa6e2c376a776d26974e38e78fe5))
+
 ## [2.29.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.28.2...v2.29.0) (2024-11-19)
 
 
