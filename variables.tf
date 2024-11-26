@@ -745,9 +745,10 @@ variable "task_policy_arns" {
   default     = []
 }
 
-variable "tracing_enabled" {
-  type        = bool
-  description = "Defines if tracing should be enabled"
+variable "tracing_provider" {
+  type        = string
+  description = "Defines which tracing provider to use. Valid values are 'local', 'xray', 'noop', or any tracer you registered yourself"
+  default     = "local"
 }
 
 variable "ulimits" {
