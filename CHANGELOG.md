@@ -1,3 +1,14 @@
+## [3.0.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.29.2...v3.0.0) (2024-11-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* replace tracing_enabled with tracing_provider (#156)
+
+### Features
+
+* replace tracing_enabled with tracing_provider ([#156](https://github.com/justtrackio/terraform-aws-ecs-app/issues/156)) ([daeeb3f](https://github.com/justtrackio/terraform-aws-ecs-app/commit/daeeb3f85c41e197cf5739f39537d83d1afa34de))
+
 ## [2.29.2](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.29.1...v2.29.2) (2024-11-22)
 
 
