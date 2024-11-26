@@ -137,7 +137,7 @@ module "container_definition" {
     SENTRY_DSN                                        = try(module.sentry[0].dsn, var.sentry_dsn)
     SENTRY_ENVIRONMENT                                = module.this.environment
     TRACING_ADDR_TYPE                                 = "srv"
-    TRACING_ENABLED                                   = var.tracing_enabled
+    TRACING_PROVIDER                                  = var.tracing_provider
   }, var.container_map_environment)
   map_secrets       = var.container_map_secrets
   port_mappings     = local.port_mappings
