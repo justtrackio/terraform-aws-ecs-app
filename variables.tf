@@ -5,8 +5,7 @@ variable "alarm_consumer" {
     evaluation_periods     = optional(number, 3)
     period                 = optional(number, 60)
     success_rate_threshold = optional(number, 99)
-    alarm_priority_high    = optional(string, "high")
-    alarm_priority_warning = optional(string, "warning")
+    alarm_levels           = optional(list(string), ["warning", "high"])
   }))
   default     = {}
   description = "This can be used to override alarms for consumers. Keys are names of the consumers."
@@ -25,8 +24,7 @@ variable "alarm_gateway" {
     evaluation_periods     = optional(number, 3)
     period                 = optional(number, 60)
     success_rate_threshold = optional(number, 99)
-    alarm_priority_high    = optional(string, "high")
-    alarm_priority_warning = optional(string, "warning")
+    alarm_levels           = optional(list(string), ["warning", "high"])
   }))
   default     = {}
   description = "This can be used to override alarms for gateway routes. Keys are names of the gateway route."
@@ -39,8 +37,7 @@ variable "alarm_kinsumer" {
     evaluation_periods       = optional(number, 1)
     period                   = optional(number, 60)
     threshold_seconds_behind = optional(number, 3600)
-    alarm_priority_high      = optional(string, "high")
-    alarm_priority_warning   = optional(string, "warning")
+    alarm_levels             = optional(list(string), ["warning", "high"])
   }))
   default     = {}
   description = "This can be used to override alarms for kinsumers. Keys are names of the kinsumers."
