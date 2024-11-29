@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v3.0.0...v3.0.1) (2024-11-29)
+
+
+### Bug Fixes
+
+* add more alert levels ([#160](https://github.com/justtrackio/terraform-aws-ecs-app/issues/160)) ([f098534](https://github.com/justtrackio/terraform-aws-ecs-app/commit/f09853489064b9f7051a4b9924beb3369b89ee3e))
+
 ## [3.0.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v2.29.2...v3.0.0) (2024-11-26)
 
 
