@@ -1,3 +1,10 @@
+## [3.1.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v3.1.0...v3.1.1) (2024-12-12)
+
+
+### Bug Fixes
+
+* bump gosoline provider to v1.5.0 ([#163](https://github.com/justtrackio/terraform-aws-ecs-app/issues/163)) ([48a7480](https://github.com/justtrackio/terraform-aws-ecs-app/commit/48a7480217e70ad49e9d3583e91fbf788e39de7f))
+
 ## [3.1.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v3.0.1...v3.1.0) (2024-12-12)
 
 
