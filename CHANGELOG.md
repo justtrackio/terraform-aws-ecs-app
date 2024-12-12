@@ -1,3 +1,10 @@
+## [3.1.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v3.0.1...v3.1.0) (2024-12-12)
+
+
+### Features
+
+* gosoline metric adjustments ([#161](https://github.com/justtrackio/terraform-aws-ecs-app/issues/161)) ([85732b6](https://github.com/justtrackio/terraform-aws-ecs-app/commit/85732b622faba3f31d3ec2caba5f6024b6fae731))
+
 ## [3.0.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v3.0.0...v3.0.1) (2024-11-29)
 
 
