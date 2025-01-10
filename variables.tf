@@ -356,6 +356,12 @@ variable "ecr_repository_lifecycle_policy" {
   description = "The policy document. This is a JSON formatted string. See more details about [Policy Parameters](http://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html#lifecycle_policy_parameters) in the official AWS docs"
 }
 
+variable "ecs_access_policy_enabled" {
+  type        = bool
+  default     = false
+  description = "Defines if the ecs tasks should have the ecs access policy"
+}
+
 variable "elasticsearch_host" {
   type        = string
   default     = null

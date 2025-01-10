@@ -68,14 +68,15 @@ locals {
     elb_name         = null
     container_port   = var.port_gateway
   }] : []
-  healthcheck   = var.healthcheck != null ? var.healthcheck : local.default_healthcheck
-  image_tag     = var.app_image_tag == null ? data.aws_ssm_parameter.container_tag[0].value : var.app_image_tag
-  port_mappings = length(var.port_mappings) != 0 ? var.port_mappings : local.default_port_mappings
-  task_cpu      = var.task_cpu != null ? local.total_cpu > var.task_cpu ? local.total_cpu : var.task_cpu : null
-  task_memory   = var.task_memory != null ? local.total_memory > var.task_memory ? local.total_memory : var.task_memory : null
-  total_cpu     = local.container_cpu + var.log_router_container_cpu
-  total_memory  = local.container_memory_reservation + var.log_router_container_memory_reservation
-  task_policies = setunion(var.task_policy_arns, local.default_policies)
+  healthcheck       = var.healthcheck != null ? var.healthcheck : local.default_healthcheck
+  image_tag         = var.app_image_tag == null ? data.aws_ssm_parameter.container_tag[0].value : var.app_image_tag
+  port_mappings     = length(var.port_mappings) != 0 ? var.port_mappings : local.default_port_mappings
+  task_cpu          = var.task_cpu != null ? local.total_cpu > var.task_cpu ? local.total_cpu : var.task_cpu : null
+  task_memory       = var.task_memory != null ? local.total_memory > var.task_memory ? local.total_memory : var.task_memory : null
+  total_cpu         = local.container_cpu + var.log_router_container_cpu
+  total_memory      = local.container_memory_reservation + var.log_router_container_memory_reservation
+  task_policies     = setunion(var.task_policy_arns, local.default_policies)
+  task_policies_map = var.ecs_access_policy_enabled ? { ecs_access = module.iam_policy_ecs_access[0].arn } : {}
 }
 
 module "ecs_label" {
@@ -207,8 +208,10 @@ module "service_task" {
   service_registries                 = var.service_registries
   task_cpu                           = local.task_cpu
   task_exec_policy_arns              = local.task_policies
+  task_exec_policy_arns_map          = local.task_policies_map
   task_memory                        = local.task_memory
   task_policy_arns                   = local.task_policies
+  task_policy_arns_map               = local.task_policies_map
   vpc_id                             = data.aws_vpc.default.id
   wait_for_steady_state              = var.wait_for_steady_state
 
