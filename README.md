@@ -35,6 +35,7 @@ Terraform module which creates a ecs app
 | <a name="module_ecs_service_task_customized_autoscaling"></a> [ecs\_service\_task\_customized\_autoscaling](#module\_ecs\_service\_task\_customized\_autoscaling) | justtrackio/ecs-autoscaling/aws | 1.2.0 |
 | <a name="module_ecs_service_task_predefined_autoscaling"></a> [ecs\_service\_task\_predefined\_autoscaling](#module\_ecs\_service\_task\_predefined\_autoscaling) | justtrackio/ecs-autoscaling/aws | 1.2.0 |
 | <a name="module_ecs_service_task_schedule"></a> [ecs\_service\_task\_schedule](#module\_ecs\_service\_task\_schedule) | justtrackio/ecs-autoscaling/aws | 1.2.0 |
+| <a name="module_iam_policy_ecs_access"></a> [iam\_policy\_ecs\_access](#module\_iam\_policy\_ecs\_access) | terraform-aws-modules/iam/aws//modules/iam-policy | 5.52.2 |
 | <a name="module_monitoring"></a> [monitoring](#module\_monitoring) | justtrackio/ecs-gosoline-monitoring/aws | 2.7.0 |
 | <a name="module_sentry"></a> [sentry](#module\_sentry) | justtrackio/project/sentry | 1.4.2 |
 | <a name="module_service_task"></a> [service\_task](#module\_service\_task) | justtrackio/ecs-alb-service-task/aws | 1.5.0 |
@@ -50,6 +51,7 @@ Terraform module which creates a ecs app
 | [aws_ssm_parameter.container_memory](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_parameter) | resource |
 | [aws_ecr_lifecycle_policy_document.lifecycle](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ecr_lifecycle_policy_document) | data source |
 | [aws_ecs_cluster.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ecs_cluster) | data source |
+| [aws_iam_policy_document.ecs_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_lb.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/lb) | data source |
 | [aws_lb_listener.http](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/lb_listener) | data source |
 | [aws_lb_listener.https](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/lb_listener) | data source |
@@ -116,6 +118,7 @@ Terraform module which creates a ecs app
 | <a name="input_docker_labels"></a> [docker\_labels](#input\_docker\_labels) | The configuration options to send to the `docker_labels` | `map(string)` | `null` | no |
 | <a name="input_domain"></a> [domain](#input\_domain) | The default domain | `string` | n/a | yes |
 | <a name="input_ecr_repository_lifecycle_policy"></a> [ecr\_repository\_lifecycle\_policy](#input\_ecr\_repository\_lifecycle\_policy) | The policy document. This is a JSON formatted string. See more details about [Policy Parameters](http://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html#lifecycle_policy_parameters) in the official AWS docs | `string` | `null` | no |
+| <a name="input_ecs_access_policy_enabled"></a> [ecs\_access\_policy\_enabled](#input\_ecs\_access\_policy\_enabled) | Defines if the ecs tasks should have the ecs access policy | `bool` | `false` | no |
 | <a name="input_elasticsearch_host"></a> [elasticsearch\_host](#input\_elasticsearch\_host) | Defines the elasticsearch host to query for logs | `string` | `null` | no |
 | <a name="input_elasticsearch_index_template"></a> [elasticsearch\_index\_template](#input\_elasticsearch\_index\_template) | This defines the properties used within the index template (Only used if create\_elasticsearch\_data\_stream is true) | <pre>object({<br/>    additional_fields  = map(any)<br/>    name               = string<br/>    priority           = number<br/>    node_name          = string<br/>    number_of_shards   = number<br/>    number_of_replicas = number<br/>  })</pre> | <pre>{<br/>  "additional_fields": {},<br/>  "name": "",<br/>  "node_name": "*",<br/>  "number_of_replicas": 1,<br/>  "number_of_shards": 1,<br/>  "priority": 250<br/>}</pre> | no |
 | <a name="input_elasticsearch_lifecycle_policy"></a> [elasticsearch\_lifecycle\_policy](#input\_elasticsearch\_lifecycle\_policy) | This defines the properties used within the index lifecycle management policy (Only used if create\_elasticsearch\_data\_stream is true) | <pre>object({<br/>    delete_phase_min_age             = string<br/>    hot_phase_max_primary_shard_size = string<br/>    hot_phase_max_age                = optional(string)<br/>    warm_phase_min_age               = string<br/>    warm_phase_number_of_replicas    = number<br/>  })</pre> | <pre>{<br/>  "delete_phase_min_age": "28d",<br/>  "hot_phase_max_primary_shard_size": "10gb",<br/>  "warm_phase_min_age": "1d",<br/>  "warm_phase_number_of_replicas": 0<br/>}</pre> | no |
