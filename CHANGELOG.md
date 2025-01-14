@@ -1,3 +1,10 @@
+## [3.2.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v3.1.1...v3.2.0) (2025-01-14)
+
+
+### Features
+
+* add ecs access policy ([#166](https://github.com/justtrackio/terraform-aws-ecs-app/issues/166)) ([a6ddccc](https://github.com/justtrackio/terraform-aws-ecs-app/commit/a6ddccc539a302c104025979ba95a2776fbbe84a))
+
 ## [3.1.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v3.1.0...v3.1.1) (2024-12-12)
 
 
