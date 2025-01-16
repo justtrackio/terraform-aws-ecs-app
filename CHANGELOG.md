@@ -1,3 +1,10 @@
+## [3.2.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v3.2.0...v3.2.1) (2025-01-16)
+
+
+### Bug Fixes
+
+* adapt tracing env vars; ([#158](https://github.com/justtrackio/terraform-aws-ecs-app/issues/158)) ([6a61390](https://github.com/justtrackio/terraform-aws-ecs-app/commit/6a6139046fa2bac0ed8741da615809c7af1dcb9f))
+
 ## [3.2.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v3.1.1...v3.2.0) (2025-01-14)
 
 
