@@ -137,7 +137,7 @@ module "container_definition" {
     REDIS_DEFAULT_NAMING_PATTERN                      = "!nodecode {name}.{group}.{env}.{family}"
     SENTRY_DSN                                        = try(module.sentry[0].dsn, var.sentry_dsn)
     SENTRY_ENVIRONMENT                                = module.this.environment
-    TRACING_ADDR_TYPE                                 = "srv"
+    TRACING_XRAY_ADDR_TYPE                            = "srv"
     TRACING_PROVIDER                                  = var.tracing_provider
   }, var.container_map_environment)
   map_secrets       = var.container_map_secrets
