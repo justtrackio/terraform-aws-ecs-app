@@ -36,7 +36,7 @@ Terraform module which creates a ecs app
 | <a name="module_ecs_service_task_predefined_autoscaling"></a> [ecs\_service\_task\_predefined\_autoscaling](#module\_ecs\_service\_task\_predefined\_autoscaling) | justtrackio/ecs-autoscaling/aws | 1.2.0 |
 | <a name="module_ecs_service_task_schedule"></a> [ecs\_service\_task\_schedule](#module\_ecs\_service\_task\_schedule) | justtrackio/ecs-autoscaling/aws | 1.2.0 |
 | <a name="module_iam_policy_ecs_access"></a> [iam\_policy\_ecs\_access](#module\_iam\_policy\_ecs\_access) | terraform-aws-modules/iam/aws//modules/iam-policy | 5.52.2 |
-| <a name="module_monitoring"></a> [monitoring](#module\_monitoring) | justtrackio/ecs-gosoline-monitoring/aws | 2.7.0 |
+| <a name="module_monitoring"></a> [monitoring](#module\_monitoring) | git@github.com:justtrackio/terraform-aws-ecs-gosoline-monitoring.git | use-additional-field-mappings |
 | <a name="module_sentry"></a> [sentry](#module\_sentry) | justtrackio/project/sentry | 1.4.2 |
 | <a name="module_service_task"></a> [service\_task](#module\_service\_task) | justtrackio/ecs-alb-service-task/aws | 1.5.0 |
 | <a name="module_ssm_label"></a> [ssm\_label](#module\_ssm\_label) | justtrackio/label/null | 0.26.0 |

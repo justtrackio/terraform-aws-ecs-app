@@ -10,9 +10,8 @@ locals {
 }
 
 module "monitoring" {
-  count   = var.monitoring_enabled ? 1 : 0
-  source  = "justtrackio/ecs-gosoline-monitoring/aws"
-  version = "2.7.0"
+  count  = var.monitoring_enabled ? 1 : 0
+  source = "git@github.com:justtrackio/terraform-aws-ecs-gosoline-monitoring.git?ref=use-additional-field-mappings"
 
   context = module.this.context
 
