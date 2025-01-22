@@ -1,3 +1,10 @@
+## [3.2.2](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v3.2.1...v3.2.2) (2025-01-22)
+
+
+### Bug Fixes
+
+* bump gosoline-monitoring module to 2.7.1 ([#172](https://github.com/justtrackio/terraform-aws-ecs-app/issues/172)) ([7aed138](https://github.com/justtrackio/terraform-aws-ecs-app/commit/7aed1386e84d5dd893a9fb7b7e18cb8e8a0f1086))
+
 ## [3.2.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v3.2.0...v3.2.1) (2025-01-16)
 
 
