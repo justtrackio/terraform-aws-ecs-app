@@ -1,3 +1,10 @@
+## [3.2.4](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v3.2.3...v3.2.4) (2025-01-29)
+
+
+### Bug Fixes
+
+* ensure variable default value consistency with ecs-gosoline-monitoring module ([c68fba8](https://github.com/justtrackio/terraform-aws-ecs-app/commit/c68fba8d4b5cc949f35df8849cf7efc4e7ffc23f))
+
 ## [3.2.3](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v3.2.2...v3.2.3) (2025-01-28)
 
 
