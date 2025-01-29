@@ -399,7 +399,7 @@ variable "elasticsearch_lifecycle_policy" {
   default = {
     delete_phase_min_age             = "28d"
     hot_phase_max_primary_shard_size = "10gb"
-    warm_phase_min_age               = "1d"
+    warm_phase_min_age               = "0d"
     warm_phase_number_of_replicas    = 0
   }
   description = "This defines the properties used within the index lifecycle management policy (Only used if create_elasticsearch_data_stream is true)"
