@@ -1,3 +1,10 @@
+## [3.2.5](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v3.2.4...v3.2.5) (2025-02-10)
+
+
+### Bug Fixes
+
+* update terraform-provider-gosoline to 1.6.0 ([#174](https://github.com/justtrackio/terraform-aws-ecs-app/issues/174)) ([22e1055](https://github.com/justtrackio/terraform-aws-ecs-app/commit/22e1055d8ca9fecfbce63f3f9d3fe13451e31e39))
+
 ## [3.2.4](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v3.2.3...v3.2.4) (2025-01-29)
 
 
