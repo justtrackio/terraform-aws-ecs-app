@@ -174,11 +174,11 @@ module "container_definition_fluentbit" {
     }
   }
 
-  map_environment = {
+  map_environment = merge({
     FLUENTD_HOSTNAME = "fluentd.${module.this.organizational_unit}-monitoring.${var.domain}"
     FLUENTD_PORT     = 15000
     TAG              = "${module.this.environment}-${module.this.namespace}-${module.this.stage}-${module.this.name}"
-  }
+  }, var.log_router_container_map_environment)
 
   essential    = var.log_router_essential
   stop_timeout = var.log_router_stop_timeout
@@ -186,7 +186,7 @@ module "container_definition_fluentbit" {
 
 module "service_task" {
   source  = "justtrackio/ecs-alb-service-task/aws"
-  version = "1.5.0"
+  version = "1.6.0"
 
   circuit_breaker_deployment_enabled = var.circuit_breaker_deployment_enabled
   circuit_breaker_rollback_enabled   = var.circuit_breaker_rollback_enabled

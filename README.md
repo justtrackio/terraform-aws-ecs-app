@@ -25,11 +25,11 @@ Terraform module which creates a ecs app
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_alarm_service_resources"></a> [alarm\_service\_resources](#module\_alarm\_service\_resources) | justtrackio/alarm-service-resources/aws | 1.2.0 |
-| <a name="module_alb_ingress"></a> [alb\_ingress](#module\_alb\_ingress) | cloudposse/alb-ingress/aws | 0.28.0 |
+| <a name="module_alb_ingress"></a> [alb\_ingress](#module\_alb\_ingress) | cloudposse/alb-ingress/aws | 0.30.0 |
 | <a name="module_cloudwatch_label"></a> [cloudwatch\_label](#module\_cloudwatch\_label) | justtrackio/label/null | 0.26.0 |
 | <a name="module_container_definition"></a> [container\_definition](#module\_container\_definition) | cloudposse/ecs-container-definition/aws | 0.61.1 |
 | <a name="module_container_definition_fluentbit"></a> [container\_definition\_fluentbit](#module\_container\_definition\_fluentbit) | cloudposse/ecs-container-definition/aws | 0.61.1 |
-| <a name="module_ecr"></a> [ecr](#module\_ecr) | terraform-aws-modules/ecr/aws | 2.3.0 |
+| <a name="module_ecr"></a> [ecr](#module\_ecr) | terraform-aws-modules/ecr/aws | 2.3.1 |
 | <a name="module_ecr_label"></a> [ecr\_label](#module\_ecr\_label) | justtrackio/label/null | 0.26.0 |
 | <a name="module_ecs_label"></a> [ecs\_label](#module\_ecs\_label) | justtrackio/label/null | 0.26.0 |
 | <a name="module_ecs_service_task_customized_autoscaling"></a> [ecs\_service\_task\_customized\_autoscaling](#module\_ecs\_service\_task\_customized\_autoscaling) | justtrackio/ecs-autoscaling/aws | 1.2.0 |
@@ -38,7 +38,7 @@ Terraform module which creates a ecs app
 | <a name="module_iam_policy_ecs_access"></a> [iam\_policy\_ecs\_access](#module\_iam\_policy\_ecs\_access) | terraform-aws-modules/iam/aws//modules/iam-policy | 5.52.2 |
 | <a name="module_monitoring"></a> [monitoring](#module\_monitoring) | justtrackio/ecs-gosoline-monitoring/aws | 2.7.2 |
 | <a name="module_sentry"></a> [sentry](#module\_sentry) | justtrackio/project/sentry | 1.4.2 |
-| <a name="module_service_task"></a> [service\_task](#module\_service\_task) | justtrackio/ecs-alb-service-task/aws | 1.5.0 |
+| <a name="module_service_task"></a> [service\_task](#module\_service\_task) | justtrackio/ecs-alb-service-task/aws | 1.6.0 |
 | <a name="module_ssm_label"></a> [ssm\_label](#module\_ssm\_label) | justtrackio/label/null | 0.26.0 |
 | <a name="module_this"></a> [this](#module\_this) | justtrackio/label/null | 0.26.0 |
 
@@ -145,10 +145,11 @@ Terraform module which creates a ecs app
 | <a name="input_log_driver"></a> [log\_driver](#input\_log\_driver) | The log driver to use for the container. If using Fargate launch type, only supported value is awslogs | `string` | `"awsfirelens"` | no |
 | <a name="input_log_retention_in_days"></a> [log\_retention\_in\_days](#input\_log\_retention\_in\_days) | The number of days to retain logs for the log group | `number` | `1` | no |
 | <a name="input_log_router_container_cpu"></a> [log\_router\_container\_cpu](#input\_log\_router\_container\_cpu) | The log router cpu reservation for the ECS task definition | `string` | `30` | no |
+| <a name="input_log_router_container_map_environment"></a> [log\_router\_container\_map\_environment](#input\_log\_router\_container\_map\_environment) | The environment variables to pass to the log router container. This is a map of string: {key: value}. `environment` overrides `map_environment` | `map(string)` | `null` | no |
 | <a name="input_log_router_container_memory_reservation"></a> [log\_router\_container\_memory\_reservation](#input\_log\_router\_container\_memory\_reservation) | The log router memory reservation for the ECS task definition | `string` | `64` | no |
 | <a name="input_log_router_essential"></a> [log\_router\_essential](#input\_log\_router\_essential) | Determines whether all other containers in a task are stopped, if this container fails or stops for any reason. Due to how Terraform type casts booleans in json it is required to double quote this value | `bool` | `false` | no |
 | <a name="input_log_router_image_repository"></a> [log\_router\_image\_repository](#input\_log\_router\_image\_repository) | Container registry repository url | `string` | n/a | yes |
-| <a name="input_log_router_image_tag"></a> [log\_router\_image\_tag](#input\_log\_router\_image\_tag) | The default container image to use in container definition | `string` | `"stable-3.0.7"` | no |
+| <a name="input_log_router_image_tag"></a> [log\_router\_image\_tag](#input\_log\_router\_image\_tag) | The default container image to use in container definition | `string` | `"stable-3.2.6"` | no |
 | <a name="input_log_router_options"></a> [log\_router\_options](#input\_log\_router\_options) | The log router options to use | `map(string)` | <pre>{<br/>  "config-file-type": "file",<br/>  "config-file-value": "/fluent-bit/etc/extra.conf"<br/>}</pre> | no |
 | <a name="input_log_router_stop_timeout"></a> [log\_router\_stop\_timeout](#input\_log\_router\_stop\_timeout) | Time duration (in seconds) to wait before the container is forcefully killed if it doesn't exit normally on its own | `number` | `60` | no |
 | <a name="input_log_router_type"></a> [log\_router\_type](#input\_log\_router\_type) | The log router type to use | `string` | `"fluentbit"` | no |

@@ -536,6 +536,12 @@ variable "log_router_container_cpu" {
   default     = 30
 }
 
+variable "log_router_container_map_environment" {
+  type        = map(string)
+  description = "The environment variables to pass to the log router container. This is a map of string: {key: value}. `environment` overrides `map_environment`"
+  default     = null
+}
+
 variable "log_router_container_memory_reservation" {
   type        = string
   description = "The log router memory reservation for the ECS task definition"
@@ -556,7 +562,7 @@ variable "log_router_image_repository" {
 variable "log_router_image_tag" {
   type        = string
   description = "The default container image to use in container definition"
-  default     = "stable-3.0.7"
+  default     = "stable-3.2.6"
 }
 
 variable "log_router_options" {
