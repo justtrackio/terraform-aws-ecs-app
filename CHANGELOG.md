@@ -1,3 +1,10 @@
+## [3.3.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v3.2.5...v3.3.0) (2025-02-25)
+
+
+### Features
+
+* pass env vars to log router ([#176](https://github.com/justtrackio/terraform-aws-ecs-app/issues/176)) ([86d10c1](https://github.com/justtrackio/terraform-aws-ecs-app/commit/86d10c1084641f1c0f18c9f59a140122ad99e388))
+
 ## [3.2.5](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v3.2.4...v3.2.5) (2025-02-10)
 
 
