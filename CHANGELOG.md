@@ -1,3 +1,10 @@
+## [3.4.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v3.3.0...v3.4.0) (2025-03-03)
+
+
+### Features
+
+* update for gosoline v0.38.0 ([#178](https://github.com/justtrackio/terraform-aws-ecs-app/issues/178)) ([af211b9](https://github.com/justtrackio/terraform-aws-ecs-app/commit/af211b9d68d71cb15a1c9cdd07ad93d99ebdb195))
+
 ## [3.3.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v3.2.5...v3.3.0) (2025-02-25)
 
 
