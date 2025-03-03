@@ -129,9 +129,9 @@ module "container_definition" {
     METRIC_CALCULATOR_ECS_CLUSTER                     = "{env}"
     METRIC_CALCULATOR_ECS_SERVICE                     = "{app_group}-{app_name}"
     METRIC_CALCULATOR_DYNAMODB_NAMING_PATTERN         = "!nodecode {env}-{modelId}"
-    METRIC_CLOUDWATCH_NAMING_PATTERN                  = "!nodecode {env}/{group}/{app}"
+    METRIC_WRITER_SETTINGS_CLOUDWATCH_NAMING_PATTERN  = "!nodecode {env}/{group}/{app}"
     METRIC_ENABLED                                    = var.metric_enabled
-    METRIC_WRITER                                     = "cw"
+    METRIC_WRITERS                                    = "cloudwatch"
     REDIS_DEFAULT_ADDRESS                             = ""
     REDIS_DEFAULT_DIALER                              = "srv"
     REDIS_DEFAULT_NAMING_PATTERN                      = "!nodecode {name}.{group}.{env}.{family}"
