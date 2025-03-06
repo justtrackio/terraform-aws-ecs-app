@@ -50,7 +50,7 @@ data "aws_ecr_lifecycle_policy_document" "lifecycle" {
     selection {
       count_type   = "sinceImagePushed"
       count_unit   = "days"
-      tag_status   = "any"
+      tag_status   = "tagged"
       count_number = 7
     }
     action {
