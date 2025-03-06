@@ -46,6 +46,20 @@ data "aws_ecr_lifecycle_policy_document" "lifecycle" {
 
   rule {
     priority    = 40
+    description = "Keep images for 7 days"
+    selection {
+      count_type   = "sinceImagePushed"
+      count_unit   = "days"
+      tag_status   = "any"
+      count_number = 7
+    }
+    action {
+      type = "expire"
+    }
+  }
+
+  rule {
+    priority    = 50
     description = "Keep last 30 images"
     selection {
       count_number = 30
