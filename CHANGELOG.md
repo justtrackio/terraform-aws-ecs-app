@@ -1,3 +1,10 @@
+## [3.5.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v3.4.0...v3.5.0) (2025-03-07)
+
+
+### Features
+
+* change ecr lifecycle policy to keep images at least 7 days ([#179](https://github.com/justtrackio/terraform-aws-ecs-app/issues/179)) ([1d766ef](https://github.com/justtrackio/terraform-aws-ecs-app/commit/1d766ef9b5058ee0ab4cc407a25bcc4f3a347c8a))
+
 ## [3.4.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v3.3.0...v3.4.0) (2025-03-03)
 
 
