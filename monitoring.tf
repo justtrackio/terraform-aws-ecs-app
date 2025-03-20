@@ -12,7 +12,7 @@ locals {
 module "monitoring" {
   count   = var.monitoring_enabled ? 1 : 0
   source  = "justtrackio/ecs-gosoline-monitoring/aws"
-  version = "2.7.2"
+  version = "2.7.3"
 
   context = module.this.context
 
@@ -25,9 +25,10 @@ module "monitoring" {
   alarm_kinsumer  = var.alarm_kinsumer
   alarm_scheduled = var.alarm_scheduled
 
-  elasticsearch_index_template   = var.elasticsearch_index_template
-  elasticsearch_lifecycle_policy = var.elasticsearch_lifecycle_policy
-  elasticsearch_host             = local.elasticsearch_host
+  elasticsearch_data_stream_enabled = var.elasticsearch_data_stream_enabled
+  elasticsearch_index_template      = var.elasticsearch_index_template
+  elasticsearch_lifecycle_policy    = var.elasticsearch_lifecycle_policy
+  elasticsearch_host                = local.elasticsearch_host
 
   kibana_data_view_enabled = var.kibana_data_view_enabled
   kibana_space_id          = var.kibana_space_id
