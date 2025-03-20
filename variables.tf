@@ -568,7 +568,7 @@ variable "log_router_image_repository" {
 variable "log_router_image_tag" {
   type        = string
   description = "The default container image to use in container definition"
-  default     = "stable-3.2.6"
+  default     = "stable-3.2.9"
 }
 
 variable "log_router_options" {
