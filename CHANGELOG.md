@@ -1,3 +1,10 @@
+## [3.5.2](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v3.5.1...v3.5.2) (2025-03-20)
+
+
+### Bug Fixes
+
+* update log_router version ([d322896](https://github.com/justtrackio/terraform-aws-ecs-app/commit/d32289649a476d19b46ff26db29f816cc56d7879))
+
 ## [3.5.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v3.5.0...v3.5.1) (2025-03-20)
 
 
