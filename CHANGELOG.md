@@ -1,3 +1,10 @@
+## [3.5.1](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v3.5.0...v3.5.1) (2025-03-20)
+
+
+### Bug Fixes
+
+* add var to be able to disable es resources ([#181](https://github.com/justtrackio/terraform-aws-ecs-app/issues/181)) ([18b2d63](https://github.com/justtrackio/terraform-aws-ecs-app/commit/18b2d63d0332d19ebfdee04e1cbc514c3b1ff00b))
+
 ## [3.5.0](https://github.com/justtrackio/terraform-aws-ecs-app/compare/v3.4.0...v3.5.0) (2025-03-07)
 
 
