@@ -362,6 +362,12 @@ variable "ecs_access_policy_enabled" {
   description = "Defines if the ecs tasks should have the ecs access policy"
 }
 
+variable "elasticsearch_data_stream_enabled" {
+  type        = bool
+  default     = true
+  description = "Defines whether there will be a elasticsearch data_stream, index template, index lifecycle policy created"
+}
+
 variable "elasticsearch_host" {
   type        = string
   default     = null
