@@ -98,7 +98,7 @@ resource "aws_cloudwatch_log_group" "default" {
 
 module "container_definition" {
   source  = "cloudposse/ecs-container-definition/aws"
-  version = "0.61.1"
+  version = "0.61.2"
 
   container_name = module.ecs_label.id
 
@@ -155,7 +155,7 @@ module "container_definition" {
 
 module "container_definition_fluentbit" {
   source  = "cloudposse/ecs-container-definition/aws"
-  version = "0.61.1"
+  version = "0.61.2"
 
   container_name               = "log_router"
   container_image              = "${var.log_router_image_repository}:${var.log_router_image_tag}"
