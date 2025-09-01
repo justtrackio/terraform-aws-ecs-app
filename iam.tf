@@ -13,7 +13,7 @@ data "aws_iam_policy_document" "ecs_access" {
 module "iam_policy_ecs_access" {
   count   = var.ecs_access_policy_enabled ? 1 : 0
   source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
-  version = "5.52.2"
+  version = "5.60.0"
 
   name   = "${module.this.id}-ecs-access"
   policy = data.aws_iam_policy_document.ecs_access.json
