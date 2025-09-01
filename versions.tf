@@ -22,7 +22,7 @@ terraform {
 
     elasticstack = {
       source  = "elastic/elasticstack"
-      version = "0.11.11"
+      version = "0.11.17"
     }
 
     sentry = {
